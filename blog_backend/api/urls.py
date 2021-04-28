@@ -1,8 +1,11 @@
 
 from django.urls import path, include
 from rest_framework.authtoken import views
-from .views import home
+from django.conf import settings
+from .views import test1
 
 urlpatterns = [
-    path('', home , name = 'api.home'),
+    path('', test1 , name = 'api.test1'),
+    path('user/',include('api.user.urls')),
+    path('post/',include('api.post.urls')),
 ]

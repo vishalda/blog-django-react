@@ -1,7 +1,6 @@
 #from django.shortcuts import render
 from django.http import JsonResponse
 
-# Create your views here.
-
-def home(request):
-    return JsonResponse({'info':'Reference testing','name':'XYZ'})
+# * Testing API by sending JsonResponse
+def test1(request):
+    return JsonResponse({'info':'Testing api - 1','TestCount':'1'})
