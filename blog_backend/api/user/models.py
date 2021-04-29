@@ -1,8 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractBaseUser
 
 # !This model is just for testing and can be changed to increase the efficiency and the security
-class Users(AbstractUser):
+class CustomUser(AbstractBaseUser):
     name = models.CharField(max_length=50, default='Anonymous')
     username = models.CharField(max_length=30,unique=True)
     email = models.EmailField(max_length=254, unique=True)
@@ -11,4 +11,5 @@ class Users(AbstractUser):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
-    REQUIRED_FIELDS = []
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email','password']

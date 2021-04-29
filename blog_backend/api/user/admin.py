@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import Users
+from .models import CustomUser
 
 # Register your models here.
 
 #TODO : Need to serialize before migrating user models to DB
-#admin.site.register(Users)
+admin.site.register(CustomUser)
