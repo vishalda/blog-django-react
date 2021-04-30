@@ -6,10 +6,10 @@ class CustomUser(AbstractBaseUser):
     name = models.CharField(max_length=50, default='Anonymous')
     username = models.CharField(max_length=30,unique=True)
     email = models.EmailField(max_length=254, unique=True)
-    password = models.CharField(max_length=30)
     session_token = models.CharField(max_length=10,default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+    phone = models.CharField(max_length=15,blank = True,null=True)
 
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email','password']
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
