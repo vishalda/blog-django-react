@@ -27,7 +27,6 @@ def validateRequest(email,username,password):
     if len(password) < 4:
         return JsonResponse({'error':'Password length should not be less than 4'})
 
-
 @csrf_exempt
 def signin(request):
     #Check if request is in POST method
@@ -40,13 +39,11 @@ def signin(request):
 
     #Check for correctness
     validateRequest(email,username,password)
-
     UserModel = get_user_model()
 
     try:
         #Check if User with specified email exists, continue if exists else raise exception
         user = UsersModel.objects.get(email = email)
-
         #Comparing of password with already existing password in database
         if user.check_password(password):
             usrDict = UserModel.objects.filter(email = email).values().first()
@@ -64,10 +61,23 @@ def signin(request):
             user.save()
             login(request,user)
             return JsonResponse('token':token,'user':usrDict)
-
         else:
             return JsonResponse({'error':'Password incorrect! Please try again.'})
     
     #Raising an exception for not matching of email ID
-    except UserModel.DoesNotExist:
+    except UserModel.DoesNotExist():
         return JsonResponse({'error':'Invalid email'})
+
+def signout(request, id):
+    logout(request)
+
+    UserModel = get_user_model()
+
+    try:
+        user = UserModel.objects.get(pk = id)
+        user.session_token = "0"
+        user.save()
+    except UserModel.DoesNotExist():
+        return JsonResponse({'error':'Invalid user ID'})
+
+    return JsonResponse({'success':'Logout succes'})
