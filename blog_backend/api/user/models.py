@@ -11,5 +11,5 @@ class CustomUser(AbstractBaseUser):
     update_at = models.DateTimeField(auto_now=True)
     phone = models.CharField(max_length=15,blank = True,null=True)
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []

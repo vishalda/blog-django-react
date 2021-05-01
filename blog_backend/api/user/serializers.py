@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
-from rest_framework.decorators import authentication_classes, permissions_classes
+from rest_framework.decorators import authentication_classes, permission_classes
 
 from .models import CustomUser
 
@@ -16,7 +16,7 @@ class UsersSerializer(serializers.HyperlinkedModelSerializer):
     #Deserializing the data and updating an existing model in DataBase
     def update(self,instance,validated_data):
         for attr, value in validated_data.items():
-            if attr = "password":
+            if attr == "password":
                 instance.set_password(value)
             else:
                 setattr(instance,attr,value)
@@ -28,5 +28,5 @@ class UsersSerializer(serializers.HyperlinkedModelSerializer):
         model = CustomUser
         #* Getting password as additional argument which is not explicitly declared
         extra_kwargs = {'password': {'write_only': True}}
-        field = ('email','name','password','phone','is_active','is_staff','is_superuser')
+        field = ('email','username','name','password','phone','is_active','is_staff','is_superuser')
 
