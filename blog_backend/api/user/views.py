@@ -60,7 +60,7 @@ def signin(request):
             user.session_token = token
             user.save()
             login(request,user)
-            return JsonResponse('token':token,'user':usrDict)
+            return JsonResponse({'token':token,'user':usrDict})
         else:
             return JsonResponse({'error':'Password incorrect! Please try again.'})
     
