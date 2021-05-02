@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'api',
-#    'api.user',
+    'api.user',
     'api.post',
 ]
 
@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'blog_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Blog',
+        'NAME': 'DEMO_1',
         'USER': 'postgres',
         'PASSWORD':str(os.getenv('DATABASE_PASSWORD')),
         'HOST':'localhost'
@@ -142,7 +142,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#AUTH_USER_MODEL = "user.CustomUser"
+AUTH_USER_MODEL = "user.CustomUser"
 
 CORS_ORIGIN_ALLOW_ALL = True
 

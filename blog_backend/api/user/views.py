@@ -1,4 +1,3 @@
-
 from django.http import JsonResponse
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
@@ -81,3 +80,16 @@ def signout(request, id):
         return JsonResponse({'error':'Invalid user ID'})
 
     return JsonResponse({'success':'Logout succes'})
+
+class UserViewSet(viewsets.ModelViewSet):
+    #Allowing anyone permission for this viewset
+    permissionClassesByAction = {'create':[AllowAny]}
+    queryset = CustomUser.objects.all().order_by('id')
+    serializer_class = UsersSerializer
+
+    def get_permission(self):
+        try:
+            return [permission() for permission in self.permissionClassesByAction]
+        except KeyError:
+            return [permission() for permission in self.permissionClassesByAction]
+            
