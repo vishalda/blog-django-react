@@ -13,13 +13,12 @@ def generateSessionToken(length=10):
     return ''.join(random.SystemRandom().choice([chr[i] for i in range(97,123)] + [str[i] for i in range(10)])  for _ in range(length))
 
 def validateRequest(email,username,password):
-
     #Checking valid email address using regex
-    if not re.match('\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b',email):
+    if not re.match('\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b',str(email)):
         return JsonResponse({'error':'Please enter a valid email address'})
     
     #Checking valid username using regex
-    if not re.match('^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$',username):
+    if not re.match('^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$',str(username)):
         return JsonResponse({'error':'Please enter a valid username'})
 
     #Checking length of password
@@ -32,17 +31,18 @@ def signin(request):
     if not request.method == 'POST':
         return JsonResponse({'error':'Accepting only POST request'})
     
-    username = request.POST['username']
-    email = request.POST['email']
-    password = request.POST['password']
+    username = request.POST.get('username',False)
+    email = request.POST.get('email',False)
+    password = request.POST.get('password',False)
 
     #Check for correctness
     validateRequest(email,username,password)
+
     UserModel = get_user_model()
 
     try:
         #Check if User with specified email exists, continue if exists else raise exception
-        user = UsersModel.objects.get(email = email)
+        user = UserModel.objects.get(email = email)
         #Comparing of password with already existing password in database
         if user.check_password(password):
             usrDict = UserModel.objects.filter(email = email).values().first()
@@ -64,7 +64,7 @@ def signin(request):
             return JsonResponse({'error':'Password incorrect! Please try again.'})
     
     #Raising an exception for not matching of email ID
-    except UserModel.DoesNotExist():
+    except UserModel.DoesNotExist:
         return JsonResponse({'error':'Invalid email'})
 
 def signout(request, id):
@@ -76,7 +76,7 @@ def signout(request, id):
         user = UserModel.objects.get(pk = id)
         user.session_token = "0"
         user.save()
-    except UserModel.DoesNotExist():
+    except UserModel.DoesNotExist:
         return JsonResponse({'error':'Invalid user ID'})
 
     return JsonResponse({'success':'Logout succes'})

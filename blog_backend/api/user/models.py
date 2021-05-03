@@ -1,8 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser,UserManager
+from django.contrib.auth.models import AbstractUser,UserManager
 
 # !This model is just for testing and can be changed to increase the efficiency and the security
-class CustomUser(AbstractBaseUser):
+class CustomUser(AbstractUser):
     name = models.CharField(max_length=50, default='Anonymous')
     username = models.CharField(max_length=30,unique=True)
     email = models.EmailField(max_length=254, unique=True)
