@@ -4,13 +4,15 @@ from rest_framework.permissions import AllowAny
 from .models import CustomUser
 from .serializers import UsersSerializer
 from django.contrib.auth import get_user_model,login,logout
+from django.contrib.auth.hashers import check_password
 from django.views.decorators.csrf import csrf_exempt
 import re
+import json
 import random
 
 #Generating Session tokens
 def generateSessionToken(length=10):
-    return ''.join(random.SystemRandom().choice([chr[i] for i in range(97,123)] + [str[i] for i in range(10)])  for _ in range(length))
+    return ''.join(random.SystemRandom().choice([chr(i)  for i in range(97,123)] + [str(i) for i in range(10)]) for _ in range(length))
 
 def validateRequest(email,username,password):
     #Checking valid email address using regex
@@ -30,10 +32,15 @@ def signin(request):
     #Check if request is in POST method
     if not request.method == 'POST':
         return JsonResponse({'error':'Accepting only POST request'})
-    
-    username = request.POST.get('username',False)
-    email = request.POST.get('email',False)
-    password = request.POST.get('password',False)
+
+    #*Getting the raw JSON formatted data using body instead of POST and decoding it
+    #Use request.POST for form-encoded data 
+    info = request.body.decode("utf-8")
+    info_decode = json.loads(info)
+
+    username = info_decode['username']
+    email = info_decode['email']
+    password = info_decode['password']
 
     #Check for correctness
     validateRequest(email,username,password)
@@ -43,8 +50,11 @@ def signin(request):
     try:
         #Check if User with specified email exists, continue if exists else raise exception
         user = UserModel.objects.get(email = email)
+        #!: checking user password manually as check_password function is not working
+        currentPassword = user.password
+
         #Comparing of password with already existing password in database
-        if user.check_password(password):
+        if currentPassword == password:
             usrDict = UserModel.objects.filter(email = email).values().first()
             usrDict.pop('password')
 
