@@ -33,14 +33,17 @@ def signin(request):
     if not request.method == 'POST':
         return JsonResponse({'error':'Accepting only POST request'})
 
-    #*Getting the raw JSON formatted data using body instead of POST and decoding it
-    #Use request.POST for form-encoded data 
-    info = request.body.decode("utf-8")
-    info_decode = json.loads(info)
+    #*To get raw JSON formatted data using body instead of POST and decoding it
+    #info = request.body.decode("utf-8")
+    #info_decode = json.loads(info)
+    #username = info_decode['username']
+    #email = info_decode['email']
+    #password = info_decode['password']
 
-    username = info_decode['username']
-    email = info_decode['email']
-    password = info_decode['password']
+    #*Use request.POST for form-encoded data 
+    username = request.POST['username']
+    email = request.POST['email']
+    password = request.POST['password']
 
     #Check for correctness
     validateRequest(email,username,password)
@@ -77,6 +80,7 @@ def signin(request):
     except UserModel.DoesNotExist:
         return JsonResponse({'error':'Invalid email'})
 
+@csrf_exempt
 def signout(request, id):
     logout(request)
 
@@ -93,13 +97,13 @@ def signout(request, id):
 
 class UserViewSet(viewsets.ModelViewSet):
     #Allowing anyone permission for this viewset
-    permissionClassesByAction = {'create':[AllowAny]}
+    permission_classes_by_action = {'create':[AllowAny]}
     queryset = CustomUser.objects.all().order_by('id')
     serializer_class = UsersSerializer
 
     def get_permission(self):
         try:
-            return [permission() for permission in self.permissionClassesByAction]
+            return [permission() for permission in self.permission_classes_by_action[self.action]]
         except KeyError:
-            return [permission() for permission in self.permissionClassesByAction]
+            return [permission() for permission in self.permission_classes]
             
