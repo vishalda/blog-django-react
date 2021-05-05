@@ -1,8 +1,9 @@
 from django.http import JsonResponse
+from rest_framework.decorators import permission_classes
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
 from .models import CustomUser
-from .serializers import UsersSerializer
+from .serializers import UserSerializer
 from django.contrib.auth import get_user_model,login,logout
 from django.contrib.auth.hashers import check_password
 from django.views.decorators.csrf import csrf_exempt
@@ -33,7 +34,7 @@ def signin(request):
     if not request.method == 'POST':
         return JsonResponse({'error':'Accepting only POST request'})
 
-    #*To get raw JSON formatted data using body instead of POST and decoding it
+    #*While getting raw JSON data use body instead of POST and decode it
     #info = request.body.decode("utf-8")
     #info_decode = json.loads(info)
     #username = info_decode['username']
@@ -53,11 +54,9 @@ def signin(request):
     try:
         #Check if User with specified email exists, continue if exists else raise exception
         user = UserModel.objects.get(email = email)
-        #!: checking user password manually as check_password function is not working
-        currentPassword = user.password
 
         #Comparing of password with already existing password in database
-        if currentPassword == password:
+        if user.check_password(password):
             usrDict = UserModel.objects.filter(email = email).values().first()
             usrDict.pop('password')
 
@@ -99,9 +98,9 @@ class UserViewSet(viewsets.ModelViewSet):
     #Allowing anyone permission for this viewset
     permission_classes_by_action = {'create':[AllowAny]}
     queryset = CustomUser.objects.all().order_by('id')
-    serializer_class = UsersSerializer
+    serializer_class = UserSerializer
 
-    def get_permission(self):
+    def get_permissions(self):
         try:
             return [permission() for permission in self.permission_classes_by_action[self.action]]
         except KeyError:
