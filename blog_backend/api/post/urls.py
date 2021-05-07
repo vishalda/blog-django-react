@@ -5,5 +5,6 @@ from . import views
 router = routers.DefaultRouter()
 router.register(r'',views.PostViewSet)
 urlpatterns = [
-    path('explore/', include(router.urls))
+    path('', include(router.urls)),
+    path('post/<int:id>/',views.PostDetail,name="post")
 ]

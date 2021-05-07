@@ -7,5 +7,5 @@ from .views import test1
 urlpatterns = [
     path('', test1 , name = 'api.test1'),
     path('user/',include('api.user.urls')),
-    path('post/',include('api.post.urls')),
+    path('explore/',include('api.post.urls')),
 ]

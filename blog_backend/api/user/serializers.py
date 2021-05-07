@@ -3,6 +3,11 @@ from django.contrib.auth.hashers import make_password
 from rest_framework.decorators import authentication_classes, permission_classes
 from .models import CustomUser
 
+class BriefUserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ('username','name')
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     #Deserializing the data and creating new model in DataBase
     def create(self,validated_data):
