@@ -6,5 +6,5 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.test3, name = 'api.post.test3')
+    path('explore/', views.LoadPosts, name = 'Load Posts')
 ]
