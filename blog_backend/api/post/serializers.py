@@ -5,6 +5,7 @@ from api.user.serializers import UserSerializer
 
 class BlogPostSerializer(serializers.ModelSerializer):
     author = UserSerializer(read_only = True)
+    image = serializers.ImageField(max_length=None,allow_empty_file = False,allow_null = True,required = False)
     class Meta:
         model = BlogPost
         fields = ('title','description','body','image','author','created_at')

@@ -1,11 +1,8 @@
-from django.http import JsonResponse
-from django.core.serializers import serialize
 from .models import BlogPost, BlogPostComment
 from .serializers import BlogPostSerializer,BlogPostCommentSerializer 
-import json
+from rest_framework import viewsets
+from . import views
 
-def LoadPosts(request):
-    posts = BlogPost.objects.all().order_by('-created_at').values()
-    data = serialize("json",posts,fields = ('title','description','author','image','created_at'))
-    #ListOfPost = json.dumps(list(posts))
-    return JsonResponse({'success':data})
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = BlogPost.objects.all().order_by('id')
+    serializer_class = BlogPostSerializer
