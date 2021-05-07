@@ -7,18 +7,17 @@ class BlogPostListSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(max_length=None,allow_empty_file = False,allow_null = True,required = False)
     class Meta:
         model = BlogPost
-        fields = ('title','description','image','author')
+        fields = ('id','title','description','image','author')
 
 class BlogPostDetailSerializer(serializers.ModelSerializer):
-    author = UserSerializer(read_only = True)
+    author = BriefUserSerializer(read_only = True)
     image = serializers.ImageField(max_length=None,allow_empty_file = False,allow_null = True,required = False)
     class Meta:
         model = BlogPost
-        fields = ('title','description','body','image','author','created_at')
+        fields = ('id','title','description','body','image','author','created_at')
 
 class BlogPostCommentSerializer(serializers.ModelSerializer):
-    author = UserSerializer(read_only = True)
-    post = BlogPostDetailSerializer(read_only = True)
+    blogpost_connected = BlogPostDetailSerializer(read_only = True)
     class Meta:
         model = BlogPostComment
-        fields = ('author','post','content','posted_at')
+        fields = ('blogpost_connected','content','posted_at')

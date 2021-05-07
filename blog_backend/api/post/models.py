@@ -1,8 +1,6 @@
 from django.db import models
 from api.user.models import CustomUser
 
-# Trial Model - 1
-
 class BlogPost(models.Model):
     title = models.CharField(max_length=20)
     description = models.CharField(max_length=100)
