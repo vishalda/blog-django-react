@@ -48,6 +48,19 @@ def LoadComment(request,id):
     else:
         return JsonResponse({'error':'No comments to display'})
 
+@csrf_exempt
+def UpdatePost(request,post_id):
+    if request.method!="POST":
+        return JsonResponse({'error':'Accepting only POST requests'})
+    instance = BlogPost.objects.get(pk=post_id)
+    #TODO: Need to be updated
+    instance.body = request.POST['body']
+    instance.title = request.POST['title']
+    instance.description = request.POST['description']
+    instance.image = request.FILES['image']
+    instance.save()
+    return JsonResponse({'success':'instance saved'})
+
 class PostDetailViewSet(viewsets.ModelViewSet):
     queryset = BlogPost.objects.all().order_by('id')
     serializer_class = BlogPostDetailSerializer

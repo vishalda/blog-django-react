@@ -10,5 +10,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('comment/<int:id>/',views.LoadComment),
     path('create-post/<int:id>/',views.CreatePost),
-    path('create-comment/<int:author_id>/<int:blog_id>/',views.CreateComment)
+    path('create-comment/<int:author_id>/<int:blog_id>/',views.CreateComment),
+    path(r'update-post/<int:post_id>/',views.UpdatePost)
 ]
