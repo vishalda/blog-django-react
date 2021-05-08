@@ -14,6 +14,7 @@ class BlogPostListSerializer(serializers.ModelSerializer):
 class BlogPostDetailSerializer(serializers.ModelSerializer):
     author = BriefUserSerializer(read_only = True)
     image = serializers.ImageField(max_length=None,allow_empty_file = False,allow_null = True,required = False)
+
     class Meta:
         model = BlogPost
         fields = ('id','title','description','body','image','author','created_at','number_of_comments')

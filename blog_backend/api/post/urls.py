@@ -8,5 +8,6 @@ router.register(r'',views.PostViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('comment/<int:id>/',views.Comment)
+    path('comment/<int:id>/',views.LoadComment),
+    path('create-post/<int:id>/',views.CreatePost)
 ]
