@@ -7,19 +7,6 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from . import views
 
-#Retrieving comments 
-def LoadComment(request,id):
-    #Filtering comments using id of blog post
-    commentSet = BlogPostComment.objects.filter(blogpost_connected_id = id).values()
-    commentList = []
-    #Adding query sets into list and retrieving it
-    for cs in commentSet:
-        commentList.append(cs)
-    if commentList:
-        return JsonResponse({'comments':commentList})
-    else:
-        return JsonResponse({'error':'No comments to display'})
-
 #Creating a post
 @csrf_exempt
 def CreatePost(request,id):
@@ -35,6 +22,31 @@ def CreatePost(request,id):
     instance = BlogPost.objects.create(title=title,description=description,body=body,image = image,author=author)
     instance.save()
     return JsonResponse({'success':"Post created successfully"})
+
+@csrf_exempt
+def CreateComment(request,author_id,blog_id):
+    if request.method!="POST":
+        return JsonResponse({'error':'Accepting only Post request'})
+    content = request.POST['content']
+    blog_post = get_object_or_404(BlogPost,pk=blog_id)
+    author = get_object_or_404(CustomUser,pk=author_id)
+
+    instance = BlogPostComment.objects.create(content=content,blogpost_connected=blog_post,author=author)
+    instance.save()
+    return JsonResponse({'success':"Comment added Successfully"})
+
+#Retrieving comments 
+def LoadComment(request,id):
+    #Filtering comments using id of blog post
+    commentSet = BlogPostComment.objects.filter(blogpost_connected_id = id).values()
+    commentList = []
+    #Adding query sets into list and retrieving it
+    for cs in commentSet:
+        commentList.append(cs)
+    if commentList:
+        return JsonResponse({'comments':commentList})
+    else:
+        return JsonResponse({'error':'No comments to display'})
 
 class PostDetailViewSet(viewsets.ModelViewSet):
     queryset = BlogPost.objects.all().order_by('id')
