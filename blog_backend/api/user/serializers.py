@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
+from django.http import JsonResponse
 from rest_framework.decorators import authentication_classes, permission_classes
 from .models import CustomUser
 
@@ -15,16 +16,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         instance = self.Meta.model(**validated_data)
         if password is not None:
             instance.set_password(password)
-        instance.save()
-        return instance
-    #Deserializing the data and updating an existing model in DataBase
-    def update(self,instance,validated_data):
-        for attr, value in validated_data.items():
-            if attr == "password":
-                instance.set_password(value)
-            else:
-                setattr(instance,attr,value)
-
         instance.save()
         return instance
 

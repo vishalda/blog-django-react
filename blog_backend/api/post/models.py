@@ -28,3 +28,11 @@ class BlogPostComment(models.Model):
 
     def __str__(self):
         return str(self.author)+", "+self.blogpost_connected.title[:40]
+
+class BlogPostLike(models.Model):
+    blogpost_connected = models.ForeignKey(BlogPost,on_delete=models.CASCADE,related_name='likes')
+    author = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
+    likes = models.IntegerField(default=0)
+
+    def __str__(self):
+        return str(self.author)+", "+self.blogpost_connected.title[:40]

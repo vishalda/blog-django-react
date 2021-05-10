@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import BlogPost, BlogPostComment
+from .models import BlogPost, BlogPostComment, BlogPostLike
 from api.user.serializers import UserSerializer,BriefUserSerializer
 
 #*Getting list of all posts
@@ -25,3 +25,10 @@ class BlogPostCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = BlogPostComment
         fields = ('blogpost_connected','content','posted_at')
+
+class BlogPostLikeSerializer(serializers.ModelSerializer):
+    blogpost_connected = BlogPostDetailSerializer(read_only = True)
+    author = BriefUserSerializer(read_only=True)
+    class Meta:
+        model = BlogPostLike
+        fields = ('blogpost_connected','likes','author')

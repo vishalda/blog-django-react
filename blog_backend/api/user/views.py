@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from rest_framework.decorators import permission_classes
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
+from django.shortcuts import get_object_or_404
 from .models import CustomUser
 from .serializers import UserSerializer
 from django.contrib.auth import get_user_model,login,logout
@@ -48,24 +49,19 @@ def signin(request):
 
     #Check for correctness
     validateRequest(email,username,password)
-
     UserModel = get_user_model()
-
     try:
         #Check if User with specified email exists, continue if exists else raise exception
         user = UserModel.objects.get(email = email)
-
         #Comparing of password with already existing password in database
         if user.check_password(password):
             usrDict = UserModel.objects.filter(email = email).values().first()
             usrDict.pop('password')
-
             #Checking if Session token exists already, if exists then raise an error and remove session token
             if user.session_token !="0":
                 user.session_token = "0"
                 user.save()
                 return JsonResponse({'error':'Previous session exists! Please login again'})
-
             #Generating token for loggin in
             token = generateSessionToken()
             user.session_token = token
