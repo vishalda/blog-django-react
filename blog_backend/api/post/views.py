@@ -1,4 +1,4 @@
-from .models import BlogPost, BlogPostComment,BlogPostLike
+from .models import BlogPost, BlogPostComment
 from .serializers import BlogPostListSerializer,BlogPostDetailSerializer
 from rest_framework import viewsets
 from django.http import JsonResponse
@@ -62,10 +62,17 @@ def LoadComment(request,id):
     else:
         return JsonResponse({'error':'No comments to display'})
 
-def createLikeModel(blog_id):
-    blog_post = get_object_or_404(BlogPost,pk=blog_id)
-    instance = BlogPostLike.objects.create(likes=0,blogpost_connected=blog_post)
-    instance.save()
+def LoadRelatedPost(request,id):
+    #Get query set using id
+    postSet = BlogPost.objects.filter(category_id = id).values()
+    postList =[]
+
+    for ps in postSet:
+        postList.append(ps)
+    if not postList:
+        return JsonResponse(({'error':'No posts to display'}))
+    else:
+        return JsonResponse(({'posts':postList}))
 
 class PostDetailViewSet(viewsets.ModelViewSet):
     queryset = BlogPost.objects.all().order_by('id')
