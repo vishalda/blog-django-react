@@ -1,4 +1,4 @@
-from .models import BlogPost, BlogPostComment
+from .models import BlogPost, BlogPostComment,BlogCategory
 from .serializers import BlogPostListSerializer,BlogPostDetailSerializer
 from rest_framework import viewsets
 from django.http import JsonResponse
@@ -17,11 +17,12 @@ def CreatePost(request,id):
     description = request.POST['description']
     body = request.POST['body']
     image = request.FILES['image']
+    category_id = request.POST['category_id']
     #Getting user model using id
     author = get_object_or_404(CustomUser,pk=id)
-    instance = BlogPost.objects.create(title=title,description=description,body=body,image = image,author=author)
+    category = get_object_or_404(BlogCategory,pk=id)
+    instance = BlogPost.objects.create(title=title,description=description,body=body,image = image,author=author,category=category)
     instance.save()
-    createLikeModel(instance.id)
     return JsonResponse({'success':"Post created successfully"})
 
 @csrf_exempt

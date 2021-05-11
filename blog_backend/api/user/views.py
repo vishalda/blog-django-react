@@ -34,14 +34,7 @@ def signin(request):
     #Check if request is in POST method
     if not request.method == 'POST':
         return JsonResponse({'error':'Accepting only POST request'})
-
-    #*While getting raw JSON data use body instead of POST and decode it
-    #info = request.body.decode("utf-8")
-    #info_decode = json.loads(info)
-    #username = info_decode['username']
-    #email = info_decode['email']
-    #password = info_decode['password']
-
+    
     #*Use request.POST for form-encoded data 
     username = request.POST['username']
     email = request.POST['email']
@@ -54,7 +47,7 @@ def signin(request):
         #Check if User with specified email exists, continue if exists else raise exception
         user = UserModel.objects.get(email = email)
         #Comparing of password with already existing password in database
-        if user.check_password(password):
+        if user.check_password(password) and user.username == username:
             usrDict = UserModel.objects.filter(email = email).values().first()
             usrDict.pop('password')
             #Checking if Session token exists already, if exists then raise an error and remove session token
@@ -69,7 +62,7 @@ def signin(request):
             login(request,user)
             return JsonResponse({'token':token,'user':usrDict})
         else:
-            return JsonResponse({'error':'Password incorrect! Please try again.'})
+            return JsonResponse({'error':'Invalid Credentials'})
     
     #Raising an exception for not matching of email ID
     except UserModel.DoesNotExist:
