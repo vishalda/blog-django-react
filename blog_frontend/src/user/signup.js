@@ -1,35 +1,37 @@
-import React, {useState} from {react}
-import { signup } from "../auth/helper/index"
+import React, { useState } from 'react';
+import { signup } from "../auth/helper/index";
+import Base from "../core/Base";
 
 const SignUp = () =>{
     const [values, setValues] = useState({
         name:"",
-        email:"vda.vishal@gmail.com",
-        username:"VDA-001",
+        email:"",
+        username:"",
         password:"",
         error:"",
         success: false,
     });
     
-    const [name,email,username,password,success,error] = values;
+    const {name,email,username,password,success,error} = values;
 
     const handleChange = (name) =>(event) =>{
         setValues({...values,error:false,[name]:event.target.value});
     };
 
     const onSubmit = (event) =>{
-        event.defaultPrevented();
+        event.preventDefault();
         setValues({...values,error:false});
-        signup(name,email,username,password)
+        signup({name,email,username,password})
         .then(data =>{
-            if(data.email == email){
+            console.log("Data",data);
+            if(data.email === email){
                 setValues({
                     name:"",
                     email:"",
                     username:"",
                     password:"",
                     error:"",
-                    success:false,
+                    success:true,
                 });
             }else{
                 setValues({
@@ -61,7 +63,7 @@ const SignUp = () =>{
     const signupForm = () =>{
         return(
             <div>
-                <form onSubmit>
+                <form>
                     <li>name : </li>
                     <input value = {name} onChange={handleChange("name")} type="text"/>
                     <li>email : </li>
@@ -78,6 +80,7 @@ const SignUp = () =>{
 
     return(
         <div>
+            <Base />
             {errorMessage()}
             {successMessage()}
             {signupForm()}
