@@ -23,6 +23,7 @@ const SignUp = () =>{
         setValues({...values,error:false});
         signup({name,email,username,password})
         .then(data =>{
+            //TODO: Need to remove later
             console.log("Data",data);
             if(data.email === email){
                 setValues({

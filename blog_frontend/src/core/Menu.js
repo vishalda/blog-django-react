@@ -1,11 +1,10 @@
 import React from 'react';
-import {BrowserRouter as Router,Link} from 'react-router-dom';
+import {withRouter,Link} from 'react-router-dom';
 
 
 const Menu = () =>{
     return(
         <div>
-            <Router>
                 <nav>
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/register">Register</Link></li>
@@ -14,9 +13,8 @@ const Menu = () =>{
                     <li><Link to="/category">Category</Link></li>
                     <li><Link to="/create-post">Create-Post</Link></li>
                 </nav>
-            </Router>
         </div>
     );
 };
 
-export default Menu;
+export default withRouter(Menu);
