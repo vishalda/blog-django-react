@@ -26,8 +26,10 @@ const SignIn = () =>{
         setValues({...values,error:false,loading:true});
         signin({email,username,password})
         .then(data=>{
+            //TODO: remove later
             console.log("DATA :",data);
             if(data.token){
+                //Setting up the jwt in localstorage
                 Authenticat(data, ()=>{
                     console.log("Tokken added");
                     setValues({
@@ -58,12 +60,14 @@ const SignIn = () =>{
         );
     };
 
+    //Function used to display Loader using state variable
     const isLoading = () =>{
         return (
             loading && <div>...loading</div>
         )
     }
 
+    //Performing redirect after successfull login 
     const performRedirect = () =>{
         if(IsAuthenticated()){
             return <Redirect to="/" />;

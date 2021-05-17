@@ -1,6 +1,7 @@
 import React from 'react';
 
 export const Card = ({post}) =>{
+    //Getting all the info about the card
     const CardTitle = post ? post.title : "Card Title";
     const CardDescription = post ? post.description : "Card Description";
     const CardImage = post ? post.image : "/home/vishal/Pictures/01-28-2021-11.32.04.jpg";

@@ -12,8 +12,10 @@ const SignUp = () =>{
         success: false,
     });
     
+    //Assigning all state values to the local variables
     const {name,email,username,password,success,error} = values;
 
+    //Updating each field of input after every change
     const handleChange = (name) =>(event) =>{
         setValues({...values,error:false,[name]:event.target.value});
     };
@@ -45,6 +47,7 @@ const SignUp = () =>{
         .catch(err => console.log(err));
     };
 
+    //Display success message using state variable
     const successMessage = () =>{
         return(
             <div style={{display:success? "" : "none"}}>
@@ -53,6 +56,7 @@ const SignUp = () =>{
         );
     };
 
+    //Display error message using state variable
     const errorMessage = () =>{
         return(
             <div style={{display:error? "" : "none"}}>
