@@ -56,3 +56,16 @@ export const IsAuthenticated = () =>{
         }
     }
 }
+
+export const signout = () =>{
+    var userId = IsAuthenticated() && IsAuthenticated().user.id;
+    console.log("Success");
+    if(typeof window !==undefined){
+        localStorage.removeItem("jwt");
+        return fetch(`${API}user/logout/${userId}/`,{
+            method:`GET`,
+        })
+        .then(response => console.log("Logged out successfully"))
+        .catch(err => console.log(err));
+    };
+};
