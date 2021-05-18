@@ -1,40 +1,52 @@
-import React, {useEffect, useState, useCallback} from 'react';
+import React from 'react';
 import { Card } from "./Card";
 import {getPost} from "./helper/coreApiCalls";
 import Base from "./Base";
 
 //Getting all posts
-export default function Posts(){
-    const [posts , setPost ] = useState([]);
-    const [error, setError ] =useState(false);
+class Posts extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            posts:[],
+            error:false,
+        }; 
+    }
+
+    componentDidMount(){
+        this.loadAllPost();
+    }
+    componentWillUnmount() {
+        clearInterval(this.state.error,this.state.posts);  
+    }
 
     //function to load all products
-    const loadAllPost = useCallback(() =>{
+    loadAllPost (){
         getPost()
         .then(data =>{
             if(data.error){
-                setError(data.error);
-                console.log(error);
+                this.setState({error:data.error});
+                console.log(this.state.error);
             }else{
-                setPost(data);
+                this.setState({posts:data});
             }
         });
-    },[]);
+    };
 
-    useEffect (() => {
-        loadAllPost();
-    }, [loadAllPost] );
-
-    return(
-        <div>
-            <Base />
-            {posts.map((post,index) =>{
-                return(
-                    <div key={index}>
-                        <Card post = {post} />
-                    </div>
-                );
-            })}
-        </div>
-    );
+    render(){
+        return(
+            <div>
+                <Base />
+                {this.state.posts.map((post,index) =>{
+                    return(
+                        <div key={index}>
+                            <Card post = {post} />
+                        </div>
+                    );
+                })}
+            </div>
+        );
+    }
 };
+
+export default Posts;

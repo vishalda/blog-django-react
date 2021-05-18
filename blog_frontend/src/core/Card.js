@@ -9,7 +9,7 @@ export const Card = ({post}) =>{
     const CardAuthorUserName = post ? post.author.username : "VDA-001";
     
     return(
-        <div className="Card" style={{width:"25%"}}>
+        <div className="Card" style={{width:"25%",border:"2px",borderBlockColor:"black"}}>
             <h1>{CardTitle}</h1>
             <h4>{CardDescription}</h4>
             <img src={CardImage} style={{width:"100%"}} alt=""/>
