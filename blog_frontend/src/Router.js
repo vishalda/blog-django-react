@@ -5,6 +5,7 @@ import SignIn from "./user/signin";
 import Posts from "./core/Explore";
 import App from "./App";
 import Category from "./core/Category";
+import ViewPost from "./core/ViewPost";
 
 const Routes = () =>{
     return(
@@ -15,6 +16,7 @@ const Routes = () =>{
                 <Route path="/login" exact component={SignIn}/>
                 <Route path="/post" exact component={Posts}/>
                 <Route path="/category" exact component={Category}/>
+                <Route path="/post/view/:id" exact render={(props) => <ViewPost {...props} />}/>
             </Switch>
         </BrowserRouter>
     );
