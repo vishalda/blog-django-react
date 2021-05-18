@@ -1,34 +1,33 @@
 import React from 'react';
-import { PostCard } from "./Card";
-import {getPost} from "./helper/coreApiCalls";
+import {getCategory} from "./helper/coreApiCalls";
 import Base from "./Base";
+import { CategoryCard } from "./Card";
 
-//Getting all posts
-class Posts extends React.Component{
+class Category extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            posts:[],
+            categories:[],
             error:false,
         }; 
     }
 
     componentDidMount(){
-        this.loadAllPost();
+        this.loadAllCategory();
     }
     componentWillUnmount() {
-        clearInterval(this.state.error,this.state.posts);  
+        clearInterval(this.state.error,this.state.categories);  
     }
 
     //function to load all products
-    loadAllPost (){
-        getPost()
+    loadAllCategory (){
+        getCategory()
         .then(data =>{
             if(data.error){
                 this.setState({error:data.error});
                 console.log(this.state.error);
             }else{
-                this.setState({posts:data});
+                this.setState({categories:data});
             }
         });
     };
@@ -37,16 +36,16 @@ class Posts extends React.Component{
         return(
             <div>
                 <Base />
-                {this.state.posts.map((post,index) =>{
+                {this.state.categories.map((category,index) =>{
                     return(
                         <div key={index}>
-                            <PostCard post = {post} />
+                            <CategoryCard category = {category} />
                         </div>
                     );
                 })}
             </div>
         );
     }
-};
+}
 
-export default Posts;
+export default Category;

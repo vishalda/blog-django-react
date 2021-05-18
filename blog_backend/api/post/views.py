@@ -1,5 +1,5 @@
 from .models import BlogPost, BlogPostComment,BlogCategory
-from .serializers import BlogPostListSerializer,BlogPostDetailSerializer
+from .serializers import BlogPostListSerializer,BlogPostDetailSerializer,BlogCategorySerializer
 from rest_framework import viewsets
 from django.http import JsonResponse
 from api.user.models import CustomUser
@@ -74,6 +74,10 @@ def LoadRelatedPost(request,id):
         return JsonResponse(({'error':'No posts to display'}))
     else:
         return JsonResponse(({'posts':postList}))
+
+class CategoryListViewSet(viewsets.ModelViewSet):
+    queryset = BlogCategory.objects.all().order_by('id')
+    serializer_class = BlogCategorySerializer
 
 class PostDetailViewSet(viewsets.ModelViewSet):
     queryset = BlogPost.objects.all().order_by('id')
