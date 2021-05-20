@@ -9,6 +9,7 @@ class Posts extends React.Component{
         super(props);
         this.state = {
             posts:[],
+            filteredPost:[],
             error:false,
         }; 
     }

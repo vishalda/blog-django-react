@@ -63,18 +63,6 @@ def LoadComment(request,id):
     else:
         return JsonResponse({'error':'No comments to display'})
 
-def LoadRelatedPost(request,id):
-    #Get query set using id
-    postSet = BlogPost.objects.filter(category_id = id).values()
-    postList =[]
-
-    for ps in postSet:
-        postList.append(ps)
-    if not postList:
-        return JsonResponse(({'error':'No posts to display'}))
-    else:
-        return JsonResponse(({'posts':postList}))
-
 class CategoryListViewSet(viewsets.ModelViewSet):
     queryset = BlogCategory.objects.all().order_by('id')
     serializer_class = BlogCategorySerializer

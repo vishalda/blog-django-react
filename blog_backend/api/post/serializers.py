@@ -5,7 +5,7 @@ from api.user.serializers import UserSerializer,BriefUserSerializer
 class BlogCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = BlogCategory
-        fields = ('title','description')
+        fields = ('title','description','id')
 
 #*Getting list of all posts
 class BlogPostListSerializer(serializers.ModelSerializer):

@@ -1,27 +1,26 @@
 import React from 'react';
-import { PostCard } from "./Card";
-import {getPost} from "./helper/coreApiCalls";
-import Base from "./Base";
+import Base from './Base';
+import { PostCard } from './Card';
+import {getPost} from './helper/coreApiCalls';
 
-//Getting all posts
-class Posts extends React.Component{
-    constructor(props) {
+class ViewCategory extends React.Component{
+    constructor(props){
         super(props);
-        this.state = {
-            posts:[],
+        this.state={
             error:false,
-        }; 
+            posts:[],
+            filteredPost:[],
+        }
     }
 
     componentDidMount(){
-        this.loadAllPost();
+        this.loadRelatedPost(this.props.idObjct.id);
     }
-    componentWillUnmount() {
-        clearInterval(this.state.error,this.state.posts);  
+    componentWillUnmount(){
+        clearInterval(this.state.error,this.state.posts);
     }
-
-    //function to load all products
-    loadAllPost (){
+    
+    loadRelatedPost(id){
         getPost()
         .then(data =>{
             if(data.error){
@@ -32,12 +31,12 @@ class Posts extends React.Component{
                 for(var i in data){
                     dataArray.push({name:i, value:data[i]})
                 }
-                console.log("Data",data);
-                console.log("DataArray",dataArray);
-                this.setState({posts:dataArray});
+                const filteredData = dataArray.filter((post) => post.value.category.id === parseInt(id))
+                console.log(filteredData);
+                this.setState({posts:filteredData});
             }
         }).catch(err =>console.log(err))
-    };
+    }
 
     render(){
         return(
@@ -46,13 +45,13 @@ class Posts extends React.Component{
                 {this.state.posts.map((post,index) =>{
                     return(
                         <div key={index}>
-                            <PostCard post = {post} />
+                            <PostCard post={post} />
                         </div>
                     );
                 })}
             </div>
         );
     }
-};
+}
 
-export default Posts;
+export default ViewCategory;

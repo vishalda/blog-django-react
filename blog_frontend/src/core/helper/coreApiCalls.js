@@ -9,7 +9,7 @@ export const getPost = () =>{
 };
 
 export const getCategory = () =>{
-    return fetch(`${API}post/category/`,{method:`GET`})
+    return fetch(`${API}post/categories/`,{method:`GET`})
     .then(response =>{
         return response.json();
     })
