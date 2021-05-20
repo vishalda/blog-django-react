@@ -3,6 +3,7 @@ import {useHistory} from 'react-router-dom';
 
 export const PostCard = ({post}) =>{
     //Getting all the info about the card
+    //Using .value because each value are objects and mapped onto array using name field
     const CardTitle = post.value ? post.value.title : "Card Title";
     const CardDescription = post.value ? post.value.description : "Card Description";
     const CardImage = post.value ? post.value.image : "/home/vishal/Pictures/01-28-2021-11.32.04.jpg";
@@ -31,6 +32,7 @@ export const CategoryCard =({category}) =>{
     const CardDescription = category ? category.description : "Card Description";
     const history = useHistory();
 
+    //Onclick view the posts under particular category
     function handleClick(){
         history.push(`/category/view/${category.id}`);
     };

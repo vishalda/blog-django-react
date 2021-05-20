@@ -16,8 +16,7 @@ export const getCategory = () =>{
     .catch(err => console.log(err))
 };
 
-export const ViewPostInDetail = (objct) =>{
-    let id = objct.id;
+export const ViewPostInDetail = (id) =>{
     return fetch(`${API}post/view/${id}/`,{method:`GET`})
     .then(response =>{
         return response.json();

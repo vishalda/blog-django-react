@@ -32,8 +32,7 @@ class Posts extends React.Component{
                 for(var i in data){
                     dataArray.push({name:i, value:data[i]})
                 }
-                console.log("Data",data);
-                console.log("DataArray",dataArray);
+                //TODO:Remove array and try to load data directly from json format
                 this.setState({posts:dataArray});
             }
         }).catch(err =>console.log(err))

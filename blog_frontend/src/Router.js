@@ -9,10 +9,9 @@ import ViewPost from "./core/ViewPost";
 import ViewCategory from "./core/ViewCategory";
 
 const Routes = () =>{
-
+    //TODO: Try to load id directly to ViewCategory without this function 
     function GetId(){
         let id = useParams();
-
         return(
             <div>
                 <ViewCategory idObjct={id} />

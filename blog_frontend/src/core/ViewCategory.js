@@ -14,6 +14,7 @@ class ViewCategory extends React.Component{
     }
 
     componentDidMount(){
+        //accessing the id in props which was sent in the routers
         this.loadRelatedPost(this.props.idObjct.id);
     }
     componentWillUnmount(){
@@ -31,8 +32,8 @@ class ViewCategory extends React.Component{
                 for(var i in data){
                     dataArray.push({name:i, value:data[i]})
                 }
+                //TODO:Remove array and try to load data directly from json format
                 const filteredData = dataArray.filter((post) => post.value.category.id === parseInt(id))
-                console.log(filteredData);
                 this.setState({posts:filteredData});
             }
         }).catch(err =>console.log(err))

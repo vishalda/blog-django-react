@@ -1,5 +1,5 @@
 import React from 'react';
-import {ViewPostInDetail} from "./helper/coreApiCalls"
+import {ViewPostInDetail} from "./helper/coreApiCalls";
 
 class ViewPost extends React.Component{
     constructor(props){
@@ -11,13 +11,14 @@ class ViewPost extends React.Component{
     }
 
     componentDidMount(){
-        this.loadPostInDetail(this.props.match.params);
+        this.loadPostInDetail(this.props.match.params.id);
     }
     componentWillUnmount(){
         clearInterval(this.state.error,this.state.post)
     }
 
     loadPostInDetail(userId){
+        //Getting the full data of that particular post using its id 
         ViewPostInDetail(userId)
         .then(data =>{
             if(data.error){
