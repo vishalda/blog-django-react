@@ -4,7 +4,7 @@ import SignUp from "./user/signup";
 import SignIn from "./user/signin";
 import Posts from "./core/Explore";
 import App from "./App";
-import Category from "./core/Category";
+import Category from "./core/GetCategories";
 import ViewPost from "./core/ViewPost";
 import ViewCategory from "./core/ViewCategory";
 

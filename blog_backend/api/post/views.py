@@ -20,7 +20,7 @@ def CreatePost(request,id):
     category_id = request.POST['category_id']
     #Getting user model using id
     author = get_object_or_404(CustomUser,pk=id)
-    category = get_object_or_404(BlogCategory,pk=id)
+    category = get_object_or_404(BlogCategory,pk=category_id)
     instance = BlogPost.objects.create(title=title,description=description,body=body,image = image,author=author,category=category)
     instance.save()
     return JsonResponse({'success':"Post created successfully"})
