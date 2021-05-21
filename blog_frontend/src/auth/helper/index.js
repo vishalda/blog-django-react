@@ -24,6 +24,7 @@ export const signin = (user) =>{
         formData.append(name,user[name]);
     }
     //Output the keys to the console
+    //TODO: Remove later
     for(var key of formData.keys()){
         console.log("KEYS", key);
     }
