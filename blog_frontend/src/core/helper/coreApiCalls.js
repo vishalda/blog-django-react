@@ -38,7 +38,7 @@ export const CreateNewPost = (postData) =>{
     }
     return fetch(`${API}post/create-post/${userId}/`,{
         method:`POST`,
-        body:formData
+        body:formData,
     })
     .then(response =>{
         return response.json();

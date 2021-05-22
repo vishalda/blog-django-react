@@ -22,14 +22,20 @@ class CreatePost extends React.Component{
     }
 
     async getOptions(){
-        const res = fetch(`${API}post/categories/`,{
+        /*const res = fetch(`${API}post/categories/`,{
             method:`GET`,
-        });
-        const data =res.data;
+        }).then(response =>{
+            return response.json();
+        }).catch(err=>console.log(err))
+        const data = [];
+        for(var i in res){
+            data.push({name:i, value:res[i]});
+        }
         const options = data.map((d)=>({
             "value":d.id,
             "label":d.title,
-        }));
+        }));*/
+        const options = ["Technology",'BlockChain']
 
         this.setState({category_options:options});
     }
@@ -44,8 +50,8 @@ class CreatePost extends React.Component{
         })
     };
 
-    handleChange = (e) => {
-        this.setState({[e.target.id]:e.target.value} )
+    handleChange =(name) => (e) => {
+        this.setState({[name]:e.target.value} )
     };
 
     onSubmit = (e) =>{
@@ -66,13 +72,19 @@ class CreatePost extends React.Component{
                 <Base />
                 <form>
                     <li>title : </li>
-                    <input value = {this.state.title} onChange={this.handleChange()} type="text"/>
+                    <input value = {this.state.title} onChange={this.handleChange("title")} type="text"/>
                     <li>description : </li>
-                    <input value = {this.state.description} onChange={this.handleChange()} type="text"/>
+                    <input value = {this.state.description} onChange={this.handleChange("description")} type="text"/>
                     <li>body : </li>
-                    <input value = {this.state.body} onChange={this.handleChange()} type="text"/>
-                    <input value = {this.state.image} onChange={this.handleImageChange()} type="file" />
+                    <input value = {this.state.body} onChange={this.handleChange("body")} type="text"/>
+                    <input value = {this.state.image} onChange={this.handleImageChange.bind(this)} type="file" />
                     <Select options={this.state.category_options} onChange={this.handleCategoryChange.bind(this)} />
+                    <select name="id" onChange={this.handleCategoryChange.bind(this)}>
+                        <option value={1}>Technology</option>
+                        <option value={2}>BlockChain</option>
+                        <option value={3}>Machine Learning</option>
+                        <option value={5}>Flutter</option>
+                    </select>
                     <button onClick={this.onSubmit}>submit</button>
                 </form>
             </div>
