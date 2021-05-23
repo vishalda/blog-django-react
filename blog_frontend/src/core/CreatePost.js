@@ -11,7 +11,7 @@ class CreatePost extends React.Component{
             title:"",
             description:"",
             body:"",
-            image:null,
+            image:"",
             category_options:[],
             category_id:"",
         }
@@ -48,6 +48,8 @@ class CreatePost extends React.Component{
         this.setState({
             image:e.target.files[0]
         })
+        console.log(e.target.files[0]);
+        console.log(this.state.image);
     };
 
     handleChange =(name) => (e) => {
@@ -57,6 +59,7 @@ class CreatePost extends React.Component{
     onSubmit = (e) =>{
         e.preventDefault();
         const {title,description,body,image,category_options,category_id} = this.state;
+        console.log(typeof(image));
         CreateNewPost({title,description,body,image,category_id})
         .then(response =>{
             console.log(response);
@@ -77,7 +80,7 @@ class CreatePost extends React.Component{
                     <input value = {this.state.description} onChange={this.handleChange("description")} type="text"/>
                     <li>body : </li>
                     <input value = {this.state.body} onChange={this.handleChange("body")} type="text"/>
-                    <input value = {this.state.image} onChange={this.handleImageChange.bind(this)} type="file" />
+                    <input type="file" id="image" accept="image/png, image/jpeg" onChange={this.handleImageChange} value = {this.state.image}/>
                     <Select options={this.state.category_options} onChange={this.handleCategoryChange.bind(this)} />
                     <select name="id" onChange={this.handleCategoryChange.bind(this)}>
                         <option value={1}>Technology</option>
