@@ -21,7 +21,7 @@ class CreatePost extends React.Component{
         this.getOptions();
     }
 
-    async getOptions(){
+    getOptions(){
         /*const res = fetch(`${API}post/categories/`,{
             method:`GET`,
         }).then(response =>{
@@ -35,31 +35,28 @@ class CreatePost extends React.Component{
             "value":d.id,
             "label":d.title,
         }));*/
-        const options = ["Technology",'BlockChain']
-
+        const options = [
+            { value: '0', label: 'Chocolate' },
+            { value: '1', label: 'Strawberry' },
+            { value: '2', label: 'Vanilla' },
+        ];
         this.setState({category_options:options});
+        console.log(this.state.category_options);
     }
-
-    handleCategoryChange(e){
-        this.setState({category_id:e.value});
-    }
-
-    handleImageChange = (e) =>{
-        this.setState({
-            image:e.target.files[0]
-        })
-        console.log(e.target.files[0]);
-        console.log(this.state.image);
-    };
 
     handleChange =(name) => (e) => {
-        this.setState({[name]:e.target.value} )
+        if(name === 'image'){
+            this.setState({[name]:e.target.files[0]})
+        }else if(name === 'category_id'){
+            this.setState({[name]:e.value});
+        }else{
+            this.setState({[name]:e.target.value})
+        }
     };
 
     onSubmit = (e) =>{
         e.preventDefault();
         const {title,description,body,image,category_options,category_id} = this.state;
-        console.log(typeof(image));
         CreateNewPost({title,description,body,image,category_id})
         .then(response =>{
             console.log(response);
@@ -80,14 +77,8 @@ class CreatePost extends React.Component{
                     <input value = {this.state.description} onChange={this.handleChange("description")} type="text"/>
                     <li>body : </li>
                     <input value = {this.state.body} onChange={this.handleChange("body")} type="text"/>
-                    <input type="file" id="image" accept="image/png, image/jpeg" onChange={this.handleImageChange} value = {this.state.image}/>
-                    <Select options={this.state.category_options} onChange={this.handleCategoryChange.bind(this)} />
-                    <select name="id" onChange={this.handleCategoryChange.bind(this)}>
-                        <option value={1}>Technology</option>
-                        <option value={2}>BlockChain</option>
-                        <option value={3}>Machine Learning</option>
-                        <option value={5}>Flutter</option>
-                    </select>
+                    <input  value = {undefined} type="file" onChange={this.handleChange('image')}/>
+                    <Select value={this.state.category_options[this.state.category_id]} options={this.state.category_options} onChange={this.handleChange('category_id')} />
                     <button onClick={this.onSubmit}>submit</button>
                 </form>
             </div>

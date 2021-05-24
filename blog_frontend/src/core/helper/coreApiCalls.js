@@ -27,15 +27,12 @@ export const ViewPostInDetail = (id) =>{
 
 export const CreateNewPost = (postData) =>{
     let userId = IsAuthenticated() && IsAuthenticated().user.id;
+    
     const formData = new FormData();
     for(const dataName in postData){
         formData.append(dataName,postData[dataName]);
     }
-    //Output the keys to the console
-    //TODO: Remove later
-    for(var key of formData.keys()){
-        console.log("KEYS", key);
-    }
+
     return fetch(`${API}post/create-post/${userId}/`,{
         method:`POST`,
         body:formData,
