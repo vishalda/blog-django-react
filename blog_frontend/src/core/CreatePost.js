@@ -1,5 +1,5 @@
 import React from 'react';
-import {CreateNewPost} from './helper/coreApiCalls';
+import {CreateNewPost, getCategory} from './helper/coreApiCalls';
 import Base from "./Base";
 import { API } from '../backend';
 import Select from "react-select";
@@ -14,34 +14,30 @@ class CreatePost extends React.Component{
             image:"",
             category_options:[],
             category_id:"",
+            options:[],
+            error:"",
         }
     }
 
     componentDidMount(){
-        this.getOptions();
+        getCategory()
+        .then(data =>{
+            if(data.error){
+                this.setState({error:data.error});
+                console.log(this.state.error);
+            }else{
+                this.getOptions(data);
+            }
+        });
     }
 
-    getOptions(){
-        /*const res = fetch(`${API}post/categories/`,{
-            method:`GET`,
-        }).then(response =>{
-            return response.json();
-        }).catch(err=>console.log(err))
-        const data = [];
-        for(var i in res){
-            data.push({name:i, value:res[i]});
-        }
-        const options = data.map((d)=>({
+    getOptions(data){
+        const option = data.map((d)=>({
             "value":d.id,
             "label":d.title,
-        }));*/
-        const options = [
-            { value: '0', label: 'Chocolate' },
-            { value: '1', label: 'Strawberry' },
-            { value: '2', label: 'Vanilla' },
-        ];
-        this.setState({category_options:options});
-        console.log(this.state.category_options);
+        }));
+
+        this.setState({category_options:option});
     }
 
     handleChange =(name) => (e) => {
@@ -72,13 +68,13 @@ class CreatePost extends React.Component{
                 <Base />
                 <form>
                     <li>title : </li>
-                    <input value = {this.state.title} onChange={this.handleChange("title")} type="text"/>
+                    <input value = {this.state.title} onChange={this.handleChange("title")} type="text" required/>
                     <li>description : </li>
-                    <input value = {this.state.description} onChange={this.handleChange("description")} type="text"/>
+                    <input value = {this.state.description} onChange={this.handleChange("description")} type="text" required/>
                     <li>body : </li>
-                    <input value = {this.state.body} onChange={this.handleChange("body")} type="text"/>
-                    <input  value = {undefined} type="file" onChange={this.handleChange('image')}/>
-                    <Select value={this.state.category_options[this.state.category_id]} options={this.state.category_options} onChange={this.handleChange('category_id')} />
+                    <input value = {this.state.body} onChange={this.handleChange("body")} type="text" required/>
+                    <input  value = {undefined} type="file" onChange={this.handleChange('image')} required/>
+                    <Select value={this.state.category_options[this.state.category_id-1]} options={this.state.category_options} onChange={this.handleChange('category_id')} required/>
                     <button onClick={this.onSubmit}>submit</button>
                 </form>
             </div>

@@ -27,7 +27,7 @@ export const ViewPostInDetail = (id) =>{
 
 export const CreateNewPost = (postData) =>{
     let userId = IsAuthenticated() && IsAuthenticated().user.id;
-    
+
     const formData = new FormData();
     for(const dataName in postData){
         formData.append(dataName,postData[dataName]);
