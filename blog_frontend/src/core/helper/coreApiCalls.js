@@ -26,8 +26,10 @@ export const ViewPostInDetail = (id) =>{
 };
 
 export const CreateNewPost = (postData) =>{
+    //Getting userId by checking for Authentication
     let userId = IsAuthenticated() && IsAuthenticated().user.id;
 
+    //Creating a new Form Data
     const formData = new FormData();
     for(const dataName in postData){
         formData.append(dataName,postData[dataName]);
