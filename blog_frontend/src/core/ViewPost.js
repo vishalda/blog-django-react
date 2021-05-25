@@ -10,7 +10,8 @@ class ViewPost extends React.Component{
             comments:[],
             viewComments:false,
             UserDetail:[]
-        }
+        };
+        this.loadUserDetailOfComment=this.loadUserDetailOfComment.bind(this);
     }
 
     componentDidMount(){
@@ -42,20 +43,28 @@ class ViewPost extends React.Component{
             }else{
                 this.setState({
                     comments:data.comments,
-                    viewComments:true,
                 })
+                if(this.state.viewComments){
+                    this.setState({viewComments:false})
+                }else{
+                    this.setState({viewComments:true})
+                }
                 console.log(this.state.comments);
             }
         })
         .catch(err=>console.log(err))
     }
 
-    loadUserDetailOfComment = (author_id)=>(e)=>{
-        e.preventDefault();
+    loadUserDetailOfComment = (author_id)=>{
+        console.log(author_id);
         getUserDetail(author_id)
         .then(data=>{
-            this.setState({UserDetail:data})
-            console.log(data);
+            if(data.error){
+                this.setState({error:data.error})
+            }else{
+                this.setState({UserDetail:data})
+                return(<p>{this.state.UserDetail.username}</p>);
+            }
         })
         .catch(err=>console.log(err))
     }
@@ -78,15 +87,14 @@ class ViewPost extends React.Component{
                 <p>{AuthorUserName}</p>
                 <button onClick={this.loadComments(this.state.post.id)}>Comments</button>
                 {this.state.viewComments && this.state.comments.map((comment,index) =>{
-                        return(
-                            <div key={index}>
-                                <hr />
-                                <h4>{ comment.content}</h4>
-                                {this.loadUserDetailOfComment(comment.author_id)}
-                                <p>{this.state.UserDetail.username}</p>
-                            </div>
-                        );
-                    })}
+                    return(
+                        <div key={index}>
+                            <hr />
+                            <h4>{ comment.content}</h4>
+                            {/*//TODO: Get detail of owner of the comment*/}
+                        </div>
+                    );
+                })}
             </div>
         );
     }
