@@ -1,5 +1,6 @@
 import React from 'react';
-import {getComments, getUserDetail, ViewPostInDetail} from "./helper/coreApiCalls";
+import { IsAuthenticated } from '../auth/helper';
+import {CreateComment, getComments, getUserDetail, ViewPostInDetail} from "./helper/coreApiCalls";
 
 class ViewPost extends React.Component{
     constructor(props){
@@ -9,9 +10,9 @@ class ViewPost extends React.Component{
             post:[],
             comments:[],
             viewComments:false,
-            UserDetail:[]
+            UserDetail:[],
+            content:"",
         };
-        this.loadUserDetailOfComment=this.loadUserDetailOfComment.bind(this);
     }
 
     componentDidMount(){
@@ -49,7 +50,6 @@ class ViewPost extends React.Component{
                 }else{
                     this.setState({viewComments:true})
                 }
-                console.log(this.state.comments);
             }
         })
         .catch(err=>console.log(err))
@@ -69,6 +69,23 @@ class ViewPost extends React.Component{
         .catch(err=>console.log(err))
     }
 
+    handleChange = (name) => (e) =>{
+        this.setState({[name]:e.target.value});
+    }
+
+    onSubmit = (e) =>{
+        e.preventDefault();
+        const post_id = this.state.post.id;
+        const author_id = IsAuthenticated() && IsAuthenticated().user.id;
+        const content = this.state.content;
+        CreateComment(author_id,post_id,content)
+        .then(data=>{
+            console.log(data);
+            this.setState({content:""})
+        })
+        .catch(err=> console.log(err))
+    }
+
     render(){
         const Title = this.state.post ? this.state.post.title : "Title";
         const Description = this.state.post ? this.state.post.description : "Description";
@@ -85,6 +102,8 @@ class ViewPost extends React.Component{
                 <img src={Image} alt="" />
                 <p>{AuthorName}</p>
                 <p>{AuthorUserName}</p>
+                <input type="text" value={this.state.content} name="comment" onChange={this.handleChange('content')}/>
+                <button onClick={this.onSubmit}>Submit Comment</button>
                 <button onClick={this.loadComments(this.state.post.id)}>Comments</button>
                 {this.state.viewComments && this.state.comments.map((comment,index) =>{
                     return(

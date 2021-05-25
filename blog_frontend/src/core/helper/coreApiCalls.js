@@ -33,6 +33,19 @@ export const getUserDetail = (id) =>{
     .catch(err=>console.log(err))
 };
 
+export const CreateComment = (author_id,post_id,content) =>{
+    const formData = new FormData();
+    formData.append('content',content);
+    return fetch(`${API}post/create-comment/${author_id}/${post_id}/`,{
+        method:`POST`,
+        body:formData
+    })
+    .then(response =>{
+        return response.json();
+    })
+    .catch(err => console.log(err));
+}
+
 export const ViewPostInDetail = (id) =>{
     return fetch(`${API}post/view/${id}/`,{method:`GET`})
     .then(response =>{
