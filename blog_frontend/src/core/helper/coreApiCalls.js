@@ -17,6 +17,23 @@ export const getCategory = () =>{
     .catch(err => console.log(err))
 };
 
+export const getComments = (id) =>{
+    return fetch(`${API}post/comment/${id}`,{method:`GET`})
+    .then(response =>{
+        return response.json();
+    })
+    .catch(err => console.log(err))
+};
+
+export const getUserDetail = (id) =>{
+    return fetch(`${API}user/${id}/`,{method:`GET`})
+    .then(response =>{
+        console.log(response.json());
+        return response.json();
+    })
+    .catch(err=>console.log(err))
+};
+
 export const ViewPostInDetail = (id) =>{
     return fetch(`${API}post/view/${id}/`,{method:`GET`})
     .then(response =>{

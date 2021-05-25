@@ -1,5 +1,5 @@
 import React from 'react';
-import {ViewPostInDetail} from "./helper/coreApiCalls";
+import {getComments, getUserDetail, ViewPostInDetail} from "./helper/coreApiCalls";
 
 class ViewPost extends React.Component{
     constructor(props){
@@ -7,6 +7,9 @@ class ViewPost extends React.Component{
         this.state={
             error:false,
             post:[],
+            comments:[],
+            viewComments:false,
+            UserDetail:[]
         }
     }
 
@@ -30,6 +33,33 @@ class ViewPost extends React.Component{
         .catch(err => console.log(err))
     }
 
+    loadComments = (postId) =>(e) =>{
+        e.preventDefault();
+        getComments(postId)
+        .then(data=>{
+            if(data.error){
+                this.setState({error:data.error})
+            }else{
+                this.setState({
+                    comments:data.comments,
+                    viewComments:true,
+                })
+                console.log(this.state.comments);
+            }
+        })
+        .catch(err=>console.log(err))
+    }
+
+    loadUserDetailOfComment = (author_id)=>(e)=>{
+        e.preventDefault();
+        getUserDetail(author_id)
+        .then(data=>{
+            this.setState({UserDetail:data})
+            console.log(data);
+        })
+        .catch(err=>console.log(err))
+    }
+
     render(){
         const Title = this.state.post ? this.state.post.title : "Title";
         const Description = this.state.post ? this.state.post.description : "Description";
@@ -46,6 +76,17 @@ class ViewPost extends React.Component{
                 <img src={Image} alt="" />
                 <p>{AuthorName}</p>
                 <p>{AuthorUserName}</p>
+                <button onClick={this.loadComments(this.state.post.id)}>Comments</button>
+                {this.state.viewComments && this.state.comments.map((comment,index) =>{
+                        return(
+                            <div key={index}>
+                                <hr />
+                                <h4>{ comment.content}</h4>
+                                {this.loadUserDetailOfComment(comment.author_id)}
+                                <p>{this.state.UserDetail.username}</p>
+                            </div>
+                        );
+                    })}
             </div>
         );
     }
