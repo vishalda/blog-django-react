@@ -56,7 +56,6 @@ class ViewPost extends React.Component{
     }
 
     loadUserDetailOfComment = (author_id)=>{
-        console.log(author_id);
         getUserDetail(author_id)
         .then(data=>{
             if(data.error){
@@ -78,11 +77,15 @@ class ViewPost extends React.Component{
         const post_id = this.state.post.id;
         const author_id = IsAuthenticated() && IsAuthenticated().user.id;
         const content = this.state.content;
-        CreateComment(author_id,post_id,content)
-        .then(data=>{
-            this.setState({content:""})
-        })
-        .catch(err=> console.log(err))
+        //Check for null comments
+        if(content!=""){
+            CreateComment(author_id,post_id,content)
+            .then(data=>{
+                this.setState({content:""})
+            })
+            .catch(err=> console.log(err))
+        }
+        this.loadComments(this.state.post.id);
     }
 
     render(){
@@ -92,6 +95,7 @@ class ViewPost extends React.Component{
         const AuthorName = this.state.post.author ? this.state.post.author.name : "Vishal";
         const AuthorUserName = this.state.post.author ? this.state.post.author.username : "VDA-001";
         const Body = this.state.post ? this.state.post.body : "Body";
+        //View post in detail
 
         return(
             <div>

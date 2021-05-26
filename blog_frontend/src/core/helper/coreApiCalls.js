@@ -18,7 +18,7 @@ export const getCategory = () =>{
 };
 
 export const getComments = (id) =>{
-    return fetch(`${API}post/comment/${id}`,{method:`GET`})
+    return fetch(`${API}post/comment/${id}/`,{method:`GET`})
     .then(response =>{
         return response.json();
     })

@@ -9,7 +9,6 @@ class Profile extends React.Component{
         super(props);
         this.state={
             user:[],
-            posts:[],
             checkPost:false,
             filteredPost:[],
             error:false,
@@ -17,11 +16,13 @@ class Profile extends React.Component{
     }
 
     componentDidMount(){
+        //Getting the user details and his/her posts
         this.loadUserDetail();
         this.loadPosts();
     }
 
     loadUserDetail(){
+        //Getting authenticated users id
         const userId = IsAuthenticated() && IsAuthenticated().user.id;
         getUserDetail(userId)
         .then(data=>{
@@ -40,16 +41,15 @@ class Profile extends React.Component{
             if(data.error){
                 this.setState({error:data.error})
             }else{
-                this.setState({posts:data})
+                //Filtering the data to get current authenticated users posts
+                let filteredData = data.filter((post) =>{
+                    if(post.author.id === this.state.user.id){
+                        return post;
+                    }
+               });
+               this.setState({filteredPost:filteredData,checkPost:true})
             }
-             let filteredData = this.state.posts.filter((post) =>{
-                 if(post.author.id === this.state.user.id){
-                     return post;
-                 }
-                 console.log(this.state.user);
-                 console.log(post);
-            });
-            this.setState({filteredPost:filteredData,checkPost:true})
+             
         })
     }
 
