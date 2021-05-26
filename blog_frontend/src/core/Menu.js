@@ -17,7 +17,10 @@ const Menu = () =>{
                     <li><Link to="/category">Category</Link></li>
                     <li><Link to="/create-post">Create-Post</Link></li>
                     {IsAuthenticated() &&
-                    <li><a href="/" onClick={()=>signout()}>Logout</a></li>}
+                    <div>
+                        <li><a href="/" onClick={()=>signout()}>Logout</a></li>
+                        <li><a href="/profile" >Profile</a></li>
+                    </div>}
                 </nav>
         </div>
     );

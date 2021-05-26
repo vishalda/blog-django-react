@@ -7,7 +7,7 @@ from .models import CustomUser
 class BriefUserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ('username','name')
+        fields = ('username','name','id')
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     #Deserializing the data and creating new model in DataBase
@@ -23,4 +23,4 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         model = CustomUser
         #* Getting password as additional argument which is not explicitly declared
         extra_kwargs = {'password': {'write_only': True}}
-        fields = ('email','username','name','password','phone','is_active','is_staff','is_superuser')
+        fields = ('id','email','username','name','password','phone','is_active','is_staff','is_superuser')

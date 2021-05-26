@@ -3,17 +3,16 @@ import {useHistory} from 'react-router-dom';
 
 export const PostCard = ({post}) =>{
     //Getting all the info about the card
-    //Using .value because each value are objects and mapped onto array using name field
-    const CardTitle = post.value ? post.value.title : "Card Title";
-    const CardDescription = post.value ? post.value.description : "Card Description";
-    const CardImage = post.value ? post.value.image : "/home/vishal/Pictures/01-28-2021-11.32.04.jpg";
-    const CardAuthorName = post.value.author ? post.value.author.name : "Vishal";
-    const CardAuthorUserName = post.value.author ? post.value.author.username : "VDA-001";
+    const CardTitle = post ? post.title : "Card Title";
+    const CardDescription = post ? post.description : "Card Description";
+    const CardImage = post ? post.image : "/home/vishal/Pictures/01-28-2021-11.32.04.jpg";
+    const CardAuthorName = post.author ? post.author.name : "Vishal";
+    const CardAuthorUserName = post.author ? post.author.username : "VDA-001";
     const history = useHistory();
 
     //redirecting to view/:id to get detail of post
     function handleClick(){
-        history.push(`/post/view/${post.value.id}`);
+        history.push(`/post/view/${post.id}`);
     };
     
     return(

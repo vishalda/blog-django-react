@@ -28,12 +28,7 @@ class ViewCategory extends React.Component{
                 this.setState({error:data.error});
                 console.log(this.state.error);
             }else{
-                let dataArray = [];
-                for(var i in data){
-                    dataArray.push({name:i, value:data[i]})
-                }
-                //TODO:Remove array and try to load data directly from json format
-                const filteredData = dataArray.filter((post) => post.value.category.id === parseInt(id))
+                const filteredData = data.filter((post) => post.category.id === parseInt(id))
                 this.setState({posts:filteredData});
             }
         }).catch(err =>console.log(err))

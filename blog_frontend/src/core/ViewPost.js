@@ -80,7 +80,6 @@ class ViewPost extends React.Component{
         const content = this.state.content;
         CreateComment(author_id,post_id,content)
         .then(data=>{
-            console.log(data);
             this.setState({content:""})
         })
         .catch(err=> console.log(err))
