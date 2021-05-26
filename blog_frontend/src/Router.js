@@ -9,6 +9,7 @@ import ViewPost from "./core/ViewPost";
 import ViewCategory from "./core/ViewCategory";
 import CreatePost from "./core/CreatePost";
 import Profile from "./core/Profile";
+import UpdatePost from "./core/UpdatePost";
 
 const Routes = () =>{
     //TODO: Try to load id directly to ViewCategory without this function 
@@ -31,6 +32,7 @@ const Routes = () =>{
                 <Route path="/category" exact component={Category}/>
                 <Route path="/create-post" exact component={CreatePost} />
                 <Route path="/profile" exact component={Profile} />
+                <Route path="/update-post/:id" exact render={(props)=><UpdatePost {...props} />} />
                 <Route path="/post/view/:id" exact render={(props) => <ViewPost {...props} />}/>
                 <Route path="/category/view/:id" exact  component={GetId}/>
             </Switch>

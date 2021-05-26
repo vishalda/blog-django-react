@@ -3,6 +3,8 @@ import { getPost, getUserDetail } from './helper/coreApiCalls';
 import { PostCard } from "./Card";
 import Base from "./Base";
 import { IsAuthenticated } from '../auth/helper';
+import UpdatePost from './UpdatePost';
+import { Redirect, useHistory } from 'react-router';
 
 class Profile extends React.Component{
     constructor(props){
@@ -53,6 +55,11 @@ class Profile extends React.Component{
         })
     }
 
+    handleClick = (id) =>{
+        const history = useHistory();
+        history.push(`/update-post/${id}`)
+    }
+
     render(){
         return(
             <div>
@@ -64,6 +71,7 @@ class Profile extends React.Component{
                     return(
                         <div key={index}>
                             <PostCard post = {post} />
+                            <button onClick={handleClick(post.id)}>Update this post</button>
                         </div>
                     )
                 })}

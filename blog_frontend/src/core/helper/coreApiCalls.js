@@ -33,19 +33,6 @@ export const getUserDetail = (id) =>{
     .catch(err=>console.log(err))
 };
 
-export const CreateComment = (author_id,post_id,content) =>{
-    const formData = new FormData();
-    formData.append('content',content);
-    return fetch(`${API}post/create-comment/${author_id}/${post_id}/`,{
-        method:`POST`,
-        body:formData
-    })
-    .then(response =>{
-        return response.json();
-    })
-    .catch(err => console.log(err));
-}
-
 export const ViewPostInDetail = (id) =>{
     return fetch(`${API}post/view/${id}/`,{method:`GET`})
     .then(response =>{
@@ -73,3 +60,31 @@ export const CreateNewPost = (postData) =>{
     })
     .catch(err => console.log(err))
 }; 
+
+export const CreateComment = (author_id,post_id,content) =>{
+    const formData = new FormData();
+    formData.append('content',content);
+    return fetch(`${API}post/create-comment/${author_id}/${post_id}/`,{
+        method:`POST`,
+        body:formData
+    })
+    .then(response =>{
+        return response.json();
+    })
+    .catch(err => console.log(err));
+}
+
+export const ChangePost = (post_id,data) =>{
+    const formData = new FormData();
+    for(const dataName in data){
+        formData.append(dataName,data[dataName]);
+    }
+    return fetch(`${API}post/update-post/${post_id}/`,{
+        method:`POST`,
+        body:formData
+    })
+    .then(response=>{
+        return response.json();
+    })
+    .catch(err=>console.log(err))
+}
