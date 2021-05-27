@@ -1,7 +1,10 @@
 import React from 'react';
 import {CreateNewPost, getCategory} from './helper/coreApiCalls';
+import CKEditor from '@ckeditor/ckeditor5-react'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import Base from "./Base";
 import Select from "react-select";
+import {config} from "../editorConfig";
 
 class CreatePost extends React.Component{
     constructor(props){
@@ -28,6 +31,7 @@ class CreatePost extends React.Component{
                 this.getOptions(data);
             }
         });
+        ClassicEditor.defaultConfig = config
     }
 
     //Setting up the options field for Select tag
@@ -73,7 +77,14 @@ class CreatePost extends React.Component{
                     <li>description : </li>
                     <input value = {this.state.description} onChange={this.handleChange("description")} type="text" required/>
                     <li>body : </li>
-                    <input value = {this.state.body} onChange={this.handleChange("body")} type="text" required/>
+                    <CKEditor
+                        editor={ClassicEditor}
+                        onChange={(event, editor) => {
+                            const data = editor.getData()
+                            //this.setState({body:data})
+                            this.handleChange("body")
+                        }}
+                    />
                     {/*Setting image value as this.state.image gives InvalidStateError */}
                     <input  value = {undefined} type="file" onChange={this.handleChange('image')} required/>
                     {/*Setting value using category_id -1 as the value of actual category_id starts from 1 */}
