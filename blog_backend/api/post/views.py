@@ -26,7 +26,7 @@ def CreatePost(request,id):
     return JsonResponse({'success':"Post created successfully"})
 
 @csrf_exempt
-def UpdatePost(request,post_id):
+def UpdatePostTextFields(request,post_id):
     if request.method!="POST":
         return JsonResponse({'error':'Accepting only POST requests'})
     instance = BlogPost.objects.get(pk=post_id)
@@ -34,9 +34,18 @@ def UpdatePost(request,post_id):
     instance.body = request.POST['body']
     instance.title = request.POST['title']
     instance.description = request.POST['description']
-    instance.image = request.FILES['image']
+
     instance.save()
     return JsonResponse({'success':'instance saved'})
+
+@csrf_exempt
+def UpdatePostImage(request,post_id):
+    if request.method!="POST":
+        return JsonResponse({'error':'Accepting only POST requests'})
+    instance = BlogPost.objects.get(pk=post_id)
+    instance.image = request.FILES['image']
+    instance.save()
+    return JsonResponse({'success':'Image added'})
 
 @csrf_exempt
 def CreateComment(request,author_id,blog_id):

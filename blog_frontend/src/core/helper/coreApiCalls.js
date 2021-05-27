@@ -74,12 +74,28 @@ export const CreateComment = (author_id,post_id,content) =>{
     .catch(err => console.log(err));
 }
 
-export const ChangePost = (post_id,data) =>{
+export const ChangePostTextField = (post_id,data) =>{
+    console.log(data);
     const formData = new FormData();
     for(const dataName in data){
         formData.append(dataName,data[dataName]);
     }
     return fetch(`${API}post/update-post/${post_id}/`,{
+        method:`POST`,
+        body:formData
+    })
+    .then(response=>{
+        return response.json();
+    })
+    .catch(err=>console.log(err))
+}
+
+export const ChangePostImage = (post_id,imageObject)=>{
+    const formData = new FormData();
+    const image = imageObject.image;
+    console.log(image);
+    formData.append('image',image);
+    return fetch(`${API}post/update-post-image/${post_id}/`,{
         method:`POST`,
         body:formData
     })

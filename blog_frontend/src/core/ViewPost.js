@@ -78,7 +78,7 @@ class ViewPost extends React.Component{
         const author_id = IsAuthenticated() && IsAuthenticated().user.id;
         const content = this.state.content;
         //Check for null comments
-        if(content!=""){
+        if(content!==""){
             CreateComment(author_id,post_id,content)
             .then(data=>{
                 this.setState({content:""})
@@ -102,7 +102,7 @@ class ViewPost extends React.Component{
                 <h1>{Title}</h1>
                 <h4>{Description}</h4>
                 <p>{Body}</p>
-                <img src={Image} alt="" />
+                <img src={Image} alt="" style={{width:"500px"}}/>
                 <p>{AuthorName}</p>
                 <p>{AuthorUserName}</p>
                 <input type="text" value={this.state.content} name="comment" onChange={this.handleChange('content')}/>

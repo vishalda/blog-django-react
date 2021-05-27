@@ -3,8 +3,7 @@ import { getPost, getUserDetail } from './helper/coreApiCalls';
 import { PostCard } from "./Card";
 import Base from "./Base";
 import { IsAuthenticated } from '../auth/helper';
-import UpdatePost from './UpdatePost';
-import { Redirect, useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
 class Profile extends React.Component{
     constructor(props){
@@ -48,16 +47,20 @@ class Profile extends React.Component{
                     if(post.author.id === this.state.user.id){
                         return post;
                     }
-               });
-               this.setState({filteredPost:filteredData,checkPost:true})
+                }) || [];
+                if(filteredData!=null){
+                    this.setState({filteredPost:filteredData,checkPost:true})
+                }
             }
              
         })
     }
 
     handleClick = (id) =>{
-        const history = useHistory();
-        history.push(`/update-post/${id}`)
+        console.log(id);
+        return(
+            <Link to={`/update-post/${id}`} />
+        );
     }
 
     render(){
@@ -71,7 +74,7 @@ class Profile extends React.Component{
                     return(
                         <div key={index}>
                             <PostCard post = {post} />
-                            <button onClick={handleClick(post.id)}>Update this post</button>
+                            <Link to={`/update-post/${post.id}`} >Update</Link>
                         </div>
                     )
                 })}

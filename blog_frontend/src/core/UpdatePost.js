@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router';
 import Base from './Base';
-import {ChangePost, ViewPostInDetail} from './helper/coreApiCalls';
+import {ChangePostTextField, ChangePostImage, ViewPostInDetail} from './helper/coreApiCalls';
 
 class UpdatePost extends React.Component{
     constructor(props){
@@ -11,6 +11,8 @@ class UpdatePost extends React.Component{
             description:"",
             body:"",
             image:"",
+            id:"",
+            imageViewer:"",
             error:false,
         }
     }
@@ -30,6 +32,8 @@ class UpdatePost extends React.Component{
                     description:data.description,
                     body:data.body,
                     image:data.image,
+                    imageViewer:data.image,
+                    id:data.id,
                 })
             }
         })
@@ -38,7 +42,11 @@ class UpdatePost extends React.Component{
 
     handleChange = (name) =>(event) =>{
         if(name==='image'){
-            this.setState({[name]:event.target.files[0]})
+            this.setState({
+                imageViewer:URL.createObjectURL(event.target.files[0]),
+                image:event.target.files[0],
+            })
+            console.log(this.state.image);
         }else{
             this.setState({[name]:event.target.value})
         }
@@ -50,8 +58,19 @@ class UpdatePost extends React.Component{
 
     onSubmit = (e) =>{
         e.preventDefault();
-        const data = [this.state.title,this.state.description,this.state.body,this.state.image];
-        ChangePost(this.props.id,data)
+        const {title,description,body} = this.state;
+        console.log({title,description,body});
+        ChangePostTextField(this.state.id,{title,description,body})
+        .then(data=>{
+            console.log(data)
+        })
+        .catch(err=>console.log(err))
+    }
+
+    onSubmitImage = (e) =>{
+        e.preventDefault();
+        const image=this.state.image;
+        ChangePostImage(this.state.id,{image})
         .then(data=>{
             console.log(data)
         })
@@ -69,10 +88,13 @@ class UpdatePost extends React.Component{
                         <input value = {this.state.description} onChange={this.handleChange("description")} type="text"/>
                         <li>body : </li>
                         <input value = {this.state.body} onChange={this.handleChange("body")} type="text"/>
-                        <img src={this.state.image} alt="" />
-                        <input  value = {undefined} type="file" onChange={this.handleChange('image')}/>
                         <button onClick={this.onSubmit}>Save changes</button>
                         <button onClick={this.performRedirect}>cancel</button>
+                        <br/>
+                        <br/>
+                        <img src={this.state.imageViewer} alt="" style={{width:"500px"}}/>
+                        <input type="file" onChange={this.handleChange('image')}/>
+                        <button onClick={this.onSubmitImage}>Change Image</button>
                 </form>
             </div>
         );
