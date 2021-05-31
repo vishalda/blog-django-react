@@ -2,6 +2,8 @@ import React from 'react';
 import { Redirect } from 'react-router';
 import Base from './Base';
 import {ChangePostTextField, ChangePostImage, ViewPostInDetail} from './helper/coreApiCalls';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 class UpdatePost extends React.Component{
     constructor(props){
@@ -87,7 +89,17 @@ class UpdatePost extends React.Component{
                         <li>description : </li>
                         <input value = {this.state.description} onChange={this.handleChange("description")} type="text"/>
                         <li>body : </li>
-                        <input value = {this.state.body} onChange={this.handleChange("body")} type="text"/>
+                        <CKEditor
+                            editor={ ClassicEditor }
+                            data={this.state.body}
+                            onReady={ editor => {} }
+                            onChange={ ( event, editor ) => {
+                                const data = editor.getData();
+                                this.setState({body:data})
+                            } }
+                            onBlur={ ( event, editor ) => {} }
+                            onFocus={ ( event, editor ) => {} }
+                        />
                         <button onClick={this.onSubmit}>Save changes</button>
                         <button onClick={this.performRedirect}>cancel</button>
                         <br/>

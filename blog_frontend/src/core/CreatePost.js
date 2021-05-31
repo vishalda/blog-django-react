@@ -1,10 +1,9 @@
 import React from 'react';
 import {CreateNewPost, getCategory} from './helper/coreApiCalls';
-import CKEditor from '@ckeditor/ckeditor5-react'
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import Base from "./Base";
 import Select from "react-select";
-import {config} from "../editorConfig";
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 class CreatePost extends React.Component{
     constructor(props){
@@ -14,6 +13,7 @@ class CreatePost extends React.Component{
             description:"",
             body:"",
             image:"",
+            imageViewer:"",
             category_options:[],
             category_id:"",
             error:"",
@@ -31,7 +31,6 @@ class CreatePost extends React.Component{
                 this.getOptions(data);
             }
         });
-        ClassicEditor.defaultConfig = config
     }
 
     //Setting up the options field for Select tag
@@ -45,7 +44,10 @@ class CreatePost extends React.Component{
 
     handleChange =(name) => (e) => {
         if(name === 'image'){
-            this.setState({[name]:e.target.files[0]})
+            this.setState({
+                imageViewer:URL.createObjectURL(e.target.files[0]),
+                [name]:e.target.files[0],
+            })
         }else if(name === 'category_id'){
             this.setState({[name]:e.value});
         }else{
@@ -61,6 +63,16 @@ class CreatePost extends React.Component{
         CreateNewPost({title,description,body,image,category_id})
         .then(response =>{
             console.log(response);
+            this.setState({
+                title:"",
+                description:"",
+                body:"",
+                image:"",
+                imageViewer:"",
+                category_options:[],
+                category_id:"",
+                error:"",
+            })
         })
         .catch(err=>{
             console.log(err);
@@ -78,14 +90,18 @@ class CreatePost extends React.Component{
                     <input value = {this.state.description} onChange={this.handleChange("description")} type="text" required/>
                     <li>body : </li>
                     <CKEditor
-                        editor={ClassicEditor}
-                        onChange={(event, editor) => {
-                            const data = editor.getData()
-                            //this.setState({body:data})
-                            this.handleChange("body")
-                        }}
+                        editor={ ClassicEditor }
+                        data="<p>Hello from CKEditor 5!</p>"
+                        onReady={ editor => {} }
+                        onChange={ ( event, editor ) => {
+                            const data = editor.getData();
+                            this.setState({body:data})
+                        } }
+                        onBlur={ ( event, editor ) => {} }
+                        onFocus={ ( event, editor ) => {} }
                     />
                     {/*Setting image value as this.state.image gives InvalidStateError */}
+                    <img src={this.state.imageViewer} alt="" style={{width:"500px"}}/>
                     <input  value = {undefined} type="file" onChange={this.handleChange('image')} required/>
                     {/*Setting value using category_id -1 as the value of actual category_id starts from 1 */}
                     <Select value={this.state.category_options[this.state.category_id-1]} options={this.state.category_options} onChange={this.handleChange('category_id')} required/>
