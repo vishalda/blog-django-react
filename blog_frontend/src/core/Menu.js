@@ -1,26 +1,36 @@
 import React from 'react';
 import {withRouter,Link} from 'react-router-dom';
 import {signout,IsAuthenticated} from "../auth/helper/index";
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav'
 
 const Menu = () =>{
     return(
         <div>
-            <nav>
-                <li><Link to="/">Home</Link></li>
-                {!IsAuthenticated() && <div>
-                    <li><Link to="/register">Register</Link></li>
-                    <li><Link to="/login">Login</Link></li>
-                </div>
-                }
-                <li><Link to="/post">explore</Link></li>
-                <li><Link to="/category">Category</Link></li>
-                {IsAuthenticated() &&
-                <div>
-                    <li><Link to="/create-post">Create-Post</Link></li>
-                    <li><a href="/" onClick={()=>signout()}>Logout</a></li>
-                    <li><a href="/profile" >Profile</a></li>
-                </div>}
-            </nav>
+            <Navbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
+                <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse id="responsive-navbar-nav">
+                    <Nav className="justify-content-end" activeKey="/home">
+                        <Nav.Link href="/" activeKey="/home">Home</Nav.Link>
+                        {!IsAuthenticated() && 
+                            <>
+                                <Nav.Link href="/register">Register</Nav.Link>
+                                <Nav.Link href="/login">Login</Nav.Link>
+                            </>
+                        }
+                        <Nav.Link href="/post">Explore</Nav.Link>
+                        <Nav.Link href="/category">Category</Nav.Link>
+                        {IsAuthenticated() && 
+                        <>
+                            <Nav.Link href="/create-post" >Create-Post</Nav.Link>
+                            <Nav.Link href="/"onClick={()=>signout()}>Logout</Nav.Link>
+                            <Nav.Link href="/profile">Profile</Nav.Link>
+                        </>}
+                        
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
         </div>
     );
 };
