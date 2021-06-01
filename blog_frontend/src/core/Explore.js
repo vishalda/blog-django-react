@@ -2,7 +2,7 @@ import React from 'react';
 import { PostCard } from "./Card";
 import {getPost} from "./helper/coreApiCalls";
 import Base from "./Base";
-
+import CardColumns from 'react-bootstrap/CardColumns'
 //Getting all posts
 class Posts extends React.Component{
     constructor(props) {
@@ -37,13 +37,15 @@ class Posts extends React.Component{
         return(
             <div>
                 <Base />
-                {this.state.posts.map((post,index) =>{
-                    return(
-                        <div key={index}>
-                            <PostCard post = {post} />
-                        </div>
-                    );
-                })}
+                <CardColumns style={{margin:"0px 0px 0px 20px"}}>
+                    {this.state.posts.map((post,index) =>{
+                        return(
+                            <div key={index}>
+                                <PostCard post = {post} />
+                            </div>
+                        );
+                    })}
+                </CardColumns>
             </div>
         );
     }

@@ -1,5 +1,7 @@
 import React from 'react';
 import {useHistory} from 'react-router-dom';
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button';
 
 export const PostCard = ({post}) =>{
     //Getting all the info about the card
@@ -16,13 +18,21 @@ export const PostCard = ({post}) =>{
     };
     
     return(
-        <div onClick={() => handleClick()} className="Card" style={{width:"25%",border:"2px solid black"}}>
-            <h1>{CardTitle}</h1>
-            <h4>{CardDescription}</h4>
-            <img src={CardImage} style={{width:"100%"}} alt=""/>
-            <p>{CardAuthorName}</p>
-            <p>{CardAuthorUserName}</p>
-        </div>
+        <Card style={{ width: '27rem' ,margin:'20px 0px 0px 0px'}} border="dark" >
+            <Card.Img variant="top" src={CardImage} />
+            <Card.Body>
+                <Card.Title>{CardTitle}</Card.Title>
+                <Card.Text>
+                    {CardDescription}
+                </Card.Text>
+                <Button variant="primary" onClick={() => handleClick()}>Go somewhere</Button>
+            </Card.Body>
+            <Card.Footer>
+                <small className="text-muted">Last updated 3 mins ago</small><br />
+                <small className="text-muted">{CardAuthorName}</small><br />
+                <small className="text-muted">{CardAuthorUserName}</small><br />
+            </Card.Footer>
+        </Card>
     );
 };
 
