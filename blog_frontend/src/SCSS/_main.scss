@@ -1,3 +1,12 @@
+$breakpoint-mobile-max : 480px;
+$breakpoint-mobile-min : 360px;
+$breakpoint-tab-min:480px;
+$breakpoint-tab-max:768px;
+$breakpoint-smallPC-min:769px;
+$breakpoint-smallPC-max:1024px;
+$breakpoint-largePC-min:1025px;
+$breakpoint-largePC-max:1200px;
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

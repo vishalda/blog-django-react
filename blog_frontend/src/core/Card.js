@@ -2,6 +2,7 @@ import React from 'react';
 import {useHistory} from 'react-router-dom';
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button';
+import "../SCSS/cardsStructure.scss";
 
 export const PostCard = ({post}) =>{
     //Getting all the info about the card
@@ -18,7 +19,7 @@ export const PostCard = ({post}) =>{
     };
     
     return(
-        <Card style={{ width: '27rem' ,margin:'20px 0px 0px 0px'}} border="dark" >
+        <Card className="post-card" style={{ width: '27rem'}} >
             <Card.Img variant="top" src={CardImage} />
             <Card.Body>
                 <Card.Title>{CardTitle}</Card.Title>
