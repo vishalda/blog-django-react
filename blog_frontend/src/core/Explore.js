@@ -3,6 +3,10 @@ import { PostCard } from "./Card";
 import {getPost} from "./helper/coreApiCalls";
 import Base from "./Base";
 import CardColumns from 'react-bootstrap/CardColumns'
+import "../SCSS/cardsStructure.scss";
+import "../SCSS/card.scss";
+import Container from "react-bootstrap/Container"
+
 //Getting all posts
 class Posts extends React.Component{
     constructor(props) {
@@ -37,15 +41,17 @@ class Posts extends React.Component{
         return(
             <div>
                 <Base />
-                <CardColumns style={{margin:"0px 0px 0px 20px"}}>
-                    {this.state.posts.map((post,index) =>{
-                        return(
-                            <div key={index}>
-                                <PostCard post = {post} />
-                            </div>
-                        );
-                    })}
-                </CardColumns>
+                <Container fluid>
+                    <CardColumns className='card-column'>
+                        {this.state.posts.map((post,index) =>{
+                            return(
+                                <div key={index} className='post-card-div'>
+                                    <PostCard post = {post} />
+                                </div>
+                            );
+                        })}
+                    </CardColumns>
+                </Container>
             </div>
         );
     }

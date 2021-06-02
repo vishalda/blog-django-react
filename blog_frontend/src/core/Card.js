@@ -2,15 +2,17 @@ import React from 'react';
 import {useHistory} from 'react-router-dom';
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button';
-import "../SCSS/cardsStructure.scss";
+import "../SCSS/card.scss";
 
 export const PostCard = ({post}) =>{
     //Getting all the info about the card
     const CardTitle = post ? post.title : "Card Title";
     const CardDescription = post ? post.description : "Card Description";
     const CardImage = post ? post.image : "/home/vishal/Pictures/01-28-2021-11.32.04.jpg";
-    const CardAuthorName = post.author ? post.author.name : "Vishal";
-    const CardAuthorUserName = post.author ? post.author.username : "VDA-001";
+    const CardUpdatedAt = post ? post.updated_at : "";
+    if(CardUpdatedAt === ""){
+        CardUpdatedAt = post ? post.created_at : "";
+    }
     const history = useHistory();
 
     //redirecting to view/:id to get detail of post
@@ -19,19 +21,16 @@ export const PostCard = ({post}) =>{
     };
     
     return(
-        <Card className="post-card" style={{ width: '27rem'}} >
-            <Card.Img variant="top" src={CardImage} />
-            <Card.Body>
+        <Card onClick={() => handleClick()} className='post-card'>
+            <Card.Img variant="top" className='post-card-image' src={CardImage} />
+            <Card.Body className='post-card-body'>
                 <Card.Title>{CardTitle}</Card.Title>
                 <Card.Text>
                     {CardDescription}
                 </Card.Text>
-                <Button variant="primary" onClick={() => handleClick()}>Go somewhere</Button>
             </Card.Body>
-            <Card.Footer>
-                <small className="text-muted">Last updated 3 mins ago</small><br />
-                <small className="text-muted">{CardAuthorName}</small><br />
-                <small className="text-muted">{CardAuthorUserName}</small><br />
+            <Card.Footer className='post-card-footer'>
+                <small className="text-muted">Last updated {CardUpdatedAt} mins ago</small><br />
             </Card.Footer>
         </Card>
     );
