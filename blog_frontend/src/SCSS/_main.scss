@@ -1,11 +1,11 @@
-$breakpoint-mobile-max : 480px;
-$breakpoint-mobile-min : 360px;
-$breakpoint-tab-min:480px;
-$breakpoint-tab-max:800px;
-$breakpoint-smallPC-min:800px;
-$breakpoint-smallPC-max:1024px;
-$breakpoint-largePC-min:1025px;
-$breakpoint-largePC-max:1200px;
+$breakpoint-mobile-max : 30em;
+$breakpoint-mobile-min : 23em;
+$breakpoint-tab-min:31em;
+$breakpoint-tab-max:56em;
+$breakpoint-smallPC-min:57em;
+$breakpoint-smallPC-max:64em;
+$breakpoint-largePC-min:65em;
+$breakpoint-largePC-max:75em;
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

@@ -14,7 +14,7 @@ class BlogPostListSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(max_length=None,allow_empty_file = False,allow_null = True,required = False)
     class Meta:
         model = BlogPost
-        fields = ('id','title','description','image','author','category')
+        fields = ('id','title','description','image','author','category','created_at')
 
 #* Getting one detailed post using its id
 class BlogPostDetailSerializer(serializers.ModelSerializer):

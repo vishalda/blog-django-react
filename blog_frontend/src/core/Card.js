@@ -9,10 +9,9 @@ export const PostCard = ({post}) =>{
     const CardTitle = post ? post.title : "Card Title";
     const CardDescription = post ? post.description : "Card Description";
     const CardImage = post ? post.image : "/home/vishal/Pictures/01-28-2021-11.32.04.jpg";
-    const CardUpdatedAt = post ? post.updated_at : "";
-    if(CardUpdatedAt === ""){
-        CardUpdatedAt = post ? post.created_at : "";
-    }
+    const CardCreatedAt = post ? post.created_at : "";
+    const CardCategory = post.category ? post.category.title : "";
+    const CardDate = CardCreatedAt.slice(0,10);
     const history = useHistory();
 
     //redirecting to view/:id to get detail of post
@@ -21,7 +20,7 @@ export const PostCard = ({post}) =>{
     };
     
     return(
-        <Card onClick={() => handleClick()} className='post-card'>
+        <Card onClick={() => handleClick()} className='post-card rounded'>
             <Card.Img variant="top" className='post-card-image' src={CardImage} />
             <Card.Body className='post-card-body'>
                 <Card.Title>{CardTitle}</Card.Title>
@@ -30,7 +29,7 @@ export const PostCard = ({post}) =>{
                 </Card.Text>
             </Card.Body>
             <Card.Footer className='post-card-footer'>
-                <small className="text-muted">Last updated {CardUpdatedAt} mins ago</small><br />
+                <Card.Text>Category: {CardCategory}  &nbsp; &nbsp;Created:{CardDate}</Card.Text>
             </Card.Footer>
         </Card>
     );
