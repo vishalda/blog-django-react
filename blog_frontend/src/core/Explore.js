@@ -2,7 +2,7 @@ import React from 'react';
 import { PostCard } from "./Card";
 import {getPost} from "./helper/coreApiCalls";
 import Base from "./Base";
-//import CardColumns from 'react-bootstrap/CardColumns'
+import CardColumns from 'react-bootstrap/CardColumns'
 import "../SCSS/cardsStructure.scss";
 import Container from "react-bootstrap/Container"
 
@@ -41,13 +41,15 @@ class Posts extends React.Component{
             <div>
                 <Base />
                 <Container fluid>
-                    {this.state.posts.map((post,index) =>{
-                        return(
-                            <div key={index} className='post-card-div'>
-                                <PostCard post = {post} />
-                            </div>
-                        );
-                    })}
+                    <CardColumns className='card-column'>
+                        {this.state.posts.map((post,index) =>{
+                            return(
+                                <div key={index} className='post-card-div'>
+                                    <PostCard post = {post} />
+                                </div>
+                            );
+                        })}
+                    </CardColumns>
                 </Container>
             </div>
         );
