@@ -1,7 +1,6 @@
 import React from 'react';
 import {useHistory} from 'react-router-dom';
 import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button';
 import "../SCSS/card.scss";
 
 export const PostCard = ({post}) =>{

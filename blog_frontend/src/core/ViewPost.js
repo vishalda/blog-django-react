@@ -3,7 +3,9 @@ import Container from 'react-bootstrap/esm/Container';
 import { IsAuthenticated } from '../auth/helper';
 import {CreateComment, getComments, getUserDetail, ViewPostInDetail} from "./helper/coreApiCalls";
 import "../SCSS/viewPost.scss";
+import Button from 'react-bootstrap/Button';
 import Base from './Base';
+import {FaRegComments} from 'react-icons/fa';
 
 class ViewPost extends React.Component{
     constructor(props){
@@ -101,22 +103,29 @@ class ViewPost extends React.Component{
         const Image = this.state.post ? this.state.post.image : "/home/vishal/Pictures/01-28-2021-11.32.04.jpg";
         const AuthorName = this.state.post.author ? this.state.post.author.name : "Vishal";
         const AuthorUserName = this.state.post.author ? this.state.post.author.username : "VDA-001";
+        const numberOfComments = this.state.post ? this.state.post.number_of_comments : "0";
+//        let CreatedAt = this.state.post ? this.state.post.created_at : "";
         //View post in detail
 
         return(
             <div>
                 <Base />
-                <div className="left-div">
+                <div className="sticky-top left-div">
                     <img src={Image} alt="" className="left-div-image"/>
-                    <p>Author: {AuthorName}</p>
-                    <p>{AuthorUserName}</p>
-                    <button onClick={this.loadComments(this.state.post.id)}>Comments</button>
+                    <span>
+                        <h5>@{AuthorName}</h5>
+                        <h6>{AuthorUserName}</h6>
+                    </span>
+                    <br/>
+                    <hr/>
+                    <p><FaRegComments className="comment-icon" />:{numberOfComments}</p>
+                    <Button onClick={this.loadComments(this.state.post.id)}>Comments</Button>
                 </div>
                 <Container className="post-detail" style={{padding:"50px 200px"}}>
                     <h1>{Title}</h1>
                     <h4 className="description">{Description}</h4>
                     <hr/>
-                    <img src={Image} alt="" style={{width:"100%"}}/>
+                    <img src={Image} alt=""/>
                     <br /><br />
                     <div dangerouslySetInnerHTML={this.createMarkup()} className="editor"></div>
                     

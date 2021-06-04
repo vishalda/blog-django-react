@@ -1,17 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Bellefair');
 .left-div{
     float:left;
-    position:fixed;
-    top:30%;
-    left: 10%;
+    margin-top: 5%;
+    margin-left:5%;
+    padding-top: 10%;
+    span{
+        position:relative;
+        float:right;
+        margin-left:10px;
+    }
+    .comment-icon{
+        font-size:large;
+        margin-right:5px;
+        padding-bottom: 2px;
+    }
 }
 
 .post-detail{
+    font-family: Bellefair;
+    font-size:25px;
     padding:50px 200px;
     .description{
         color:gray;
     }
     img{
         border-radius: 20px;
+        width:100%;
     }
 }
 
