@@ -1,7 +1,9 @@
 import React from 'react';
+import Container from 'react-bootstrap/esm/Container';
 import Base from './Base';
 import { PostCard } from './Card';
 import {getPost} from './helper/coreApiCalls';
+import CardColumns from 'react-bootstrap/CardColumns'
 
 class ViewCategory extends React.Component{
     constructor(props){
@@ -38,13 +40,17 @@ class ViewCategory extends React.Component{
         return(
             <div>
                 <Base />
-                {this.state.posts.map((post,index) =>{
-                    return(
-                        <div key={index}>
-                            <PostCard post={post} />
-                        </div>
-                    );
-                })}
+                <Container fluid>
+                    <CardColumns className='card-column'>
+                        {this.state.posts.map((post,index) =>{
+                            return(
+                                <div key={index} className='post-card-div'>
+                                    <PostCard post={post} />
+                                </div>
+                            );
+                        })}
+                    </CardColumns>
+                </Container>
             </div>
         );
     }

@@ -1,4 +1,5 @@
 import React from 'react';
+import Container from 'react-bootstrap/esm/Container';
 import { IsAuthenticated } from '../auth/helper';
 import {CreateComment, getComments, getUserDetail, ViewPostInDetail} from "./helper/coreApiCalls";
 
@@ -102,24 +103,30 @@ class ViewPost extends React.Component{
 
         return(
             <div>
-                <h1>{Title}</h1>
-                <h4>{Description}</h4>
-                <div dangerouslySetInnerHTML={this.createMarkup()} className="editor"></div>
-                <img src={Image} alt="" style={{width:"500px"}}/>
-                <p>{AuthorName}</p>
-                <p>{AuthorUserName}</p>
-                <input type="text" value={this.state.content} name="comment" onChange={this.handleChange('content')}/>
-                <button onClick={this.onSubmit}>Submit Comment</button>
-                <button onClick={this.loadComments(this.state.post.id)}>Comments</button>
-                {this.state.viewComments && this.state.comments.map((comment,index) =>{
-                    return(
-                        <div key={index}>
-                            <hr />
-                            <h4>{ comment.content}</h4>
-                            {/*//TODO: Get detail of owner of the comment*/}
-                        </div>
-                    );
-                })}
+                <div style={{float:'left',display:'block','justifyContent':'center'}} className="sticky-top">
+                    <img src={Image} alt="" style={{width:"50px",borderRadius:"50%"}}/>
+                    <p>Author: {AuthorName}</p>
+                    <p>{AuthorUserName}</p>
+                    <button onClick={this.loadComments(this.state.post.id)}>Comments</button>
+                </div>
+                <Container style={{padding:'50px 200px'}}>
+                    <h1>{Title}</h1>
+                    <h4>{Description}</h4>
+                    <div dangerouslySetInnerHTML={this.createMarkup()} className="editor"></div>
+                    <img src={Image} alt="" style={{width:"500px"}}/>
+                    
+                    <input type="text" value={this.state.content} name="comment" onChange={this.handleChange('content')}/>
+                    <button onClick={this.onSubmit}>Submit Comment</button>
+                    {this.state.viewComments && this.state.comments.map((comment,index) =>{
+                        return(
+                            <div key={index}>
+                                <hr />
+                                <h4>{ comment.content}</h4>
+                                {/*//TODO: Get detail of owner of the comment*/}
+                            </div>
+                        );
+                    })}
+                </Container>
             </div>
         );
     }

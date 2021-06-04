@@ -3,7 +3,7 @@ import { PostCard } from "./Card";
 import {getPost} from "./helper/coreApiCalls";
 import Base from "./Base";
 import CardColumns from 'react-bootstrap/CardColumns'
-import "../SCSS/cardsStructure.scss";
+import "../SCSS/card.scss";
 import Container from "react-bootstrap/Container"
 
 //Getting all posts
