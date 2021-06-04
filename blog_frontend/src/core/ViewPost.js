@@ -6,6 +6,9 @@ import "../SCSS/viewPost.scss";
 import Button from 'react-bootstrap/Button';
 import Base from './Base';
 import {FaRegComments} from 'react-icons/fa';
+import Modal from 'react-bootstrap/Modal';
+import InputGroup from 'react-bootstrap/InputGroup';
+import FormControl from 'react-bootstrap/FormControl';
 
 class ViewPost extends React.Component{
     constructor(props){
@@ -17,7 +20,16 @@ class ViewPost extends React.Component{
             viewComments:false,
             UserDetail:[],
             content:"",
+            show:false,
         };
+    }
+
+    handleClose = () =>{
+        this.setState({show:false})
+    }
+
+    handleShow = () =>{
+        this.setState({show:true})
     }
 
     componentDidMount(){
@@ -40,8 +52,7 @@ class ViewPost extends React.Component{
         .catch(err => console.log(err))
     }
 
-    loadComments = (postId) =>(e) =>{
-        e.preventDefault();
+    loadComments = (postId)  =>{
         getComments(postId)
         .then(data=>{
             if(data.error){
@@ -78,10 +89,12 @@ class ViewPost extends React.Component{
     }
 
     onSubmit = (e) =>{
+        this.handleClose();
         e.preventDefault();
         const post_id = this.state.post.id;
         const author_id = IsAuthenticated() && IsAuthenticated().user.id;
         const content = this.state.content;
+        console.log(content);
         //Check for null comments
         if(content!==""){
             CreateComment(author_id,post_id,content)
@@ -90,7 +103,11 @@ class ViewPost extends React.Component{
             })
             .catch(err=> console.log(err))
         }
+    }
+
+    referenceFunction=()=>{
         this.loadComments(this.state.post.id);
+        this.handleShow();
     }
 
     createMarkup = () => {
@@ -104,7 +121,6 @@ class ViewPost extends React.Component{
         const AuthorName = this.state.post.author ? this.state.post.author.name : "Vishal";
         const AuthorUserName = this.state.post.author ? this.state.post.author.username : "VDA-001";
         const numberOfComments = this.state.post ? this.state.post.number_of_comments : "0";
-//        let CreatedAt = this.state.post ? this.state.post.created_at : "";
         //View post in detail
 
         return(
@@ -113,14 +129,43 @@ class ViewPost extends React.Component{
                 <div className="sticky-top left-div">
                     <img src={Image} alt="" className="left-div-image"/>
                     <span>
-                        <h5>@{AuthorName}</h5>
-                        <h6>{AuthorUserName}</h6>
+                        <h5>@{AuthorUserName}</h5>
+                        <h6>{AuthorName}</h6>
                     </span>
                     <br/>
                     <hr/>
                     <p><FaRegComments className="comment-icon" />:{numberOfComments}</p>
-                    <Button onClick={this.loadComments(this.state.post.id)}>Comments</Button>
+                    <Button onClick={this.referenceFunction}>Comments</Button>
                 </div>
+                <Modal show={this.state.show} scrollable={true} onHide={this.handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Comments</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className="modal-body">{this.state.comments.map((comment,index) =>{
+                        return(
+                            <div key={index}>
+                                <p>{ comment.content}</p>
+                                <hr />
+                                {/*//TODO: Get detail of owner of the comment*/}
+                            </div>
+                        );
+                    })}</Modal.Body>
+                    <Modal.Footer>
+                    <InputGroup>
+                        <FormControl
+                        placeholder="Create Comment"
+                        aria-label="Create Comment"
+                        aria-describedby="basic-addon2"
+                        value={this.state.content} 
+                        name="comment" 
+                        onChange={this.handleChange('content')}
+                        />
+                        <InputGroup.Append>
+                        <Button variant="outline-secondary" onClick={this.onSubmit}>Create</Button>
+                        </InputGroup.Append>
+                    </InputGroup>
+                    </Modal.Footer>
+                </Modal>
                 <Container className="post-detail" style={{padding:"50px 200px"}}>
                     <h1>{Title}</h1>
                     <h4 className="description">{Description}</h4>
@@ -128,18 +173,7 @@ class ViewPost extends React.Component{
                     <img src={Image} alt=""/>
                     <br /><br />
                     <div dangerouslySetInnerHTML={this.createMarkup()} className="editor"></div>
-                    
-                    <input type="text" value={this.state.content} name="comment" onChange={this.handleChange('content')}/>
-                    <button onClick={this.onSubmit}>Submit Comment</button>
-                    {this.state.viewComments && this.state.comments.map((comment,index) =>{
-                        return(
-                            <div key={index}>
-                                <hr />
-                                <h4>{ comment.content}</h4>
-                                {/*//TODO: Get detail of owner of the comment*/}
-                            </div>
-                        );
-                    })}
+                    <hr />
                 </Container>
             </div>
         );
