@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import { signup } from "../auth/helper/index";
 import Base from "../core/Base";
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button';
+import "../SCSS/signup.scss";
+import InputGroup from 'react-bootstrap/InputGroup';
+import { RiLockPasswordLine } from "react-icons/ri";
+import { VscSymbolNamespace } from "react-icons/vsc";
+import { GrUserNew } from "react-icons/gr";
+import { HiOutlineMailOpen } from "react-icons/hi";
 
 const SignUp = () =>{
     const [values, setValues] = useState({
@@ -67,18 +75,70 @@ const SignUp = () =>{
 
     const signupForm = () =>{
         return(
-            <div>
-                <form>
-                    <li>name : </li>
-                    <input value = {name} onChange={handleChange("name")} type="text"/>
-                    <li>email : </li>
-                    <input value = {email} onChange={handleChange("email")} type="text"/>
-                    <li>username : </li>
-                    <input value = {username} onChange={handleChange("username")} type="text"/>
-                    <li>password : </li>
-                    <input value = {password} onChange={handleChange("password")} type="password"/>
-                    <button onClick={onSubmit}>submit</button>
-                </form>
+            <div className="signup-form">
+                <h2>Register form:</h2><br/>
+                <Form>
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Email address</Form.Label>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Prepend>
+                                <InputGroup.Text id="basic-addon1"><HiOutlineMailOpen /></InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <Form.Control
+                            placeholder="Email address"
+                            type="email"
+                            value = {email} 
+                            onChange={handleChange("email")}
+                            />
+                        </InputGroup>
+                        <Form.Text className="text-muted">
+                        We'll never share your email with anyone else.
+                        </Form.Text>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Username</Form.Label>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Prepend>
+                                <InputGroup.Text id="basic-addon1"><VscSymbolNamespace /></InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <Form.Control
+                            placeholder="Enter Username"
+                            type="text"
+                            value = {username} 
+                            onChange={handleChange("username")}
+                            />
+                        </InputGroup>
+                        <Form.Label>Name</Form.Label>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Prepend>
+                                <InputGroup.Text id="basic-addon1"><GrUserNew /></InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <Form.Control
+                            placeholder="Enter Name"
+                            type="text"
+                            value = {name} 
+                            onChange={handleChange("name")}
+                            />
+                        </InputGroup>
+                    </Form.Group>
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label>Password</Form.Label>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Prepend>
+                                <InputGroup.Text id="basic-addon1"><RiLockPasswordLine /></InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <Form.Control
+                            placeholder="Enter password"
+                            type="password"
+                            value = {password} 
+                            onChange={handleChange("password")}
+                            />
+                        </InputGroup>
+                    </Form.Group>
+                    <Button variant="primary" type="submit" onClick={onSubmit}>
+                        Submit
+                    </Button>
+                </Form>
             </div>
         );
     };
