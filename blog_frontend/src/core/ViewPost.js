@@ -9,6 +9,7 @@ import {FaRegComments} from 'react-icons/fa';
 import Modal from 'react-bootstrap/Modal';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
+import { MdDateRange } from "react-icons/md";
 
 class ViewPost extends React.Component{
     constructor(props){
@@ -121,8 +122,9 @@ class ViewPost extends React.Component{
         const AuthorName = this.state.post.author ? this.state.post.author.name : "Vishal";
         const AuthorUserName = this.state.post.author ? this.state.post.author.username : "VDA-001";
         const numberOfComments = this.state.post ? this.state.post.number_of_comments : "0";
+        let CreatedAt = this.state.post ? String(this.state.post.created_at).slice(0,10) : "";
+        
         //View post in detail
-
         return(
             <div>
                 <Base />
@@ -134,7 +136,7 @@ class ViewPost extends React.Component{
                     </span>
                     <br/>
                     <hr/>
-                    <p><FaRegComments className="comment-icon" />:{numberOfComments}</p>
+                    <p><FaRegComments className="icon" />:{numberOfComments}&nbsp; &nbsp;<MdDateRange className="icon" />{CreatedAt}</p>
                     <Button onClick={this.referenceFunction}>Comments</Button>
                 </div>
                 <Modal show={this.state.show} scrollable={true} onHide={this.handleClose}>
