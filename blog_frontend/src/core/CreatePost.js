@@ -7,6 +7,9 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Container from 'react-bootstrap/esm/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import InputGroup from 'react-bootstrap/InputGroup'
+import { MdDescription,MdTitle } from "react-icons/md";
+import { Redirect } from 'react-router';
 
 class CreatePost extends React.Component{
     constructor(props){
@@ -80,6 +83,7 @@ class CreatePost extends React.Component{
         .catch(err=>{
             console.log(err);
         });
+        <Redirect to='/profile' />
     };
 
     render(){
@@ -91,9 +95,28 @@ class CreatePost extends React.Component{
                 <Form>
                     <Form.Group>
                         <Form.Label>Title:</Form.Label>
-                        <Form.Control type="text" placeholder="Title..."  value = {this.state.title} onChange={this.handleChange("title")} required/>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Prepend>
+                            <InputGroup.Text id="basic-addon1"><MdTitle /></InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <Form.Control
+                            placeholder="Title..."
+                            value = {this.state.title} 
+                            onChange={this.handleChange("title")}
+                            />
+                        </InputGroup>
                         <Form.Label>Description:</Form.Label>
-                        <Form.Control type="text" placeholder="Description..." value = {this.state.description} onChange={this.handleChange("description")}/>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Prepend>
+                            <InputGroup.Text id="basic-addon1"><MdDescription /></InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <Form.Control
+                            placeholder="Description..."
+                            value = {this.state.description} 
+                            onChange={this.handleChange("description")} 
+                            required
+                            />
+                        </InputGroup>
                         <Form.Label>Body:</Form.Label>
                         <CKEditor
                             editor={ ClassicEditor }
@@ -107,7 +130,7 @@ class CreatePost extends React.Component{
                             onFocus={ ( event, editor ) => {} }
                         /><br/>
                         <img src={this.state.imageViewer} alt="" style={{width:"500px"}}/>
-                        <Form.File id="exampleFormControlFile1" label="Upload an Image" value = {undefined} type="file" onChange={this.handleChange('image')} required/><br/>
+                        <Form.File id="exampleFormControlFile1" label="Upload an Image representing post" value = {undefined} type="file" onChange={this.handleChange('image')} required/><br/>
                         <Select value={this.state.category_options[this.state.category_id-1]} options={this.state.category_options} onChange={this.handleChange('category_id')} required/>
                     </Form.Group>
                     <Button variant="primary" type="submit" onClick={this.onSubmit}>
