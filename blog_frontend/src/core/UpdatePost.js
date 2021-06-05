@@ -4,6 +4,11 @@ import Base from './Base';
 import {ChangePostTextField, ChangePostImage, ViewPostInDetail} from './helper/coreApiCalls';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import InputGroup from 'react-bootstrap/InputGroup'
+import { MdDescription,MdTitle } from "react-icons/md";
+import Container from 'react-bootstrap/esm/Container';
 
 class UpdatePost extends React.Component{
     constructor(props){
@@ -83,12 +88,31 @@ class UpdatePost extends React.Component{
         return(
             <div>
                 <Base />
-                <form>
-                        <li>title : </li>
-                        <input value = {this.state.title} onChange={this.handleChange("title")} type="text"/>
-                        <li>description : </li>
-                        <input value = {this.state.description} onChange={this.handleChange("description")} type="text"/>
-                        <li>body : </li>
+                <Container>
+                    <Form>
+                        <Form.Label>Title:</Form.Label>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Prepend>
+                            <InputGroup.Text id="basic-addon1"><MdTitle /></InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <Form.Control
+                            placeholder="Title..."
+                            value = {this.state.title} 
+                            onChange={this.handleChange("title")}
+                            />
+                        </InputGroup>
+                        <Form.Label>Description:</Form.Label>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Prepend>
+                            <InputGroup.Text id="basic-addon1"><MdDescription /></InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <Form.Control
+                            placeholder="Description..."
+                            value = {this.state.description} 
+                            onChange={this.handleChange("description")} 
+                            />
+                        </InputGroup>
+                        <Form.Label>Body:</Form.Label>
                         <CKEditor
                             editor={ ClassicEditor }
                             data={this.state.body}
@@ -99,15 +123,23 @@ class UpdatePost extends React.Component{
                             } }
                             onBlur={ ( event, editor ) => {} }
                             onFocus={ ( event, editor ) => {} }
-                        />
-                        <button onClick={this.onSubmit}>Save changes</button>
-                        <button onClick={this.performRedirect}>cancel</button>
+                        /><br/>
+                        <Button variant="outline-success" type="submit" style={{margin:'10px'}} onClick={this.onSubmit}>
+                            Save Changes
+                        </Button> 
+                        <Button variant="outline-danger" type="submit" style={{margin:'10px'}} onClick={this.performRedirect}>
+                            Cancel
+                        </Button>                       
                         <br/>
                         <br/>
-                        <img src={this.state.imageViewer} alt="" style={{width:"500px"}}/>
-                        <input type="file" onChange={this.handleChange('image')}/>
-                        <button onClick={this.onSubmitImage}>Change Image</button>
-                </form>
+                        <hr/>
+                        <img src={this.state.imageViewer} alt="" style={{width:"500px",borderRadius:'10px',marginBottom:'10px'}}/>
+                        <Form.File id="exampleFormControlFile1" label="Change Image" value = {undefined} type="file" onChange={this.handleChange('image')}/><br/>
+                        <Button variant="outline-success" type="submit" style={{marginBottom:'20px'}}onClick={this.onSubmitImage}>
+                            Change Image
+                        </Button>
+                    </Form>
+                </Container>
             </div>
         );
     }

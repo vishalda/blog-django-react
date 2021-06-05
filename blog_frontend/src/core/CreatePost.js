@@ -103,6 +103,7 @@ class CreatePost extends React.Component{
                             placeholder="Title..."
                             value = {this.state.title} 
                             onChange={this.handleChange("title")}
+                            required
                             />
                         </InputGroup>
                         <Form.Label>Description:</Form.Label>
