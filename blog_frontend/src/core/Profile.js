@@ -4,6 +4,9 @@ import { PostCard } from "./Card";
 import Base from "./Base";
 import { IsAuthenticated } from '../auth/helper';
 import { Link } from 'react-router-dom';
+import Container from "react-bootstrap/Container";
+import CardColumns from 'react-bootstrap/CardColumns';
+import Button from 'react-bootstrap/Button';
 
 class Profile extends React.Component{
     constructor(props){
@@ -70,14 +73,19 @@ class Profile extends React.Component{
                 <p>{this.state.user.username}</p>
                 <p>{this.state.user.name}</p>
                 <hr/>
-                {this.state.checkPost && this.state.filteredPost.map((post,index)=>{
-                    return(
-                        <div key={index}>
-                            <PostCard post = {post} />
-                            <Link to={`/update-post/${post.id}`} >Update</Link>
-                        </div>
-                    )
-                })}
+                <Container fluid>
+                    <CardColumns className='card-column'>
+                    {this.state.checkPost && this.state.filteredPost.map((post,index)=>{
+                        return(
+                            <div key={index} style={{marginBottom:'20px'}}>
+                                <PostCard post = {post} />
+                                <Button variant="outline-dark" style={{margin:'5px 30%'}} href={`/update-post/${post.id}`}>Update this Post</Button>
+                            </div>
+                        ) 
+                    })}
+                    </CardColumns>
+                </Container>
+                
             </div>
         );
     }
