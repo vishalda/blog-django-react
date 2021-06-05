@@ -19,7 +19,7 @@ export const PostCard = ({post}) =>{
     };
     
     return(
-        <Card onClick={() => handleClick()} className='post-card rounded'>
+        <Card onClick={() => handleClick()} className='post-card rounded-0'>
             <Card.Img variant="top" className='post-card-image' src={CardImage} />
             <Card.Body className='post-card-body'>
                 <Card.Title>{CardTitle}</Card.Title>
@@ -45,9 +45,15 @@ export const CategoryCard =({category}) =>{
     };
 
     return(
-        <div onClick={() =>handleClick()} className="Card" style={{width:"25%",border:"2px solid black"}}>
-            <h1>{CardTitle}</h1>
-            <h4>{CardDescription}</h4>
+        <div onClick={() =>handleClick()} className="category-card">
+            <Card style={{ width: '100%' }}>
+            <Card.Body>
+                <Card.Title style={{fontSize:"30px"}} className="category-card-title">{CardTitle}</Card.Title>
+                <Card.Text>
+                {CardDescription}
+                </Card.Text>
+            </Card.Body>
+            </Card>
         </div>
     );
 };

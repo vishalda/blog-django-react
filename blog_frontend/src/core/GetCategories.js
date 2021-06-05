@@ -2,6 +2,7 @@ import React from 'react';
 import {getCategory} from "./helper/coreApiCalls";
 import Base from "./Base";
 import { CategoryCard } from "./Card";
+import Container from 'react-bootstrap/esm/Container';
 
 class Category extends React.Component {
     constructor(props) {
@@ -36,13 +37,16 @@ class Category extends React.Component {
         return(
             <div>
                 <Base />
-                {this.state.categories.map((category,index) =>{
-                    return(
-                        <div key={index}>
-                            <CategoryCard category = {category} />
-                        </div>
-                    );
-                })}
+                <Container>
+                    <h1 style={{margin:"20px"}}>Categories:</h1>
+                    {this.state.categories.map((category,index) =>{
+                        return(
+                            <div key={index} style={{margin:"20px"}}>
+                                <CategoryCard category = {category} />
+                            </div>
+                        );
+                    })}
+                </Container>
             </div>
         );
     }

@@ -3,9 +3,8 @@
     font-size: small;
     height:100%;
     transition:0.5s;
-    -webkit-box-shadow: -4px 11px 59px -7px rgba(0,0,0,0.52);
-    -moz-box-shadow: -4px 11px 59px -7px rgba(0,0,0,0.52);
-    box-shadow: -4px 11px 59px -7px rgba(0,0,0,0.52);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
     &:hover{
         box-shadow:none;
         cursor:pointer;
@@ -24,4 +23,17 @@
 
 .card-column{
     margin:50px;
+}
+
+.category-card-title{
+    font-size: 35px;
+}
+
+.category-card{
+    border-radius: 20px;
+    transition: 0.5s;
+    &:hover{
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        cursor:pointer;
+    }
 }
