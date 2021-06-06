@@ -10,7 +10,7 @@ class CustomUser(AbstractUser):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
     phone = models.CharField(max_length=15,blank = True,null=True)
-
+    description = models.TextField(blank=True,null=True)
     objects = UserManager()
 
     USERNAME_FIELD = 'email'

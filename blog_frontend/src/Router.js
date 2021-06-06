@@ -8,7 +8,7 @@ import Category from "./core/GetCategories";
 import ViewPost from "./core/ViewPost";
 import ViewCategory from "./core/ViewCategory";
 import CreatePost from "./core/CreatePost";
-import Profile from "./core/Profile";
+import Profile from "./user/profile";
 import UpdatePost from "./core/UpdatePost";
 
 const Routes = () =>{
