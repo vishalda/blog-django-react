@@ -3,7 +3,7 @@ import { signup } from "../auth/helper/index";
 import Base from "../core/Base";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
-import "../SCSS/signup.scss";
+import "../SCSS/authentication.scss";
 import InputGroup from 'react-bootstrap/InputGroup';
 import { RiLockPasswordLine } from "react-icons/ri";
 import { VscSymbolNamespace } from "react-icons/vsc";
@@ -75,7 +75,7 @@ const SignUp = () =>{
 
     const signupForm = () =>{
         return(
-            <div className="signup-form">
+            <div className="authentication-form">
                 <h2>Register form:</h2><br/>
                 <Form>
                     <Form.Group controlId="formBasicEmail">
