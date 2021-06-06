@@ -3,11 +3,13 @@ from django.contrib.auth.hashers import make_password
 from django.http import JsonResponse
 from rest_framework.decorators import authentication_classes, permission_classes
 from .models import CustomUser
+import requests
 
 class BriefUserSerializer(serializers.HyperlinkedModelSerializer):
+    avatar = serializers.ImageField(max_length=None,allow_empty_file = False,allow_null = True,required = False)
     class Meta:
         model = CustomUser
-        fields = ('username','name','id')
+        fields = ('username','name','id','avatar')
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     #Deserializing the data and creating new model in DataBase

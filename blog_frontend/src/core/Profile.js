@@ -70,6 +70,7 @@ class Profile extends React.Component{
         return(
             <div>
                 <Base />
+                <iframe src={`https://robohash.org/${this.state.user.username}`} style={{border:'0',width:'auto'}}></iframe>
                 <p>{this.state.user.username}</p>
                 <p>{this.state.user.name}</p>
                 <hr/>
