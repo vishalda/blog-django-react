@@ -3,6 +3,7 @@ import {getCategory} from "./helper/coreApiCalls";
 import Base from "./Base";
 import { CategoryCard } from "./Card";
 import Container from 'react-bootstrap/esm/Container';
+import Alert from 'react-bootstrap/esm/Alert';
 
 class Category extends React.Component {
     constructor(props) {
@@ -26,11 +27,21 @@ class Category extends React.Component {
         .then(data =>{
             if(data.error){
                 this.setState({error:data.error});
-                console.log(this.state.error);
             }else{
                 this.setState({categories:data});
             }
         });
+    };
+
+    //Display error message using state variable
+    errorMessage = () =>{
+        return(
+            <Container>
+                <Alert variant={'danger'} style={{display:this.state.error? "" : "none"}}>
+                    {this.state.error}
+                </Alert>
+            </Container>
+        );
     };
 
     render(){
@@ -38,6 +49,7 @@ class Category extends React.Component {
             <div>
                 <Base />
                 <Container>
+                    {this.errorMessage()}
                     <h1 style={{margin:"20px"}}>Categories:</h1>
                     {this.state.categories.map((category,index) =>{
                         return(

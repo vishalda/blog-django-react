@@ -5,6 +5,7 @@ import Base from "./Base";
 import CardColumns from 'react-bootstrap/CardColumns'
 import "../SCSS/card.scss";
 import Container from "react-bootstrap/Container"
+import Alert from 'react-bootstrap/esm/Alert';
 
 //Getting all posts
 class Posts extends React.Component{
@@ -29,11 +30,21 @@ class Posts extends React.Component{
         .then(data =>{
             if(data.error){
                 this.setState({error:data.error});
-                console.log(this.state.error);
             }else{
                 this.setState({posts:data});
             }
         }).catch(err =>console.log(err))
+    };
+
+    //Display error message using state variable
+    errorMessage = () =>{
+        return(
+            <Container>
+                <Alert variant={'danger'} style={{display:this.state.error? "" : "none"}}>
+                    {this.state.error}
+                </Alert>
+            </Container>
+        );
     };
 
     render(){
@@ -41,6 +52,7 @@ class Posts extends React.Component{
             <div>
                 <Base />
                 <Container fluid>
+                    {this.errorMessage()}
                     <CardColumns className='card-column'>
                         {this.state.posts.map((post,index) =>{
                             return(

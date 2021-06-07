@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup'
 import { MdDescription,MdTitle } from "react-icons/md";
 import Container from 'react-bootstrap/esm/Container';
+import Alert from 'react-bootstrap/esm/Alert';
 
 class UpdatePost extends React.Component{
     constructor(props){
@@ -44,7 +45,7 @@ class UpdatePost extends React.Component{
                 })
             }
         })
-        .catch(err=>console.log(err))
+        .catch(err=>this.setState({error:err}))
     }
 
     handleChange = (name) =>(event) =>{
@@ -66,29 +67,52 @@ class UpdatePost extends React.Component{
     onSubmit = (e) =>{
         e.preventDefault();
         const {title,description,body} = this.state;
-        console.log({title,description,body});
         ChangePostTextField(this.state.id,{title,description,body})
         .then(data=>{
-            console.log(data)
+            this.setState({success:true});
         })
-        .catch(err=>console.log(err))
-    }
+        .catch(err=>this.setState({error:err}));
+    };
 
     onSubmitImage = (e) =>{
         e.preventDefault();
         const image=this.state.image;
         ChangePostImage(this.state.id,{image})
         .then(data=>{
-            console.log(data)
+            this.setState({success:true});
         })
-        .catch(err=>console.log(err))
-    }
+        .catch(err=>this.setState({error:err}));
+    };
+
+    //Display success message using state variable
+    successMessage = () =>{
+        return(
+            <Container>
+                <Alert variant={'success'} style={{display:this.state.success? "" : "none"}}>
+                    Post updated successfully. Go back to <Alert.Link href="/profile">Profile</Alert.Link>.
+                </Alert>
+            </Container>
+        );
+    };
+
+    //Display error message using state variable
+    errorMessage = () =>{
+        return(
+            <Container>
+                <Alert variant={'danger'} style={{display:this.state.error? "" : "none"}}>
+                    {this.state.error}
+                </Alert>
+            </Container>
+        );
+    };
 
     render(){
         return(
             <div>
                 <Base />
                 <Container>
+                    {this.errorMessage()}
+                    {this.successMessage()}
                     <Form>
                         <Form.Label>Title:</Form.Label>
                         <InputGroup className="mb-3">

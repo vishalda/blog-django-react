@@ -9,7 +9,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup'
 import { MdDescription,MdTitle } from "react-icons/md";
-import { Redirect } from 'react-router';
+import Alert from 'react-bootstrap/esm/Alert';
 
 class CreatePost extends React.Component{
     constructor(props){
@@ -23,6 +23,7 @@ class CreatePost extends React.Component{
             category_options:[],
             category_id:"",
             error:"",
+            success:false,
         }
     }
 
@@ -65,25 +66,52 @@ class CreatePost extends React.Component{
         e.preventDefault();
         //Loading State variables to normal varialbes
         const {title,description,body,image,category_id} = this.state;
-        
-        CreateNewPost({title,description,body,image,category_id})
-        .then(response =>{
-            console.log(response);
-            this.setState({
-                title:"",
-                description:"",
-                body:"",
-                image:"",
-                imageViewer:"",
-                category_options:[],
-                category_id:"",
-                error:"",
+        if(title===''||description===''||body===''||image===''||category_id===''){
+            this.setState({error:"Please fill in all the details"})
+        }else{
+            CreateNewPost({title,description,body,image,category_id})
+            .then(response =>{
+                console.log(response);
+                this.setState({
+                    title:"",
+                    description:"",
+                    body:"",
+                    image:"",
+                    imageViewer:"",
+                    category_options:[],
+                    category_id:"",
+                    error:"",
+                    success:true,
+                })
             })
-        })
-        .catch(err=>{
-            console.log(err);
-        });
-        <Redirect to='/profile' />
+            .catch(err=>{
+                this.setState({
+                    error:err
+                })
+            });
+        }        
+    };
+
+    //Display success message using state variable
+    successMessage = () =>{
+        return(
+            <Container>
+                <Alert variant={'success'} style={{display:this.state.success? "" : "none"}}>
+                    New Post created successfully. View <Alert.Link href="/profile">Post</Alert.Link>.
+                </Alert>
+            </Container>
+        );
+    };
+
+    //Display error message using state variable
+    errorMessage = () =>{
+        return(
+            <Container>
+                <Alert variant={'danger'} style={{display:this.state.error? "" : "none"}}>
+                    {this.state.error}
+                </Alert>
+            </Container>
+        );
     };
 
     render(){
@@ -91,6 +119,8 @@ class CreatePost extends React.Component{
             <div>
                 <Base />
                 <br/>
+                {this.errorMessage()}
+                {this.successMessage()}
                 <Container>
                 <Form>
                     <Form.Group>

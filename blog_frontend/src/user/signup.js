@@ -9,6 +9,8 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { VscSymbolNamespace } from "react-icons/vsc";
 import { GrUserNew } from "react-icons/gr";
 import { HiOutlineMailOpen } from "react-icons/hi";
+import Alert from 'react-bootstrap/esm/Alert';
+import Container from "react-bootstrap/Container";
 
 const SignUp = () =>{
     const [values, setValues] = useState({
@@ -31,10 +33,12 @@ const SignUp = () =>{
     const onSubmit = (event) =>{
         event.preventDefault();
         setValues({...values,error:false});
+        if(email==='' || username===''||password===''||name===''){
+            setValues({...values,error:"Please fill in all the details",loading:false});
+        }
         signup({name,email,username,password})
         .then(data =>{
             //TODO: Need to remove later
-            console.log("Data",data);
             if(data.email === email){
                 setValues({
                     name:"",
@@ -47,7 +51,7 @@ const SignUp = () =>{
             }else{
                 setValues({
                     ...values,
-                    error:true,
+                    error:data.email,
                     success:false,
                 });
             }
@@ -58,18 +62,22 @@ const SignUp = () =>{
     //Display success message using state variable
     const successMessage = () =>{
         return(
-            <div style={{display:success? "" : "none"}}>
-                New account created successfully
-            </div>
+            <Container>
+                <Alert variant={'success'} style={{display:success? "" : "none"}}>
+                    New Account created successfully. Please <Alert.Link href="/login">Login</Alert.Link>.
+                </Alert>
+            </Container>
         );
     };
 
     //Display error message using state variable
     const errorMessage = () =>{
         return(
-            <div style={{display:error? "" : "none"}}>
-                Error occurred
-            </div>
+            <Container>
+                <Alert variant={'danger'} style={{display:error? "" : "none"}}>
+                    {error}
+                </Alert>
+            </Container>
         );
     };
 

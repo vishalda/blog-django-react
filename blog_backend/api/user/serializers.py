@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from rest_framework.decorators import authentication_classes, permission_classes
 from .models import CustomUser
 import requests
+import re
 
 class BriefUserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

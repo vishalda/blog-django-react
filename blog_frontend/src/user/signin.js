@@ -9,6 +9,8 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { RiLockPasswordLine } from "react-icons/ri";
 import { VscSymbolNamespace } from "react-icons/vsc";
 import { HiOutlineMailOpen } from "react-icons/hi";
+import Alert from 'react-bootstrap/Alert';
+import Container from "react-bootstrap/Container";
 
 const SignIn = () =>{
 
@@ -31,24 +33,28 @@ const SignIn = () =>{
     const onSubmit = (event) =>{
         event.preventDefault();
         setValues({...values,error:false,loading:true});
-        signin({email,username,password})
-        .then(data=>{
-            //TODO: remove later
-            console.log("DATA :",data);
-            if(data.token){
-                //Setting up the jwt in localstorage
-                Authenticat(data, ()=>{
-                    console.log("Tokken added");
-                    setValues({
-                        ...values,
-                        didRedirect:true,
+        if(email==='' || username===''||password===''){
+            setValues({...values,error:"Please fill in all the details",loading:false});
+        }else{
+            signin({email,username,password})
+            .then(data=>{
+                //TODO: remove later
+                console.log("DATA :",data);
+                if(data.token){
+                    //Setting up the jwt in localstorage
+                    Authenticat(data, ()=>{
+                        console.log("Tokken added");
+                        setValues({
+                            ...values,
+                            didRedirect:true,
+                        });
                     });
-                });
-            }else{
-                setValues({...values,loading:false});
-            }
-        })
-        .catch(err => console.log(err));
+                }else{
+                    setValues({...values,loading:false,error:data.error});
+                }
+            })
+            .catch(err =>setValues({error:err}));
+        }
     };
 
     const successMessage = () =>{
@@ -61,9 +67,12 @@ const SignIn = () =>{
 
     const errorMessage = () =>{
         return(
-            <div style={{display:error? "" : "none"}}>
-                Error occurred
-            </div>
+            <Container>
+                <Alert variant={'danger'} style={{display:error? "" : "none"}}>
+                    {error}
+                </Alert>
+            </Container>
+            
         );
     };
 
@@ -87,7 +96,7 @@ const SignIn = () =>{
                 <Form className="authentication-form">
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
-                        <InputGroup className="mb-3">
+                        <InputGroup className="mb-3" required>
                             <InputGroup.Prepend>
                                 <InputGroup.Text id="basic-addon1"><HiOutlineMailOpen /></InputGroup.Text>
                             </InputGroup.Prepend>
@@ -95,6 +104,7 @@ const SignIn = () =>{
                             placeholder="Email address"
                             type="email"
                             value = {email} 
+                            required
                             onChange={handleChange("email")}
                             />
                         </InputGroup>
@@ -104,7 +114,7 @@ const SignIn = () =>{
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Username</Form.Label>
-                        <InputGroup className="mb-3">
+                        <InputGroup className="mb-3" required>
                             <InputGroup.Prepend>
                                 <InputGroup.Text id="basic-addon1"><VscSymbolNamespace /></InputGroup.Text>
                             </InputGroup.Prepend>
@@ -112,11 +122,12 @@ const SignIn = () =>{
                             placeholder="Enter Username"
                             type="text"
                             value = {username} 
+                            required
                             onChange={handleChange("username")}
                             />
                         </InputGroup>
                     </Form.Group>
-                    <Form.Group controlId="formBasicPassword">
+                    <Form.Group controlId="formBasicPassword" required>
                         <Form.Label>Password</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Prepend>
@@ -126,6 +137,7 @@ const SignIn = () =>{
                             placeholder="Enter password"
                             type="password"
                             value = {password} 
+                            required
                             onChange={handleChange("password")}
                             />
                         </InputGroup>

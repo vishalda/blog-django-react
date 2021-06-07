@@ -77,9 +77,9 @@ class CategoryListViewSet(viewsets.ModelViewSet):
     serializer_class = BlogCategorySerializer
 
 class PostDetailViewSet(viewsets.ModelViewSet):
-    queryset = BlogPost.objects.all().order_by('id')
+    queryset = BlogPost.objects.all().order_by('-created_at')
     serializer_class = BlogPostDetailSerializer
 
 class PostViewSet(viewsets.ModelViewSet):
-    queryset = BlogPost.objects.all().order_by('id')
+    queryset = BlogPost.objects.all().order_by('-created_at')
     serializer_class = BlogPostListSerializer

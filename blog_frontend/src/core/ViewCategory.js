@@ -3,7 +3,9 @@ import Container from 'react-bootstrap/esm/Container';
 import Base from './Base';
 import { PostCard } from './Card';
 import {getPost} from './helper/coreApiCalls';
-import CardColumns from 'react-bootstrap/CardColumns'
+import CardColumns from 'react-bootstrap/CardColumns';
+import Alert from 'react-bootstrap/esm/Alert';
+
 
 class ViewCategory extends React.Component{
     constructor(props){
@@ -28,19 +30,30 @@ class ViewCategory extends React.Component{
         .then(data =>{
             if(data.error){
                 this.setState({error:data.error});
-                console.log(this.state.error);
             }else{
-                const filteredData = data.filter((post) => post.category.id === parseInt(id))
+                const filteredData = data.filter((post) => post.category.id === parseInt(id));
                 this.setState({posts:filteredData});
             }
-        }).catch(err =>console.log(err))
+        }).catch(err =>this.setState({error:err}))
     }
+
+    //Display error message using state variable
+    errorMessage = () =>{
+        return(
+            <Container>
+                <Alert variant={'danger'} style={{display:this.state.error? "" : "none"}}>
+                    {this.state.error}
+                </Alert>
+            </Container>
+        );
+    };
 
     render(){
         return(
             <div>
                 <Base />
                 <Container fluid>
+                    {this.errorMessage()}
                     <CardColumns className='card-column'>
                         {this.state.posts.map((post,index) =>{
                             return(

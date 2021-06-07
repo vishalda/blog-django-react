@@ -10,6 +10,7 @@ import Modal from 'react-bootstrap/Modal';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import { MdDateRange } from "react-icons/md";
+import Alert from 'react-bootstrap/esm/Alert';
 
 class ViewPost extends React.Component{
     constructor(props){
@@ -50,7 +51,7 @@ class ViewPost extends React.Component{
                 this.setState({post:data})
             }
         })
-        .catch(err => console.log(err))
+        .catch(err => this.setState({error:err}))
     }
 
     loadComments = (postId)  =>{
@@ -69,7 +70,7 @@ class ViewPost extends React.Component{
                 }
             }
         })
-        .catch(err=>console.log(err))
+        .catch(err=>this.setState({error:err}))
     }
 
     loadUserDetailOfComment = (author_id)=>{
@@ -82,7 +83,7 @@ class ViewPost extends React.Component{
                 return(<p>{this.state.UserDetail.username}</p>);
             }
         })
-        .catch(err=>console.log(err))
+        .catch(err=>this.setState({error:err}))
     }
 
     handleChange = (name) => (e) =>{
@@ -95,14 +96,13 @@ class ViewPost extends React.Component{
         const post_id = this.state.post.id;
         const author_id = IsAuthenticated() && IsAuthenticated().user.id;
         const content = this.state.content;
-        console.log(content);
         //Check for null comments
         if(content!==""){
             CreateComment(author_id,post_id,content)
             .then(data=>{
                 this.setState({content:""})
             })
-            .catch(err=> console.log(err))
+            .catch(err=> this.setState({error:err}))
         }
     }
 
@@ -114,6 +114,17 @@ class ViewPost extends React.Component{
     createMarkup = () => {
         return { __html: this.state.post.body};
     }
+
+    //Display error message using state variable
+    errorMessage = () =>{
+        return(
+            <Container>
+                <Alert variant={'danger'} style={{display:this.state.error? "" : "none"}}>
+                    {this.state.error}
+                </Alert>
+            </Container>
+        );
+    };
 
     render(){
         const Title = this.state.post ? this.state.post.title : "Title";
@@ -128,6 +139,7 @@ class ViewPost extends React.Component{
         return(
             <div>
                 <Base />
+                {this.errorMessage()}
                 <div className="sticky-top left-div">
                     <img src={Image} alt="" className="left-div-image"/>
                     <span>
