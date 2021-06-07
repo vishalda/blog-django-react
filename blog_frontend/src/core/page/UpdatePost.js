@@ -1,111 +1,102 @@
 import React from 'react';
-import { Redirect } from "react-router";
-import {CreateNewPost, getCategory} from './helper/coreApiCalls';
-import Base from "./Base";
-import Select from "react-select";
+import { Redirect } from 'react-router';
+import Base from '../components/Base';
+import {ChangePostTextField, ChangePostImage, ViewPostInDetail} from '../helper/coreApiCalls';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import Container from 'react-bootstrap/esm/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup'
 import { MdDescription,MdTitle } from "react-icons/md";
+import Container from 'react-bootstrap/esm/Container';
 import Alert from 'react-bootstrap/esm/Alert';
-import "../SCSS/loader.scss";
+import "../../SCSS/loader.scss";
 import Spinner from 'react-bootstrap/Spinner'
 
-class CreatePost extends React.Component{
+class UpdatePost extends React.Component{
     constructor(props){
         super(props);
-        this.state = {
+        this.state={
             title:"",
             description:"",
             body:"",
             image:"",
+            id:"",
             imageViewer:"",
-            category_options:[],
-            category_id:"",
-            error:"",
-            success:false,
+            error:false,
             loading:false,
-            doRedirect:false,
         }
     }
 
     componentDidMount(){
-        //Getting all the category list from backend and passing it to getOptions func
+        this.loadPost(this.props.match.params.id);
+    }
+
+    loadPost(id){
         this.setState({loading:true})
-        getCategory()
-        .then(data =>{
+        ViewPostInDetail(id)
+        .then(data=>{
             if(data.error){
-                this.setState({error:data.error,loading:false});
+                this.setState({error:data.error})
             }else{
-                this.getOptions(data);
+                this.setState({
+                    title:data.title,
+                    description:data.description,
+                    body:data.body,
+                    image:data.image,
+                    imageViewer:data.image,
+                    id:data.id,
+                })
             }
-            this.setState({loading:false});
-        });
+            this.setState({loading:false})
+        })
+        .catch(err=>this.setState({error:err}))
     }
 
-    //Setting up the options field for Select tag
-    getOptions(data){
-        const option = data.map((d)=>({
-            "value":d.id,
-            "label":d.title,
-        }));
-        this.setState({category_options:option});
-    }
-
-    handleChange =(name) => (e) => {
-        if(name === 'image'){
+    handleChange = (name) =>(event) =>{
+        if(name==='image'){
             this.setState({
-                imageViewer:URL.createObjectURL(e.target.files[0]),
-                [name]:e.target.files[0],
+                imageViewer:URL.createObjectURL(event.target.files[0]),
+                image:event.target.files[0],
             })
-        }else if(name === 'category_id'){
-            this.setState({[name]:e.value});
+            console.log(this.state.image);
         }else{
-            this.setState({[name]:e.target.value})
+            this.setState({[name]:event.target.value})
         }
+    }
+
+    performRedirect = () =>{
+        return <Redirect to="/profile" />;
     };
 
     onSubmit = (e) =>{
         e.preventDefault();
-        //Loading State variables to normal varialbes
         this.setState({loading:true})
-        const {title,description,body,image,category_id} = this.state;
-        if(title===''||description===''||body===''||image===''||category_id===''){
-            this.setState({error:"Please fill in all the details",loading:false})
-        }else{
-            CreateNewPost({title,description,body,image,category_id})
-            .then(response =>{
-                console.log(response);
-                this.setState({
-                    title:"",
-                    description:"",
-                    body:"",
-                    image:"",
-                    imageViewer:"",
-                    category_options:[],
-                    category_id:"",
-                    error:"",
-                    doRedirect:true,
-                    loading:false,
-                })
-            })
-            .catch(err=>{
-                this.setState({
-                    error:err
-                })
-            });
-        }        
+        const {title,description,body} = this.state;
+        ChangePostTextField(this.state.id,{title,description,body})
+        .then(data=>{
+            this.setState({success:true,loading:false});
+        })
+        .catch(err=>this.setState({error:err}));
+    };
+
+    onSubmitImage = (e) =>{
+        e.preventDefault();
+        this.setState({loading:true})
+        const image=this.state.image;
+        ChangePostImage(this.state.id,{image})
+        .then(data=>{
+            this.setState({success:true,loading:false});
+        })
+        .catch(err=>this.setState({error:err}));
     };
 
     //Display success message using state variable
     successMessage = () =>{
         return(
             <Container>
-                <Alert variant={'success'} style={{display:this.state.success? "" : "none"}}>
-                    New Post created successfully. View <Alert.Link href="/profile">Post</Alert.Link>.
+                <Alert variant={'success'} style={{display:(this.state.success && !this.state.error)? "" : "none"}}>
+                    Post updated successfully. Go back to <Alert.Link href="/profile">Profile</Alert.Link>.
                 </Alert>
             </Container>
         );
@@ -122,12 +113,6 @@ class CreatePost extends React.Component{
         );
     };
 
-    performRedirect = () =>{
-        if(this.state.doRedirect){
-            return <Redirect to="/profile" />;
-        }
-    };
-
     //Function used to display Loader using state variable
     isLoading = () =>{
         return (
@@ -139,14 +124,11 @@ class CreatePost extends React.Component{
         return(
             <div>
                 <Base />
-                <br/>
-                {this.errorMessage()}
-                {this.successMessage()}
-                {this.isLoading()}
-                {this.performRedirect()}
                 <Container>
-                <Form>
-                    <Form.Group>
+                    {this.errorMessage()}
+                    {this.successMessage()}
+                    {this.isLoading()}
+                    <Form>
                         <Form.Label>Title:</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Prepend>
@@ -156,7 +138,6 @@ class CreatePost extends React.Component{
                             placeholder="Title..."
                             value = {this.state.title} 
                             onChange={this.handleChange("title")}
-                            required
                             />
                         </InputGroup>
                         <Form.Label>Description:</Form.Label>
@@ -168,7 +149,6 @@ class CreatePost extends React.Component{
                             placeholder="Description..."
                             value = {this.state.description} 
                             onChange={this.handleChange("description")} 
-                            required
                             />
                         </InputGroup>
                         <Form.Label>Body:</Form.Label>
@@ -183,19 +163,25 @@ class CreatePost extends React.Component{
                             onBlur={ ( event, editor ) => {} }
                             onFocus={ ( event, editor ) => {} }
                         /><br/>
-                        <img src={this.state.imageViewer} alt="" style={{width:"500px"}}/>
-                        <Form.File id="exampleFormControlFile1" label="Upload an Image representing post" value = {undefined} type="file" onChange={this.handleChange('image')} required/><br/>
-                        <Select value={this.state.category_options[this.state.category_id-1]} options={this.state.category_options} onChange={this.handleChange('category_id')} required/>
-                    </Form.Group>
-                    <Button variant="primary" type="submit" onClick={this.onSubmit}>
-                        Submit
-                    </Button>
+                        <Button variant="outline-success" type="submit" style={{margin:'10px'}} onClick={this.onSubmit}>
+                            Save Changes
+                        </Button> 
+                        <Button variant="outline-danger" type="submit" style={{margin:'10px'}} onClick={this.performRedirect}>
+                            Cancel
+                        </Button>                       
+                        <br/>
+                        <br/>
+                        <hr/>
+                        <img src={this.state.imageViewer} alt="" style={{width:"500px",borderRadius:'10px',marginBottom:'10px'}}/>
+                        <Form.File id="exampleFormControlFile1" label="Change Image" value = {undefined} type="file" onChange={this.handleChange('image')}/><br/>
+                        <Button variant="outline-success" type="submit" style={{marginBottom:'20px'}}onClick={this.onSubmitImage}>
+                            Change Image
+                        </Button>
                     </Form>
                 </Container>
-                
             </div>
         );
-    };
+    }
 };
 
-export default CreatePost;
+export default UpdatePost;

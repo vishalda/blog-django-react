@@ -1,44 +1,41 @@
 import React from 'react';
-import { PostCard } from "./Card";
-import {getPost} from "./helper/coreApiCalls";
-import Base from "./Base";
-import CardColumns from 'react-bootstrap/CardColumns'
-import "../SCSS/card.scss";
-import Container from "react-bootstrap/Container"
+import {getCategory} from "../helper/coreApiCalls";
+import Base from "../components/Base";
+import { CategoryCard } from "../components/Card";
+import Container from 'react-bootstrap/esm/Container';
 import Alert from 'react-bootstrap/esm/Alert';
-import "../SCSS/loader.scss";
+import "../../SCSS/loader.scss";
 import Spinner from 'react-bootstrap/Spinner'
 
-//Getting all posts
-class Posts extends React.Component{
+class Category extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            posts:[],
+            categories:[],
             error:false,
             loading:false,
         }; 
     }
 
     componentDidMount(){
-        this.loadAllPost();
+        this.loadAllCategory();
     }
     componentWillUnmount() {
-        clearInterval(this.state.error,this.state.posts);  
+        clearInterval(this.state.error,this.state.categories);  
     }
 
     //function to load all products
-    loadAllPost (){
+    loadAllCategory (){
         this.setState({loading:true})
-        getPost()
+        getCategory()
         .then(data =>{
             if(data.error){
                 this.setState({error:data.error});
             }else{
-                this.setState({posts:data});
+                this.setState({categories:data});
             }
-            this.setState({loading:false})
-        }).catch(err =>console.log(err))
+            this.setState({loading:false});
+        });
     };
 
     //Display error message using state variable
@@ -63,22 +60,21 @@ class Posts extends React.Component{
         return(
             <div>
                 <Base />
-                <Container fluid>
+                <Container>
                     {this.errorMessage()}
                     {this.isLoading()}
-                    <CardColumns className='card-column'>
-                        {this.state.posts.map((post,index) =>{
-                            return(
-                                <div key={index} className='post-card-div'>
-                                    <PostCard post = {post} />
-                                </div>
-                            );
-                        })}
-                    </CardColumns>
+                    <h1 style={{margin:"20px"}}>Categories:</h1>
+                    {this.state.categories.map((category,index) =>{
+                        return(
+                            <div key={index} style={{margin:"20px"}}>
+                                <CategoryCard category = {category} />
+                            </div>
+                        );
+                    })}
                 </Container>
             </div>
         );
     }
-};
+}
 
-export default Posts;
+export default Category;

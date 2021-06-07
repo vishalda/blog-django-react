@@ -1,41 +1,44 @@
 import React from 'react';
-import {getCategory} from "./helper/coreApiCalls";
-import Base from "./Base";
-import { CategoryCard } from "./Card";
-import Container from 'react-bootstrap/esm/Container';
+import { PostCard } from "../components/Card";
+import {getPost} from "../helper/coreApiCalls";
+import Base from "../components/Base";
+import CardColumns from 'react-bootstrap/CardColumns'
+import "../../SCSS/card.scss";
+import Container from "react-bootstrap/Container"
 import Alert from 'react-bootstrap/esm/Alert';
-import "../SCSS/loader.scss";
+import "../../SCSS/loader.scss";
 import Spinner from 'react-bootstrap/Spinner'
 
-class Category extends React.Component {
+//Getting all posts
+class Posts extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            categories:[],
+            posts:[],
             error:false,
             loading:false,
         }; 
     }
 
     componentDidMount(){
-        this.loadAllCategory();
+        this.loadAllPost();
     }
     componentWillUnmount() {
-        clearInterval(this.state.error,this.state.categories);  
+        clearInterval(this.state.error,this.state.posts);  
     }
 
     //function to load all products
-    loadAllCategory (){
+    loadAllPost (){
         this.setState({loading:true})
-        getCategory()
+        getPost()
         .then(data =>{
             if(data.error){
                 this.setState({error:data.error});
             }else{
-                this.setState({categories:data});
+                this.setState({posts:data});
             }
-            this.setState({loading:false});
-        });
+            this.setState({loading:false})
+        }).catch(err =>console.log(err))
     };
 
     //Display error message using state variable
@@ -60,21 +63,22 @@ class Category extends React.Component {
         return(
             <div>
                 <Base />
-                <Container>
+                <Container fluid>
                     {this.errorMessage()}
                     {this.isLoading()}
-                    <h1 style={{margin:"20px"}}>Categories:</h1>
-                    {this.state.categories.map((category,index) =>{
-                        return(
-                            <div key={index} style={{margin:"20px"}}>
-                                <CategoryCard category = {category} />
-                            </div>
-                        );
-                    })}
+                    <CardColumns className='card-column'>
+                        {this.state.posts.map((post,index) =>{
+                            return(
+                                <div key={index} className='post-card-div'>
+                                    <PostCard post = {post} />
+                                </div>
+                            );
+                        })}
+                    </CardColumns>
                 </Container>
             </div>
         );
     }
-}
+};
 
-export default Category;
+export default Posts;

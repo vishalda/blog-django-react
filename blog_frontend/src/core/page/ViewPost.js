@@ -1,17 +1,17 @@
 import React from 'react';
 import Container from 'react-bootstrap/esm/Container';
-import { IsAuthenticated } from '../auth/helper';
-import {CreateComment, getComments, getUserDetail, ViewPostInDetail} from "./helper/coreApiCalls";
-import "../SCSS/viewPost.scss";
+import { IsAuthenticated } from '../../auth/helper';
+import {CreateComment, getComments, getUserDetail, ViewPostInDetail} from "../helper/coreApiCalls";
+import "../../SCSS/viewPost.scss";
 import Button from 'react-bootstrap/Button';
-import Base from './Base';
+import Base from '../components/Base';
 import {FaRegComments} from 'react-icons/fa';
 import Modal from 'react-bootstrap/Modal';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import { MdDateRange } from "react-icons/md";
 import Alert from 'react-bootstrap/esm/Alert';
-import "../SCSS/loader.scss";
+import "../../SCSS/loader.scss";
 import Spinner from 'react-bootstrap/Spinner'
 
 class ViewPost extends React.Component{

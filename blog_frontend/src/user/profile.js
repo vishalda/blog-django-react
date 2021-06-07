@@ -1,7 +1,7 @@
 import React from 'react';
 import { getPost, getUserDetail } from '../core/helper/coreApiCalls';
-import { PostCard } from "../core/Card";
-import Base from "../core/Base";
+import { PostCard } from "../core/components/Card";
+import Base from "../core/components/Base";
 import { IsAuthenticated } from '../auth/helper/index';
 import { Link } from 'react-router-dom';
 import Container from "react-bootstrap/Container";
@@ -98,27 +98,31 @@ class Profile extends React.Component{
                 <Base />
                 {this.errorMessage()}
                 {this.isLoading()}
-                <Container className="detail-block">
-                    <iframe src={`https://robohash.org/${this.state.user.username}`} className="profile-pic"></iframe>
-                    <h5 className="user-detail" id="username">@{this.state.user.username}</h5>
-                    <h3 className="user-detail" id="name">{this.state.user.name}</h3>
-                    <p className="user-detail" id="description">{this.state.user.description}</p>
-                    <p className="user-detail">Joined: {String(this.state.user.created_at).slice(0,10)}</p>
-                </Container>
-                <br/>
-                <hr/>
-                <Container fluid>
-                    <CardColumns className='card-column'>
-                    {this.state.checkPost && this.state.filteredPost.map((post,index)=>{
-                        return(
-                            <div key={index} className="post-card-div">
-                                <PostCard post = {post} />
-                                <Button variant="outline-dark" className="update-button" href={`/update-post/${post.id}`}>Update this Post</Button>
-                            </div>
-                        ) 
-                    })}
-                    </CardColumns>
-                </Container>
+                {!this.isLoading() && 
+                <div>
+                    <Container className="detail-block">
+                        <iframe src={`https://robohash.org/${this.state.user.username}`} className="profile-pic"></iframe>
+                        <h5 className="user-detail" id="username">@{this.state.user.username}</h5>
+                        <h3 className="user-detail" id="name">{this.state.user.name}</h3>
+                        <p className="user-detail" id="description">{this.state.user.description}</p>
+                        <p className="user-detail">Joined: {String(this.state.user.created_at).slice(0,10)}</p>
+                    </Container>
+                    <br/>
+                    <hr/>
+                    <Container fluid>
+                        <CardColumns className='card-column'>
+                        {this.state.checkPost && this.state.filteredPost.map((post,index)=>{
+                            return(
+                                <div key={index} className="post-card-div">
+                                    <PostCard post = {post} />
+                                    <Button variant="outline-dark" className="update-button" href={`/update-post/${post.id}`}>Update this Post</Button>
+                                </div>
+                            ) 
+                        })}
+                        </CardColumns>
+                    </Container>    
+                </div>}
+                
             </div>
         );
     }

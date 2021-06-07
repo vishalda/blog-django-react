@@ -1,4 +1,4 @@
-import Base from './core/Base';
+import Base from './core/components/Base';
 
 export default function App(){
     return(

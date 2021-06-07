@@ -1,11 +1,11 @@
 import React from 'react';
 import Container from 'react-bootstrap/esm/Container';
-import Base from './Base';
-import { PostCard } from './Card';
-import {getPost} from './helper/coreApiCalls';
+import Base from '../components/Base';
+import { PostCard } from '../components/Card';
+import {getPost} from '../helper/coreApiCalls';
 import CardColumns from 'react-bootstrap/CardColumns';
 import Alert from 'react-bootstrap/esm/Alert';
-import "../SCSS/loader.scss";
+import "../../SCSS/loader.scss";
 import Spinner from 'react-bootstrap/Spinner'
 
 class ViewCategory extends React.Component{

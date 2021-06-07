@@ -1,6 +1,6 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
-import {signout,IsAuthenticated} from "../auth/helper/index";
+import {signout,IsAuthenticated} from "../../auth/helper/index";
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav'
 

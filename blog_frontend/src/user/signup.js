@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { signup } from "../auth/helper/index";
-import Base from "../core/Base";
+import Base from "../core/components/Base";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
 import "../SCSS/authentication.scss";

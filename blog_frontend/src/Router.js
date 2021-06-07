@@ -2,14 +2,14 @@ import React from "react";
 import { BrowserRouter,Switch,Route, useParams} from "react-router-dom";
 import SignUp from "./user/signup";
 import SignIn from "./user/signin";
-import Posts from "./core/Explore";
+import Posts from "./core/page/Explore";
 import App from "./App";
-import Category from "./core/GetCategories";
-import ViewPost from "./core/ViewPost";
-import ViewCategory from "./core/ViewCategory";
-import CreatePost from "./core/CreatePost";
+import Category from "./core/page/GetCategories";
+import ViewPost from "./core/page/ViewPost";
+import ViewCategory from "./core/page/ViewCategory";
+import CreatePost from "./core/page/CreatePost";
 import Profile from "./user/profile";
-import UpdatePost from "./core/UpdatePost";
+import UpdatePost from "./core/page/UpdatePost";
 
 const Routes = () =>{
     //TODO: Try to load id directly to ViewCategory without this function 

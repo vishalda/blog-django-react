@@ -1,7 +1,7 @@
 import React from 'react';
 import {useHistory} from 'react-router-dom';
 import Card from 'react-bootstrap/Card'
-import "../SCSS/card.scss";
+import "../../SCSS/card.scss";
 
 export const PostCard = ({post}) =>{
     //Getting all the info about the card
