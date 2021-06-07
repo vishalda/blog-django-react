@@ -22,6 +22,7 @@ class UpdatePost extends React.Component{
             id:"",
             imageViewer:"",
             error:false,
+            loading:false,
         }
     }
 
@@ -30,6 +31,7 @@ class UpdatePost extends React.Component{
     }
 
     loadPost(id){
+        this.setState({loading:true})
         ViewPostInDetail(id)
         .then(data=>{
             if(data.error){
@@ -44,6 +46,7 @@ class UpdatePost extends React.Component{
                     id:data.id,
                 })
             }
+            this.setState({loading:false})
         })
         .catch(err=>this.setState({error:err}))
     }
@@ -66,20 +69,22 @@ class UpdatePost extends React.Component{
 
     onSubmit = (e) =>{
         e.preventDefault();
+        this.setState({loading:true})
         const {title,description,body} = this.state;
         ChangePostTextField(this.state.id,{title,description,body})
         .then(data=>{
-            this.setState({success:true});
+            this.setState({success:true,loading:false});
         })
         .catch(err=>this.setState({error:err}));
     };
 
     onSubmitImage = (e) =>{
         e.preventDefault();
+        this.setState({loading:true})
         const image=this.state.image;
         ChangePostImage(this.state.id,{image})
         .then(data=>{
-            this.setState({success:true});
+            this.setState({success:true,loading:false});
         })
         .catch(err=>this.setState({error:err}));
     };
@@ -88,7 +93,7 @@ class UpdatePost extends React.Component{
     successMessage = () =>{
         return(
             <Container>
-                <Alert variant={'success'} style={{display:this.state.success? "" : "none"}}>
+                <Alert variant={'success'} style={{display:(this.state.success && !this.state.error)? "" : "none"}}>
                     Post updated successfully. Go back to <Alert.Link href="/profile">Profile</Alert.Link>.
                 </Alert>
             </Container>
@@ -106,6 +111,13 @@ class UpdatePost extends React.Component{
         );
     };
 
+    //Function used to display Loader using state variable
+    isLoading = () =>{
+        return (
+            this.state.loading && <div>...loading</div>
+        );
+    };
+
     render(){
         return(
             <div>
@@ -113,6 +125,7 @@ class UpdatePost extends React.Component{
                 <Container>
                     {this.errorMessage()}
                     {this.successMessage()}
+                    {this.isLoading()}
                     <Form>
                         <Form.Label>Title:</Form.Label>
                         <InputGroup className="mb-3">

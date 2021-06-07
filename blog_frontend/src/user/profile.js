@@ -8,6 +8,8 @@ import Container from "react-bootstrap/Container";
 import CardColumns from 'react-bootstrap/CardColumns';
 import Button from 'react-bootstrap/Button';
 import "../SCSS/profile.scss";
+import Alert from 'react-bootstrap/Alert';
+
 
 class Profile extends React.Component{
     constructor(props){
@@ -17,6 +19,7 @@ class Profile extends React.Component{
             checkPost:false,
             filteredPost:[],
             error:false,
+            loading:false,
         }
     }
 
@@ -28,6 +31,7 @@ class Profile extends React.Component{
 
     loadUserDetail(){
         //Getting authenticated users id
+        this.setState({loading:true})
         const userId = IsAuthenticated() && IsAuthenticated().user.id;
         getUserDetail(userId)
         .then(data=>{
@@ -36,11 +40,13 @@ class Profile extends React.Component{
             }else{
                 this.setState({user:data})
             }
+            this.setState({loading:false})
         })
-        .catch(err=>console.log(err))
+        .catch(err=>this.setState({error:err}))
     }
 
     loadPosts(){
+        this.setState({loading:true})
         getPost()
         .then(data =>{
             if(data.error){
@@ -56,9 +62,9 @@ class Profile extends React.Component{
                     this.setState({filteredPost:filteredData,checkPost:true})
                 }
             }
-             
+            this.setState({loading:false})
         })
-    }
+    };
 
     handleClick = (id) =>{
         console.log(id);
@@ -67,10 +73,30 @@ class Profile extends React.Component{
         );
     }
 
+    errorMessage = () =>{
+        return(
+            <Container>
+                <Alert variant={'danger'} style={{display:this.state.error? "" : "none"}}>
+                    {this.state.error}
+                </Alert>
+            </Container>
+            
+        );
+    };
+
+    //Function used to display Loader using state variable
+    isLoading = () =>{
+        return (
+            this.state.loading && <div>...loading</div>
+        );
+    };
+
     render(){
         return(
             <div>
                 <Base />
+                {this.errorMessage()}
+                {this.isLoading()}
                 <Container className="detail-block">
                     <iframe src={`https://robohash.org/${this.state.user.username}`} className="profile-pic"></iframe>
                     <h5 className="user-detail" id="username">@{this.state.user.username}</h5>
@@ -92,7 +118,6 @@ class Profile extends React.Component{
                     })}
                     </CardColumns>
                 </Container>
-                
             </div>
         );
     }

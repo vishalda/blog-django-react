@@ -23,11 +23,12 @@ class ViewPost extends React.Component{
             UserDetail:[],
             content:"",
             show:false,
+            loading:false,
         };
     }
 
     handleClose = () =>{
-        this.setState({show:false})
+        this.setState({show:false,error:""})
     }
 
     handleShow = () =>{
@@ -43,6 +44,7 @@ class ViewPost extends React.Component{
 
     loadPostInDetail(userId){
         //Getting the full data of that particular post using its id 
+        this.setState({loading:true})
         ViewPostInDetail(userId)
         .then(data =>{
             if(data.error){
@@ -50,11 +52,13 @@ class ViewPost extends React.Component{
             }else{
                 this.setState({post:data})
             }
+            this.setState({loading:false})
         })
         .catch(err => this.setState({error:err}))
     }
 
     loadComments = (postId)  =>{
+        this.setState({loading:true})
         getComments(postId)
         .then(data=>{
             if(data.error){
@@ -69,11 +73,13 @@ class ViewPost extends React.Component{
                     this.setState({viewComments:true})
                 }
             }
+            this.setState({loading:false})
         })
         .catch(err=>this.setState({error:err}))
     }
 
     loadUserDetailOfComment = (author_id)=>{
+        this.setState({loading:true})
         getUserDetail(author_id)
         .then(data=>{
             if(data.error){
@@ -82,6 +88,7 @@ class ViewPost extends React.Component{
                 this.setState({UserDetail:data})
                 return(<p>{this.state.UserDetail.username}</p>);
             }
+            this.setState({loading:false})
         })
         .catch(err=>this.setState({error:err}))
     }
@@ -92,6 +99,7 @@ class ViewPost extends React.Component{
 
     onSubmit = (e) =>{
         this.handleClose();
+        this.setState({loading:true})
         e.preventDefault();
         const post_id = this.state.post.id;
         const author_id = IsAuthenticated() && IsAuthenticated().user.id;
@@ -100,7 +108,8 @@ class ViewPost extends React.Component{
         if(content!==""){
             CreateComment(author_id,post_id,content)
             .then(data=>{
-                this.setState({content:""})
+                this.setState({content:"",loading:false})
+                this.loadPostInDetail(this.props.match.params.id)
             })
             .catch(err=> this.setState({error:err}))
         }
@@ -126,6 +135,13 @@ class ViewPost extends React.Component{
         );
     };
 
+    //Function used to display Loader using state variable
+    isLoading = () =>{
+        return (
+            this.state.loading && <div>...loading</div>
+        );
+    };
+
     render(){
         const Title = this.state.post ? this.state.post.title : "Title";
         const Description = this.state.post ? this.state.post.description : "Description";
@@ -140,6 +156,7 @@ class ViewPost extends React.Component{
             <div>
                 <Base />
                 {this.errorMessage()}
+                {this.isLoading()}
                 <div className="sticky-top left-div">
                     <img src={Image} alt="" className="left-div-image"/>
                     <span>

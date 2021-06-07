@@ -11,6 +11,7 @@ class Category extends React.Component {
         this.state = {
             categories:[],
             error:false,
+            loading:false,
         }; 
     }
 
@@ -23,6 +24,7 @@ class Category extends React.Component {
 
     //function to load all products
     loadAllCategory (){
+        this.setState({loading:true})
         getCategory()
         .then(data =>{
             if(data.error){
@@ -30,6 +32,7 @@ class Category extends React.Component {
             }else{
                 this.setState({categories:data});
             }
+            this.setState({loading:false});
         });
     };
 
@@ -44,12 +47,20 @@ class Category extends React.Component {
         );
     };
 
+    //Function used to display Loader using state variable
+    isLoading = () =>{
+        return (
+            this.state.loading && <div>...loading</div>
+        );
+    };
+
     render(){
         return(
             <div>
                 <Base />
                 <Container>
                     {this.errorMessage()}
+                    {this.isLoading()}
                     <h1 style={{margin:"20px"}}>Categories:</h1>
                     {this.state.categories.map((category,index) =>{
                         return(

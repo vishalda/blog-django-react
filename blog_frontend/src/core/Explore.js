@@ -14,6 +14,7 @@ class Posts extends React.Component{
         this.state = {
             posts:[],
             error:false,
+            loading:false,
         }; 
     }
 
@@ -26,6 +27,7 @@ class Posts extends React.Component{
 
     //function to load all products
     loadAllPost (){
+        this.setState({loading:true})
         getPost()
         .then(data =>{
             if(data.error){
@@ -33,6 +35,7 @@ class Posts extends React.Component{
             }else{
                 this.setState({posts:data});
             }
+            this.setState({loading:false})
         }).catch(err =>console.log(err))
     };
 
@@ -47,12 +50,20 @@ class Posts extends React.Component{
         );
     };
 
+    //Function used to display Loader using state variable
+    isLoading = () =>{
+        return (
+            this.state.loading && <div>...loading</div>
+        );
+    };
+
     render(){
         return(
             <div>
                 <Base />
                 <Container fluid>
                     {this.errorMessage()}
+                    {this.isLoading()}
                     <CardColumns className='card-column'>
                         {this.state.posts.map((post,index) =>{
                             return(

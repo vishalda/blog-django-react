@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from "react-router";
 import {CreateNewPost, getCategory} from './helper/coreApiCalls';
 import Base from "./Base";
 import Select from "react-select";
@@ -24,19 +25,22 @@ class CreatePost extends React.Component{
             category_id:"",
             error:"",
             success:false,
+            loading:false,
+            doRedirect:false,
         }
     }
 
     componentDidMount(){
         //Getting all the category list from backend and passing it to getOptions func
+        this.setState({loading:true})
         getCategory()
         .then(data =>{
             if(data.error){
-                this.setState({error:data.error});
-                console.log(this.state.error);
+                this.setState({error:data.error,loading:false});
             }else{
                 this.getOptions(data);
             }
+            this.setState({loading:false});
         });
     }
 
@@ -65,9 +69,10 @@ class CreatePost extends React.Component{
     onSubmit = (e) =>{
         e.preventDefault();
         //Loading State variables to normal varialbes
+        this.setState({loading:true})
         const {title,description,body,image,category_id} = this.state;
         if(title===''||description===''||body===''||image===''||category_id===''){
-            this.setState({error:"Please fill in all the details"})
+            this.setState({error:"Please fill in all the details",loading:false})
         }else{
             CreateNewPost({title,description,body,image,category_id})
             .then(response =>{
@@ -81,7 +86,8 @@ class CreatePost extends React.Component{
                     category_options:[],
                     category_id:"",
                     error:"",
-                    success:true,
+                    doRedirect:true,
+                    loading:false,
                 })
             })
             .catch(err=>{
@@ -114,6 +120,19 @@ class CreatePost extends React.Component{
         );
     };
 
+    performRedirect = () =>{
+        if(this.state.doRedirect){
+            return <Redirect to="/profile" />;
+        }
+    };
+
+    //Function used to display Loader using state variable
+    isLoading = () =>{
+        return (
+            this.state.loading && <div>...loading</div>
+        );
+    };
+
     render(){
         return(
             <div>
@@ -121,6 +140,8 @@ class CreatePost extends React.Component{
                 <br/>
                 {this.errorMessage()}
                 {this.successMessage()}
+                {this.isLoading()}
+                {this.performRedirect()}
                 <Container>
                 <Form>
                     <Form.Group>

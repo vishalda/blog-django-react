@@ -14,6 +14,7 @@ class ViewCategory extends React.Component{
             error:false,
             posts:[],
             filteredPost:[],
+            loading:false,
         }
     }
 
@@ -26,6 +27,7 @@ class ViewCategory extends React.Component{
     }
     
     loadRelatedPost(id){
+        this.setState({loading:true})
         getPost()
         .then(data =>{
             if(data.error){
@@ -34,6 +36,7 @@ class ViewCategory extends React.Component{
                 const filteredData = data.filter((post) => post.category.id === parseInt(id));
                 this.setState({posts:filteredData});
             }
+            this.setState({loading:false})
         }).catch(err =>this.setState({error:err}))
     }
 
@@ -48,12 +51,20 @@ class ViewCategory extends React.Component{
         );
     };
 
+    //Function used to display Loader using state variable
+    isLoading = () =>{
+        return (
+            this.state.loading && <div>...loading</div>
+        );
+    };
+
     render(){
         return(
             <div>
                 <Base />
                 <Container fluid>
                     {this.errorMessage()}
+                    {this.isLoading()}
                     <CardColumns className='card-column'>
                         {this.state.posts.map((post,index) =>{
                             return(

@@ -20,10 +20,11 @@ const SignUp = () =>{
         password:"",
         error:"",
         success: false,
+        loading:false,
     });
     
     //Assigning all state values to the local variables
-    const {name,email,username,password,success,error} = values;
+    const {name,email,username,password,success,error,loading} = values;
 
     //Updating each field of input after every change
     const handleChange = (name) =>(event) =>{
@@ -32,7 +33,7 @@ const SignUp = () =>{
 
     const onSubmit = (event) =>{
         event.preventDefault();
-        setValues({...values,error:false});
+        setValues({...values,error:false,loading:true});
         if(email==='' || username===''||password===''||name===''){
             setValues({...values,error:"Please fill in all the details",loading:false});
         }
@@ -47,12 +48,14 @@ const SignUp = () =>{
                     password:"",
                     error:"",
                     success:true,
+                    loading:false
                 });
             }else{
                 setValues({
                     ...values,
                     error:data.email,
                     success:false,
+                    loading:false
                 });
             }
         })
@@ -78,6 +81,13 @@ const SignUp = () =>{
                     {error}
                 </Alert>
             </Container>
+        );
+    };
+
+    //Function used to display Loader using state variable
+    const isLoading = () =>{
+        return (
+            loading && <div>...loading</div>
         );
     };
 
@@ -157,6 +167,7 @@ const SignUp = () =>{
             {errorMessage()}
             {successMessage()}
             {signupForm()}
+            {isLoading()}
         </div>
     );
 };

@@ -80,8 +80,8 @@ const SignIn = () =>{
     const isLoading = () =>{
         return (
             loading && <div>...loading</div>
-        )
-    }
+        );
+    };
 
     //Performing redirect after successfull login 
     const performRedirect = () =>{
