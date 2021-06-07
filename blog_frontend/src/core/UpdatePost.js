@@ -10,6 +10,8 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import { MdDescription,MdTitle } from "react-icons/md";
 import Container from 'react-bootstrap/esm/Container';
 import Alert from 'react-bootstrap/esm/Alert';
+import "../SCSS/loader.scss";
+import Spinner from 'react-bootstrap/Spinner'
 
 class UpdatePost extends React.Component{
     constructor(props){
@@ -114,7 +116,7 @@ class UpdatePost extends React.Component{
     //Function used to display Loader using state variable
     isLoading = () =>{
         return (
-            this.state.loading && <div>...loading</div>
+            this.state.loading && <Spinner animation="border" className="loader"/>
         );
     };
 

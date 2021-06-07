@@ -4,6 +4,8 @@ import Base from "./Base";
 import { CategoryCard } from "./Card";
 import Container from 'react-bootstrap/esm/Container';
 import Alert from 'react-bootstrap/esm/Alert';
+import "../SCSS/loader.scss";
+import Spinner from 'react-bootstrap/Spinner'
 
 class Category extends React.Component {
     constructor(props) {
@@ -50,7 +52,7 @@ class Category extends React.Component {
     //Function used to display Loader using state variable
     isLoading = () =>{
         return (
-            this.state.loading && <div>...loading</div>
+            this.state.loading && <Spinner animation="border" className="loader"/>
         );
     };
 

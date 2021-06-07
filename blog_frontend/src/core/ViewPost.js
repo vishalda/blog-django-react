@@ -11,6 +11,8 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import { MdDateRange } from "react-icons/md";
 import Alert from 'react-bootstrap/esm/Alert';
+import "../SCSS/loader.scss";
+import Spinner from 'react-bootstrap/Spinner'
 
 class ViewPost extends React.Component{
     constructor(props){
@@ -138,7 +140,7 @@ class ViewPost extends React.Component{
     //Function used to display Loader using state variable
     isLoading = () =>{
         return (
-            this.state.loading && <div>...loading</div>
+            this.state.loading && <Spinner animation="border" className="loader"/>
         );
     };
 

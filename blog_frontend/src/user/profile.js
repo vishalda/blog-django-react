@@ -9,7 +9,8 @@ import CardColumns from 'react-bootstrap/CardColumns';
 import Button from 'react-bootstrap/Button';
 import "../SCSS/profile.scss";
 import Alert from 'react-bootstrap/Alert';
-
+import "../SCSS/loader.scss";
+import Spinner from 'react-bootstrap/Spinner'
 
 class Profile extends React.Component{
     constructor(props){
@@ -87,7 +88,7 @@ class Profile extends React.Component{
     //Function used to display Loader using state variable
     isLoading = () =>{
         return (
-            this.state.loading && <div>...loading</div>
+            this.state.loading && <Spinner animation="border" className="loader"/>
         );
     };
 

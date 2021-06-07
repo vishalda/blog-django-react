@@ -6,6 +6,8 @@ import CardColumns from 'react-bootstrap/CardColumns'
 import "../SCSS/card.scss";
 import Container from "react-bootstrap/Container"
 import Alert from 'react-bootstrap/esm/Alert';
+import "../SCSS/loader.scss";
+import Spinner from 'react-bootstrap/Spinner'
 
 //Getting all posts
 class Posts extends React.Component{
@@ -53,7 +55,7 @@ class Posts extends React.Component{
     //Function used to display Loader using state variable
     isLoading = () =>{
         return (
-            this.state.loading && <div>...loading</div>
+            this.state.loading && <Spinner animation="border" className="loader"/>
         );
     };
 

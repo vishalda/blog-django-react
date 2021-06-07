@@ -11,6 +11,8 @@ import { GrUserNew } from "react-icons/gr";
 import { HiOutlineMailOpen } from "react-icons/hi";
 import Alert from 'react-bootstrap/esm/Alert';
 import Container from "react-bootstrap/Container";
+import "../SCSS/loader.scss";
+import Spinner from 'react-bootstrap/Spinner'
 
 const SignUp = () =>{
     const [values, setValues] = useState({
@@ -87,7 +89,7 @@ const SignUp = () =>{
     //Function used to display Loader using state variable
     const isLoading = () =>{
         return (
-            loading && <div>...loading</div>
+            loading && <Spinner animation="border" className="loader"/>
         );
     };
 

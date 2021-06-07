@@ -5,7 +5,8 @@ import { PostCard } from './Card';
 import {getPost} from './helper/coreApiCalls';
 import CardColumns from 'react-bootstrap/CardColumns';
 import Alert from 'react-bootstrap/esm/Alert';
-
+import "../SCSS/loader.scss";
+import Spinner from 'react-bootstrap/Spinner'
 
 class ViewCategory extends React.Component{
     constructor(props){
@@ -54,7 +55,7 @@ class ViewCategory extends React.Component{
     //Function used to display Loader using state variable
     isLoading = () =>{
         return (
-            this.state.loading && <div>...loading</div>
+            this.state.loading && <Spinner animation="border" className="loader"/>
         );
     };
 
