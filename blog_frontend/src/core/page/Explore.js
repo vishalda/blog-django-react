@@ -7,6 +7,7 @@ import "../../SCSS/card.scss";
 import Container from "react-bootstrap/Container"
 import Alert from 'react-bootstrap/esm/Alert';
 import "../../SCSS/loader.scss";
+import "../../SCSS/explore.scss";
 import Spinner from 'react-bootstrap/Spinner'
 
 //Getting all posts
@@ -61,7 +62,7 @@ class Posts extends React.Component{
 
     render(){
         return(
-            <div>
+            <div className="explore">
                 <Base />
                 <Container fluid>
                     {this.errorMessage()}

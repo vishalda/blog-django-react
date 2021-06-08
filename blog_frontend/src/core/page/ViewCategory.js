@@ -6,6 +6,7 @@ import {getPost} from '../helper/coreApiCalls';
 import CardColumns from 'react-bootstrap/CardColumns';
 import Alert from 'react-bootstrap/esm/Alert';
 import "../../SCSS/loader.scss";
+import "../../SCSS/category.scss";
 import Spinner from 'react-bootstrap/Spinner'
 
 class ViewCategory extends React.Component{
@@ -61,7 +62,7 @@ class ViewCategory extends React.Component{
 
     render(){
         return(
-            <div>
+            <div className="view-category">
                 <Base />
                 <Container fluid>
                     {this.errorMessage()}

@@ -94,7 +94,7 @@ const SignIn = () =>{
 
     const signinForm = () =>{
         return(
-            <div>
+            <div className="authentication-page">
                 <Form className="authentication-form">
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>

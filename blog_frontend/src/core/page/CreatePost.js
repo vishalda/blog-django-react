@@ -12,6 +12,7 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import { MdDescription,MdTitle } from "react-icons/md";
 import Alert from 'react-bootstrap/esm/Alert';
 import "../../SCSS/loader.scss";
+import "../../SCSS/createPost.scss";
 import Spinner from 'react-bootstrap/Spinner'
 
 class CreatePost extends React.Component{
@@ -137,7 +138,7 @@ class CreatePost extends React.Component{
 
     render(){
         return(
-            <div>
+            <div className="create-post">
                 <Base />
                 <br/>
                 {this.errorMessage()}

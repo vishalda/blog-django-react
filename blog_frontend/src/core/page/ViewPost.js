@@ -12,6 +12,7 @@ import FormControl from 'react-bootstrap/FormControl';
 import { MdDateRange } from "react-icons/md";
 import Alert from 'react-bootstrap/esm/Alert';
 import "../../SCSS/loader.scss";
+import "../../SCSS/viewPost.scss";
 import Spinner from 'react-bootstrap/Spinner'
 
 class ViewPost extends React.Component{
@@ -155,7 +156,7 @@ class ViewPost extends React.Component{
         
         //View post in detail
         return(
-            <div>
+            <div className="view-post">
                 <Base />
                 {this.errorMessage()}
                 {this.isLoading()}

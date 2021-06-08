@@ -11,6 +11,7 @@ import { MdDescription,MdTitle } from "react-icons/md";
 import Container from 'react-bootstrap/esm/Container';
 import Alert from 'react-bootstrap/esm/Alert';
 import "../../SCSS/loader.scss";
+import "../../SCSS/updatePost.scss";
 import Spinner from 'react-bootstrap/Spinner'
 
 class UpdatePost extends React.Component{
@@ -122,7 +123,7 @@ class UpdatePost extends React.Component{
 
     render(){
         return(
-            <div>
+            <div className="update-post">
                 <Base />
                 <Container>
                     {this.errorMessage()}

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap');
 $breakpoint-mobile-max : 30em;
 $breakpoint-mobile-min : 23em;
 $breakpoint-tab-min:31em;
@@ -6,16 +7,3 @@ $breakpoint-smallPC-min:57em;
 $breakpoint-smallPC-max:64em;
 $breakpoint-largePC-min:65em;
 $breakpoint-largePC-max:75em;
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}

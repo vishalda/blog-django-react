@@ -95,9 +95,9 @@ const SignUp = () =>{
 
     const signupForm = () =>{
         return(
-            <div className="authentication-form">
+            <div className="authentication-page">
                 <h2>Register form:</h2><br/>
-                <Form>
+                <Form className="authentication-form">
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <InputGroup className="mb-3">
