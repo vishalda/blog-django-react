@@ -2,25 +2,26 @@ import React from 'react';
 import {withRouter} from 'react-router-dom';
 import {signout,IsAuthenticated} from "../../auth/helper/index";
 import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav'
+import Nav from 'react-bootstrap/Nav';
+import "../../SCSS/base.scss";
 
 const Menu = () =>{
     return(
-        <div>
+        <div className="navbar-div">
             <Navbar sticky="top" collapseOnSelect expand="lg" className="navbar">
                 <Navbar.Brand href="/" className="logo">Blog</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="ml-auto" activeKey="/home">
                         <Nav.Link href="/" activeKey="/home" className="nav-ele">Home</Nav.Link>
+                        <Nav.Link href="/post" className="nav-ele">Explore</Nav.Link>
+                        <Nav.Link href="/category" className="nav-ele">Category</Nav.Link>
                         {!IsAuthenticated() && 
                             <>
                                 <Nav.Link href="/register" className="nav-ele">Register</Nav.Link>
                                 <Nav.Link href="/login" className="nav-ele">Login</Nav.Link>
                             </>
                         }
-                        <Nav.Link href="/post" className="nav-ele">Explore</Nav.Link>
-                        <Nav.Link href="/category" className="nav-ele">Category</Nav.Link>
                         {IsAuthenticated() && 
                         <>
                             <Nav.Link href="/create-post" className="nav-ele" >Create-Post</Nav.Link>

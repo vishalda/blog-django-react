@@ -171,7 +171,7 @@ class ViewPost extends React.Component{
                     <p><FaRegComments className="icon" />:{numberOfComments}&nbsp; &nbsp;<MdDateRange className="icon" />{CreatedAt}</p>
                     <Button onClick={this.referenceFunction}>Comments</Button>
                 </div>
-                <Modal show={this.state.show} scrollable={true} onHide={this.handleClose}>
+                <Modal show={this.state.show} scrollable={true} onHide={this.handleClose} className="view-comments">
                     <Modal.Header closeButton>
                         <Modal.Title>Comments</Modal.Title>
                     </Modal.Header>

@@ -4,7 +4,11 @@ import "../../SCSS/base.scss";
 
 const Base = () =>{
   return (
-    <Menu />
+    <div className="base">
+      <Menu />
+      <div className="top-right-div"></div>
+      <div className="bottom-left-div"></div>
+    </div>
   );
 };
 
