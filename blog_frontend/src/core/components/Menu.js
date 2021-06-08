@@ -7,25 +7,25 @@ import Nav from 'react-bootstrap/Nav'
 const Menu = () =>{
     return(
         <div>
-            <Navbar sticky="top" collapseOnSelect expand="lg">
-                <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
+            <Navbar sticky="top" collapseOnSelect expand="lg" className="navbar">
+                <Navbar.Brand href="/" className="logo">Blog</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="justify-content-end" activeKey="/home">
-                        <Nav.Link href="/" activeKey="/home">Home</Nav.Link>
+                    <Nav className="ml-auto" activeKey="/home">
+                        <Nav.Link href="/" activeKey="/home" className="nav-ele">Home</Nav.Link>
                         {!IsAuthenticated() && 
                             <>
-                                <Nav.Link href="/register">Register</Nav.Link>
-                                <Nav.Link href="/login">Login</Nav.Link>
+                                <Nav.Link href="/register" className="nav-ele">Register</Nav.Link>
+                                <Nav.Link href="/login" className="nav-ele">Login</Nav.Link>
                             </>
                         }
-                        <Nav.Link href="/post">Explore</Nav.Link>
-                        <Nav.Link href="/category">Category</Nav.Link>
+                        <Nav.Link href="/post" className="nav-ele">Explore</Nav.Link>
+                        <Nav.Link href="/category" className="nav-ele">Category</Nav.Link>
                         {IsAuthenticated() && 
                         <>
-                            <Nav.Link href="/create-post" >Create-Post</Nav.Link>
-                            <Nav.Link href="/"onClick={()=>signout()}>Logout</Nav.Link>
-                            <Nav.Link href="/profile">Profile</Nav.Link>
+                            <Nav.Link href="/create-post" className="nav-ele" >Create-Post</Nav.Link>
+                            <Nav.Link href="/"onClick={()=>signout()} className="nav-ele">Logout</Nav.Link>
+                            <Nav.Link href="/profile" className="nav-ele">Profile</Nav.Link>
                         </>}
                         
                     </Nav>
