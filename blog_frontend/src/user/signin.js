@@ -12,7 +12,8 @@ import { HiOutlineMailOpen } from "react-icons/hi";
 import Alert from 'react-bootstrap/Alert';
 import Container from "react-bootstrap/Container";
 import "../SCSS/loader.scss";
-import Spinner from 'react-bootstrap/Spinner'
+import Spinner from 'react-bootstrap/Spinner';
+import LoginPageSvg from "../core/components/svg";
 
 const SignIn = () =>{
 
@@ -95,6 +96,9 @@ const SignIn = () =>{
     const signinForm = () =>{
         return(
             <div className="authentication-page">
+                <div className="svg-div">
+                    <LoginPageSvg />
+                </div>
                 <Form className="authentication-form">
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>

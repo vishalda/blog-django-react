@@ -12,7 +12,9 @@ import { HiOutlineMailOpen } from "react-icons/hi";
 import Alert from 'react-bootstrap/esm/Alert';
 import Container from "react-bootstrap/Container";
 import "../SCSS/loader.scss";
-import Spinner from 'react-bootstrap/Spinner'
+import Spinner from 'react-bootstrap/Spinner';
+import RegisterPageSvg from "../core/components/svg";
+//import {Layer1} from "../images/undraw_welcome_cats_thqn.svg"
 
 const SignUp = () =>{
     const [values, setValues] = useState({
@@ -96,7 +98,10 @@ const SignUp = () =>{
     const signupForm = () =>{
         return(
             <div className="authentication-page">
-                <h2>Register form:</h2><br/>
+                <div className="svg-div">
+                    <RegisterPageSvg className="register-svg"/><br/>
+                </div>
+                <h2 className="register-name">Register </h2>
                 <Form className="authentication-form">
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
@@ -159,6 +164,7 @@ const SignUp = () =>{
                         Submit
                     </Button>
                 </Form>
+                <h5 className="change-page">Already have an account? <a href="/login">Login</a></h5>
             </div>
         );
     };
