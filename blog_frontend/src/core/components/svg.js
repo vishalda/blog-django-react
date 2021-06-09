@@ -16,4 +16,4 @@ class LoginPageSvg extends React.Component{
     }
 }
 
-export default {RegisterPageSvg,LoginPageSvg};
+export {RegisterPageSvg,LoginPageSvg};

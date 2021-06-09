@@ -13,7 +13,7 @@ import Alert from 'react-bootstrap/Alert';
 import Container from "react-bootstrap/Container";
 import "../SCSS/loader.scss";
 import Spinner from 'react-bootstrap/Spinner';
-import LoginPageSvg from "../core/components/svg";
+import {LoginPageSvg} from "../core/components/svg";
 
 const SignIn = () =>{
 
@@ -99,6 +99,7 @@ const SignIn = () =>{
                 <div className="svg-div">
                     <LoginPageSvg />
                 </div>
+                <h2 className="form-name">Login</h2>
                 <Form className="authentication-form">
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
@@ -152,6 +153,7 @@ const SignIn = () =>{
                         Submit
                     </Button>
                 </Form>
+                <h5 className="change-page">Don't have an account? Create one at <a href="/register">Register</a></h5>
             </div>
         );
     }
