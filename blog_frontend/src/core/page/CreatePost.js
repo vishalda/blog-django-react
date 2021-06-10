@@ -188,7 +188,7 @@ class CreatePost extends React.Component{
                         <Form.File id="exampleFormControlFile1" label="Upload an Image representing post" value = {undefined} type="file" onChange={this.handleChange('image')} required/><br/>
                         <Select value={this.state.category_options[this.state.category_id-1]} options={this.state.category_options} onChange={this.handleChange('category_id')} required/>
                     </Form.Group>
-                    <Button variant="primary" type="submit" onClick={this.onSubmit}>
+                    <Button className="button" type="submit" onClick={this.onSubmit}>
                         Submit
                     </Button>
                     </Form>

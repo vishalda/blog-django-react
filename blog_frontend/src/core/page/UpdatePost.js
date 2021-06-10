@@ -164,7 +164,7 @@ class UpdatePost extends React.Component{
                             onBlur={ ( event, editor ) => {} }
                             onFocus={ ( event, editor ) => {} }
                         /><br/>
-                        <Button variant="outline-success" type="submit" style={{margin:'10px'}} onClick={this.onSubmit}>
+                        <Button className="button" type="submit" style={{margin:'10px'}} onClick={this.onSubmit}>
                             Save Changes
                         </Button> 
                         <Button variant="outline-danger" type="submit" style={{margin:'10px'}} onClick={this.performRedirect}>
@@ -175,7 +175,7 @@ class UpdatePost extends React.Component{
                         <hr/>
                         <img src={this.state.imageViewer} alt="" style={{width:"500px",borderRadius:'10px',marginBottom:'10px'}}/>
                         <Form.File id="exampleFormControlFile1" label="Change Image" value = {undefined} type="file" onChange={this.handleChange('image')}/><br/>
-                        <Button variant="outline-success" type="submit" style={{marginBottom:'20px'}}onClick={this.onSubmitImage}>
+                        <Button className="button" type="submit" style={{marginBottom:'20px'}}onClick={this.onSubmitImage}>
                             Change Image
                         </Button>
                     </Form>

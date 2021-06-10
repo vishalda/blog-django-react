@@ -21,7 +21,7 @@
     width:50%;
     display: flex;
     justify-content:center;
-    margin-top: 5%;
+    margin-top: 4%;
 }
 
 .form-name{
@@ -36,4 +36,21 @@
     position: relative;
     float: left;
     margin-left:13%;
+}
+
+.link{
+    color: #6c63ff;
+    &:hover{
+        color:#6c63ff;
+    }
+}
+
+.button{
+    background-color: white !important;
+    border-color:#6c63ff !important;
+    color: #6c63ff !important;
+    &:hover{
+        background-color: #6c63ff !important;
+        color:white !important;
+    }
 }

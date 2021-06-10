@@ -161,7 +161,7 @@ class ViewPost extends React.Component{
                 {this.errorMessage()}
                 {this.isLoading()}
                 <div className="sticky-top left-div">
-                    <img src={Image} alt="" className="left-div-image"/>
+                    <iframe src={`https://robohash.org/${AuthorUserName}`} className="left-div-image"></iframe>
                     <span>
                         <h5>@{AuthorUserName}</h5>
                         <h6>{AuthorName}</h6>
@@ -169,7 +169,7 @@ class ViewPost extends React.Component{
                     <br/>
                     <hr/>
                     <p><FaRegComments className="icon" />:{numberOfComments}&nbsp; &nbsp;<MdDateRange className="icon" />{CreatedAt}</p>
-                    <Button onClick={this.referenceFunction}>Comments</Button>
+                    <Button onClick={this.referenceFunction} className="button">Comments</Button>
                 </div>
                 <Modal show={this.state.show} scrollable={true} onHide={this.handleClose} className="view-comments">
                     <Modal.Header closeButton>
@@ -195,7 +195,7 @@ class ViewPost extends React.Component{
                         onChange={this.handleChange('content')}
                         />
                         <InputGroup.Append>
-                        <Button variant="outline-secondary" onClick={this.onSubmit}>Create</Button>
+                        <Button className="button" onClick={this.onSubmit}>Create</Button>
                         </InputGroup.Append>
                     </InputGroup>
                     </Modal.Footer>

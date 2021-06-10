@@ -1,3 +1,12 @@
 .update-post{
     font-family: 'Merriweather', serif;
+    .button{
+        background-color: white !important;
+        border-color:#6c63ff !important;
+        color: #6c63ff !important;
+        &:hover{
+            background-color: #6c63ff !important;
+            color:white !important;
+        }
+    }
 }

@@ -149,11 +149,11 @@ const SignIn = () =>{
                             />
                         </InputGroup>
                     </Form.Group>
-                    <Button variant="primary" type="submit" onClick={onSubmit}>
+                    <Button className="button" type="submit" onClick={onSubmit}>
                         Submit
                     </Button>
                 </Form>
-                <h5 className="change-page">Don't have an account? Create one at <a href="/register">Register</a></h5>
+                <h5 className="change-page">Don't have an account? Create one at <a href="/register" className="link">Register</a></h5>
             </div>
         );
     }

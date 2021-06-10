@@ -10,6 +10,7 @@ import ViewCategory from "./core/page/ViewCategory";
 import CreatePost from "./core/page/CreatePost";
 import Profile from "./user/profile";
 import UpdatePost from "./core/page/UpdatePost";
+import Home from "./core/page/Home";
 
 const Routes = () =>{
     //TODO: Try to load id directly to ViewCategory without this function 
@@ -25,7 +26,7 @@ const Routes = () =>{
     return(
         <BrowserRouter>
             <Switch>
-                <Route path="/" exact component={App}/>
+                <Route path="/" exact component={Home}/>
                 <Route path="/register" exact component={SignUp}/>
                 <Route path="/login" exact component={SignIn}/>
                 <Route path="/post" exact component={Posts}/>

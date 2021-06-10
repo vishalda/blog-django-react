@@ -8,6 +8,7 @@ import Alert from 'react-bootstrap/esm/Alert';
 import "../../SCSS/loader.scss";
 import "../../SCSS/category.scss";
 import Spinner from 'react-bootstrap/Spinner'
+import {getCategory} from "../helper/coreApiCalls";
 
 class ViewCategory extends React.Component{
     constructor(props){
@@ -17,12 +18,14 @@ class ViewCategory extends React.Component{
             posts:[],
             filteredPost:[],
             loading:false,
+            category:[],
         }
     }
 
     componentDidMount(){
         //accessing the id in props which was sent in the routers
         this.loadRelatedPost(this.props.idObjct.id);
+        this.loadCategoryInfo();
     }
     componentWillUnmount(){
         clearInterval(this.state.error,this.state.posts);
@@ -41,6 +44,20 @@ class ViewCategory extends React.Component{
             this.setState({loading:false})
         }).catch(err =>this.setState({error:err}))
     }
+
+    loadCategoryInfo (){
+        this.setState({loading:true})
+        getCategory()
+        .then(data =>{
+            if(data.error){
+                this.setState({error:data.error});
+            }else{
+                const CategoryInfo = data.filter((category) => category.id === parseInt(this.props.idObjct.id));
+                this.setState({category:CategoryInfo});
+            }
+            this.setState({loading:false});
+        }).catch(err=>this.setState({error:err}))
+    };
 
     //Display error message using state variable
     errorMessage = () =>{

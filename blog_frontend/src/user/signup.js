@@ -160,11 +160,11 @@ const SignUp = () =>{
                             />
                         </InputGroup>
                     </Form.Group>
-                    <Button variant="primary" type="submit" onClick={onSubmit}>
+                    <Button type="submit" className="button" onClick={onSubmit}>
                         Submit
                     </Button>
                 </Form>
-                <h5 className="change-page">Already have an account? <a href="/login">Login</a></h5>
+                <h5 className="change-page">Already have an account? <a href="/login" className="link">Login</a></h5>
             </div>
         );
     };
