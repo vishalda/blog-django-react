@@ -7,7 +7,7 @@ const Base = () =>{
     <div className="base">
       <Menu />
       <div className="top-right-div"></div>
-      <div className="bottom-left-div"></div>
+      <div className="top-left-div"></div>
     </div>
   );
 };

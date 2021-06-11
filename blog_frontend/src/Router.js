@@ -3,7 +3,6 @@ import { BrowserRouter,Switch,Route, useParams} from "react-router-dom";
 import SignUp from "./user/signup";
 import SignIn from "./user/signin";
 import Posts from "./core/page/Explore";
-import App from "./App";
 import Category from "./core/page/GetCategories";
 import ViewPost from "./core/page/ViewPost";
 import ViewCategory from "./core/page/ViewCategory";

@@ -122,7 +122,6 @@ class Profile extends React.Component{
                         </CardColumns>
                     </Container>    
                 </div>}
-                
             </div>
         );
     }
