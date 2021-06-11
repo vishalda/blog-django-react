@@ -5,7 +5,6 @@ import "../../SCSS/home.scss";
 import Button from 'react-bootstrap/Button';
 import { Redirect } from 'react-router';
 import { BsHeartFill } from "react-icons/bs";
-import { Link } from 'react-router-dom';
 import { AiFillGithub,AiFillInstagram,AiFillLinkedin } from "react-icons/ai";
 
 class Home extends React.Component{

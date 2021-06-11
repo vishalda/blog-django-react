@@ -19,7 +19,7 @@ export const PostCard = ({post}) =>{
     };
     
     return(
-        <Card onClick={() => handleClick()} className='post-card rounded-0'>
+        <Card onClick={() => handleClick()} className='post-card'>
             <Card.Img variant="top" className='post-card-image' src={CardImage} />
             <Card.Body className='post-card-body'>
                 <Card.Title>{CardTitle}</Card.Title>
