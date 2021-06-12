@@ -6,8 +6,8 @@ const Base = () =>{
   return (
     <div className="base">
       <Menu />
-      <div className="top-right-div"></div>
-      <div className="top-left-div"></div>
+      <div className="top-right-circle"></div>
+      <div className="top-left-circle"></div>
     </div>
   );
 };

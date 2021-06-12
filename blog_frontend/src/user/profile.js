@@ -9,7 +9,6 @@ import CardColumns from 'react-bootstrap/CardColumns';
 import Button from 'react-bootstrap/Button';
 import "../SCSS/profile.scss";
 import Alert from 'react-bootstrap/Alert';
-import "../SCSS/loader.scss";
 import Spinner from 'react-bootstrap/Spinner'
 
 class Profile extends React.Component{
@@ -109,7 +108,7 @@ class Profile extends React.Component{
                     </Container>
                     <br/>
                     <hr/>
-                    <Container fluid>
+                    <Container fluid className="wrapUp-card-elements">
                         <CardColumns className='card-column'>
                         {this.state.checkPost && this.state.filteredPost.map((post,index)=>{
                             return(

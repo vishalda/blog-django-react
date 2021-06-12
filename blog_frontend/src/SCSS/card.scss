@@ -1,59 +1,66 @@
 @import "./main";
-.post-card{
-    width:400px;
-    font-size: small;
-    height:100%;
-    transition:0.5s;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 20px !important;
 
-    &:hover{
-        box-shadow:none;
-        cursor:pointer;
-    }
-}
+.wrapUp-card-elements{
+    font-family: 'Merriweather', serif;
 
-.post-card-div{
-    margin:0 10px 30px 10px;
-    height:auto;
-    border-radius: 20px !important;
-}
-
-.post-card-img-div{
-    display: inline-block;
-    overflow: hidden;        
-    border-radius: 20px !important;
-    width:100% !important;
-    .post-card-image{
-        width:100% !important;
-        height:300px;
-        object-fit: cover;
-        border-radius: 20px !important;
-        -moz-transition: all 0.3s;
-        -webkit-transition: all 0.3s;
-        transition: all 0.3s;
-        &:hover{
-            -moz-transform: scale(1.1);
-            -webkit-transform: scale(1.1);
-            transform:scale(1.1);
+    .card-column{
+        margin:50px;
+    
+        .post-card-div{
+            margin:0 10px 30px 10px;
+            height:auto;
+            border-radius: 20px !important;
+    
+            .post-card{
+                width:400px;
+                font-size: small;
+                height:100%;
+                transition:0.5s;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                border-radius: 20px !important;
+            
+                &:hover{
+                    box-shadow:none;
+                    cursor:pointer;
+                }
+        
+                .post-card-img-div{
+                    display: inline-block;
+                    overflow: hidden;        
+                    border-radius: 20px !important;
+                    width:100% !important;
+    
+                    .post-card-image{
+                        width:100% !important;
+                        height:300px;
+                        object-fit: cover;
+                        border-radius: 20px !important;
+                        -moz-transition: all 0.3s;
+                        -webkit-transition: all 0.3s;
+                        transition: all 0.3s;
+    
+                        &:hover{
+                            -moz-transform: scale(1.1);
+                            -webkit-transform: scale(1.1);
+                            transform:scale(1.1);
+                        }
+                    }
+                }
+            }
         }
     }
-}
 
-
-.card-column{
-    margin:50px;
-}
-
-.category-card-title{
-    font-size: 35px;
-}
-
-.category-card{
-    border-radius: 20px;
-    transition: 0.5s;
-    &:hover{
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        cursor:pointer;
+    .category-card{
+        border-radius: 20px;
+        transition: 0.5s;
+    
+        &:hover{
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            cursor:pointer;
+        }
+    
+        .category-card-title{
+            font-size: 35px;
+        }
     }
 }

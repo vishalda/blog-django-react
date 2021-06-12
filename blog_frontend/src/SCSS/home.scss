@@ -1,14 +1,19 @@
+@import "./main";
+
 .home{
     font-family: 'Merriweather', serif;
+
     .home-page-content{
         width:50%;
         position: relative;
         float: left;
         padding:10% 5%;
+
         .button{
             background-color: white !important;
             border-color:#6c63ff !important;
             color: #6c63ff !important;
+
             &:hover{
                 background-color: #6c63ff !important;
                 color:white !important;
@@ -34,6 +39,7 @@
         position:absolute;
         bottom:0;
         left:0;
+
         .icons{
             color:black;
             margin:0 20px;

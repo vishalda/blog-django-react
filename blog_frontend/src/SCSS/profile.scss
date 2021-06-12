@@ -2,39 +2,39 @@
 
 .profile{
     font-family: 'Merriweather', serif;
-}
 
-.detail-block{
-    margin-top:50px;
-}
+    .detail-block{
+        margin-top:50px;
 
-.profile-pic{
-    width:150px;
-    border:0;
-    border-radius: 50%;
-    position: relative;
-    float:left;
-}
+        .profile-pic{
+            width:150px;
+            border:0;
+            border-radius: 50%;
+            position: relative;
+            float:left;
+        }
 
-.user-detail{
-    margin-top: 10px;
-}
+        .user-detail{
+            margin-top: 10px;
+        }
 
-#username{
-    color:gray;
-}
+        #username{
+            color:gray;
+        }
+    }
 
-.post-card-div{
-    margin-bottom:20px;
-}
+    .post-card-div{
+        margin-bottom:20px;
 
-.update-button{
-    margin:5px 30%;
-    background-color: white !important;
-    border-color:#6c63ff !important;
-    color: #6c63ff !important;
-    &:hover{
-        background-color: #6c63ff !important;
-        color:white !important;
+        .update-button{
+            margin:5px 30%;
+            background-color: white !important;
+            border-color:#6c63ff !important;
+            color: #6c63ff !important;
+            &:hover{
+                background-color: #6c63ff !important;
+                color:white !important;
+            }
+        }
     }
 }

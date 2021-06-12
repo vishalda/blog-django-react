@@ -5,8 +5,7 @@ import { PostCard } from '../components/Card';
 import {getPost} from '../helper/coreApiCalls';
 import CardColumns from 'react-bootstrap/CardColumns';
 import Alert from 'react-bootstrap/esm/Alert';
-import "../../SCSS/loader.scss";
-import "../../SCSS/category.scss";
+import "../../SCSS/card.scss";
 import Spinner from 'react-bootstrap/Spinner'
 import {getCategory} from "../helper/coreApiCalls";
 
@@ -79,7 +78,7 @@ class ViewCategory extends React.Component{
 
     render(){
         return(
-            <div className="view-category">
+            <div className="view-category wrapUp-card-elements">
                 <Base />
                 <Container fluid>
                     {this.errorMessage()}

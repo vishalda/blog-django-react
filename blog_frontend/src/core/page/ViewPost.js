@@ -11,8 +11,6 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import { MdDateRange } from "react-icons/md";
 import Alert from 'react-bootstrap/esm/Alert';
-import "../../SCSS/loader.scss";
-import "../../SCSS/viewPost.scss";
 import Spinner from 'react-bootstrap/Spinner'
 
 class ViewPost extends React.Component{

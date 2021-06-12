@@ -4,8 +4,7 @@ import Base from "../components/Base";
 import { CategoryCard } from "../components/Card";
 import Container from 'react-bootstrap/esm/Container';
 import Alert from 'react-bootstrap/esm/Alert';
-import "../../SCSS/loader.scss";
-import "../../SCSS/category.scss";
+import "../../SCSS/card.scss";
 import Spinner from 'react-bootstrap/Spinner';
 
 class Category extends React.Component {
@@ -59,7 +58,7 @@ class Category extends React.Component {
 
     render(){
         return(
-            <div className="get-category">
+            <div className="get-category wrapUp-card-elements">
                 <Base />
                 <Container>
                     {this.errorMessage()}

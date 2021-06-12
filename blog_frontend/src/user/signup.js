@@ -11,10 +11,8 @@ import { GrUserNew } from "react-icons/gr";
 import { HiOutlineMailOpen } from "react-icons/hi";
 import Alert from 'react-bootstrap/esm/Alert';
 import Container from "react-bootstrap/Container";
-import "../SCSS/loader.scss";
 import Spinner from 'react-bootstrap/Spinner';
 import {RegisterPageSvg} from "../core/components/svg";
-//import {Layer1} from "../images/undraw_welcome_cats_thqn.svg"
 
 const SignUp = () =>{
     const [values, setValues] = useState({

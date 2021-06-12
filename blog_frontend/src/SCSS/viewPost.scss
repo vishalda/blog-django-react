@@ -2,53 +2,59 @@
 
 .view-post{
     font-family: 'Merriweather', serif;
-}
 
-.view-comments{
-    font-family: 'Merriweather', serif;
-}
+    .left-div{
+        float:left;
+        margin-top: 5%;
+        margin-left:5%;
+        padding-top: 10%;
 
-.left-div{
-    float:left;
-    margin-top: 5%;
-    margin-left:5%;
-    padding-top: 10%;
-    .button{
-        background-color: white !important;
-        border-color:#6c63ff !important;
-        color: #6c63ff !important;
-        &:hover{
-            background-color: #6c63ff !important;
-            color:white !important;
+        .button{
+            background-color: white !important;
+            border-color:#6c63ff !important;
+            color: #6c63ff !important;
+
+            &:hover{
+                background-color: #6c63ff !important;
+                color:white !important;
+            }
+        }
+
+        span{
+            position:relative;
+            float:right;
+            margin-left:10px;
+        }
+
+        .icon{
+            font-size:large;
+            margin-right:5px;
+            padding-bottom: 2px;
+        }
+    
+        .left-div-image{
+            width:60px;
+            height:60px;
+            border-radius: 50%;
+            object-fit: cover;
         }
     }
-    span{
-        position:relative;
-        float:right;
-        margin-left:10px;
-    }
-    .icon{
-        font-size:large;
-        margin-right:5px;
-        padding-bottom: 2px;
+
+    .view-comments{
+        font-family: 'Merriweather', serif;
     }
 
-    .left-div-image{
-        width:60px;
-        height:60px;
-        border-radius: 50%;
-        object-fit: cover;
-    }
-}
+    .post-detail{
+        font-size:20px;
+        padding:50px 200px;
 
-.post-detail{
-    font-size:20px;
-    padding:50px 200px;
-    .description{
-        color:gray;
-    }
-    img{
-        border-radius: 20px;
-        width:100%;
+        .description{
+            color:gray;
+        }
+        
+        img{
+            border-radius: 20px;
+            width:100%;
+        }
     }
 }

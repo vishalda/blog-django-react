@@ -10,7 +10,6 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import { MdDescription,MdTitle } from "react-icons/md";
 import Container from 'react-bootstrap/esm/Container';
 import Alert from 'react-bootstrap/esm/Alert';
-import "../../SCSS/loader.scss";
 import "../../SCSS/updatePost.scss";
 import Spinner from 'react-bootstrap/Spinner'
 

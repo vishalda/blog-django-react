@@ -1,52 +1,50 @@
 @import "./main";
 
-.nav-ele{
-    margin:0 15px;
-    transition: 0.3s;
-    border-radius: 20px;
-    color:rgb(0, 0, 0);
-    &:hover{
-        color:rgb(19, 19, 19) !important;
+.base{
+    .navbar{
+        z-index: 2;
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        font-family: 'Merriweather', serif;
+        margin:20px;
+        box-shadow: -2px 3px 30px -20px rgba(0,0,0,0.75);
+        -webkit-box-shadow: -2px 3px 30px -20px rgba(0,0,0,0.75);
+        -moz-box-shadow: -2px 3px 30px -20px rgba(0,0,0,0.75);
+    
+        .logo{
+            margin-left: 20px;
+        }
+    
+        .nav-ele{
+            margin:0 15px;
+            transition: 0.3s;
+            border-radius: 20px;
+            color:rgb(0, 0, 0);
+            &:hover{
+                color:rgb(19, 19, 19) !important;
+            }
+        }
     }
-}
 
-.logo{
-    margin-left: 20px;
-}
-
-.navbar{
-    z-index: 2;
-    background-color: rgb(255, 255, 255);
-    border-radius: 10px;
-    font-family: 'Merriweather', serif;
-    margin:20px;
-    box-shadow: -2px 3px 30px -20px rgba(0,0,0,0.75);
-    -webkit-box-shadow: -2px 3px 30px -20px rgba(0,0,0,0.75);
-    -moz-box-shadow: -2px 3px 30px -20px rgba(0,0,0,0.75);
-}
-
-.top-right-div{
-    z-index: -1;
-    width:10%;
-    height:20%;
-    border-bottom-left-radius: 100%;
-    background-color: #6c63ff;
-    position:fixed;
-    top:0;
-    left:90%;
-}
-
-.top-left-div{
-    z-index: -1;
-    width:10%;
-    height:20%;
-    border-bottom-right-radius: 100%;
-    background-color: #6c63ff;
-    position: fixed;
-    top:0;
-    left:0;
-}
-
-.footer{
-    background-color: #6c63ff;
+    .top-right-circle{
+        z-index: -1;
+        width:10%;
+        height:20%;
+        border-bottom-left-radius: 100%;
+        background-color: #6c63ff;
+        position:fixed;
+        top:0;
+        left:90%;
+    }
+    
+    .top-left-circle{
+        z-index: -1;
+        width:10%;
+        height:20%;
+        border-bottom-right-radius: 100%;
+        background-color: #6c63ff;
+        position: fixed;
+        top:0;
+        left:0;
+    }
 }

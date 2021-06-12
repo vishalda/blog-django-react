@@ -11,7 +11,6 @@ import { VscSymbolNamespace } from "react-icons/vsc";
 import { HiOutlineMailOpen } from "react-icons/hi";
 import Alert from 'react-bootstrap/Alert';
 import Container from "react-bootstrap/Container";
-import "../SCSS/loader.scss";
 import Spinner from 'react-bootstrap/Spinner';
 import {LoginPageSvg} from "../core/components/svg";
 
