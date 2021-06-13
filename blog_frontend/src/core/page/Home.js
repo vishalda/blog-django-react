@@ -1,17 +1,19 @@
-import Base from '../components/Base';
 import React from 'react';
-import {HomePageSvg} from "../components/svg";
-import "../../SCSS/home.scss";
-import Button from 'react-bootstrap/Button';
 import { Redirect } from 'react-router';
+import Base from '../components/Base';
+import {HomePageSvg} from "../components/svg";
+import Button from 'react-bootstrap/Button';
 import { BsHeartFill } from "react-icons/bs";
 import { AiFillGithub,AiFillInstagram,AiFillLinkedin } from "react-icons/ai";
 import { FaGithubSquare } from "react-icons/fa";
+import "../../SCSS/home.scss";
 
 class Home extends React.Component{
+    
     performRedirect=()=>{
         return <Redirect to='/create-post' />;
     }
+
     render(){
         return(
             <div className="home">

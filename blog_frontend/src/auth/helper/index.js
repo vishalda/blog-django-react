@@ -1,4 +1,4 @@
-import { API } from "../../backend"
+import { API } from "../../backend";
 
 //Sign in function
 export const signup = (user) =>{
@@ -23,17 +23,11 @@ export const signin = (user) =>{
     for(const name in user){
         formData.append(name,user[name]);
     }
-    //Output the keys to the console
-    //TODO: Remove later
-    for(var key of formData.keys()){
-        console.log("KEYS", key);
-    }
     return fetch(`${API}user/login/`,{
         method:"POST",
         body:formData,
     })
     .then(response=>{
-        console.log("Success",response);
         return response.json();
     })
     .catch(err=>console.log(err));

@@ -1,5 +1,5 @@
 //This file will act as the base field for every page on the website
-import Menu from "./Menu";
+import Menu from "./Navbar";
 import "../../SCSS/base.scss";
 
 const Base = () =>{

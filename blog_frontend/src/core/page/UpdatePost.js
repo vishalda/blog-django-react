@@ -32,6 +32,7 @@ class UpdatePost extends React.Component{
         this.loadPost(this.props.match.params.id);
     }
 
+    //Load all data of the post to the state variables
     loadPost(id){
         this.setState({loading:true})
         ViewPostInDetail(id)
@@ -53,6 +54,7 @@ class UpdatePost extends React.Component{
         .catch(err=>this.setState({error:err}))
     }
 
+    //Function to handle change in any of the input
     handleChange = (name) =>(event) =>{
         if(name==='image'){
             this.setState({
@@ -69,6 +71,7 @@ class UpdatePost extends React.Component{
         return <Redirect to="/profile" />;
     };
 
+    //Function to handle title,description,body submit
     onSubmit = (e) =>{
         e.preventDefault();
         this.setState({loading:true})
@@ -80,6 +83,7 @@ class UpdatePost extends React.Component{
         .catch(err=>this.setState({error:err}));
     };
 
+    //Function to handle image submit
     onSubmitImage = (e) =>{
         e.preventDefault();
         this.setState({loading:true})
@@ -163,18 +167,18 @@ class UpdatePost extends React.Component{
                             onBlur={ ( event, editor ) => {} }
                             onFocus={ ( event, editor ) => {} }
                         /><br/>
-                        <Button className="button" type="submit" style={{margin:'10px'}} onClick={this.onSubmit}>
+                        <Button className="button" type="submit" onClick={this.onSubmit}>
                             Save Changes
                         </Button> 
-                        <Button variant="outline-danger" type="submit" style={{margin:'10px'}} onClick={this.performRedirect}>
+                        <Button variant="outline-danger danger-button" type="submit" onClick={this.performRedirect}>
                             Cancel
                         </Button>                       
                         <br/>
                         <br/>
                         <hr/>
-                        <img src={this.state.imageViewer} alt="" style={{width:"500px",borderRadius:'10px',marginBottom:'10px'}}/>
+                        <img src={this.state.imageViewer} alt="" className="view-image" />
                         <Form.File id="exampleFormControlFile1" label="Change Image" value = {undefined} type="file" onChange={this.handleChange('image')}/><br/>
-                        <Button className="button" type="submit" style={{marginBottom:'20px'}}onClick={this.onSubmitImage}>
+                        <Button className="button" type="submit" style={{marginBottom:'40px',marginLeft:'0'}}onClick={this.onSubmitImage}>
                             Change Image
                         </Button>
                     </Form>

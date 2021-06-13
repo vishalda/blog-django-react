@@ -2,10 +2,10 @@ import React from 'react';
 import {getCategory} from "../helper/coreApiCalls";
 import Base from "../components/Base";
 import { CategoryCard } from "../components/Card";
+import Spinner from 'react-bootstrap/Spinner';
 import Container from 'react-bootstrap/esm/Container';
 import Alert from 'react-bootstrap/esm/Alert';
 import "../../SCSS/card.scss";
-import Spinner from 'react-bootstrap/Spinner';
 
 class Category extends React.Component {
     constructor(props) {

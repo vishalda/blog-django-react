@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { signup } from "../auth/helper/index";
 import Base from "../core/components/Base";
+import {RegisterPageSvg} from "../core/components/svg";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
-import "../SCSS/authentication.scss";
 import InputGroup from 'react-bootstrap/InputGroup';
+import Alert from 'react-bootstrap/esm/Alert';
+import Container from 'react-bootstrap/Container';
+import Spinner from 'react-bootstrap/Spinner';
 import { RiLockPasswordLine } from "react-icons/ri";
 import { VscSymbolNamespace } from "react-icons/vsc";
 import { GrUserNew } from "react-icons/gr";
 import { HiOutlineMailOpen } from "react-icons/hi";
-import Alert from 'react-bootstrap/esm/Alert';
-import Container from "react-bootstrap/Container";
-import Spinner from 'react-bootstrap/Spinner';
-import {RegisterPageSvg} from "../core/components/svg";
+import "../SCSS/authentication.scss";
 
 const SignUp = () =>{
     const [values, setValues] = useState({
@@ -33,15 +33,17 @@ const SignUp = () =>{
         setValues({...values,error:false,[name]:event.target.value});
     };
 
+    //Function to handle register
     const onSubmit = (event) =>{
         event.preventDefault();
         setValues({...values,error:false,loading:true});
+        //Check if all fields are filled
         if(email==='' || username===''||password===''||name===''){
             setValues({...values,error:"Please fill in all the details",loading:false});
         }
         signup({name,email,username,password})
         .then(data =>{
-            //TODO: Need to remove later
+            //Check if email in data is equal to the actual submitted email id
             if(data.email === email){
                 setValues({
                     name:"",

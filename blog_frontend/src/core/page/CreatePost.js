@@ -1,18 +1,18 @@
 import React from 'react';
 import { Redirect } from "react-router";
-import {CreateNewPost, getCategory} from '../helper/coreApiCalls';
-import Base from "../components/Base";
 import Select from "react-select";
+import { MdDescription,MdTitle } from "react-icons/md";
+import {CreateNewPost, getCategory} from '../helper/coreApiCalls';
+import Spinner from 'react-bootstrap/Spinner';
+import Base from "../components/Base";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Container from 'react-bootstrap/esm/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup'
-import { MdDescription,MdTitle } from "react-icons/md";
 import Alert from 'react-bootstrap/esm/Alert';
 import "../../SCSS/createPost.scss";
-import Spinner from 'react-bootstrap/Spinner'
 
 class CreatePost extends React.Component{
     constructor(props){
@@ -57,6 +57,7 @@ class CreatePost extends React.Component{
 
     handleChange =(name) => (e) => {
         if(name === 'image'){
+            //Changing only image field
             this.setState({
                 imageViewer:URL.createObjectURL(e.target.files[0]),
                 [name]:e.target.files[0],
@@ -73,12 +74,13 @@ class CreatePost extends React.Component{
         //Loading State variables to normal varialbes
         this.setState({loading:true})
         const {title,description,body,image,category_id} = this.state;
+        //Check if all fields are filled
         if(title===''||description===''||body===''||image===''||category_id===''){
             this.setState({error:"Please fill in all the details",loading:false})
         }else{
             CreateNewPost({title,description,body,image,category_id})
             .then(response =>{
-                console.log(response);
+                //changing all states to null
                 this.setState({
                     title:"",
                     description:"",

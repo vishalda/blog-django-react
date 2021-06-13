@@ -1,12 +1,12 @@
 import React from 'react';
-import { PostCard } from "../components/Card";
 import {getPost} from "../helper/coreApiCalls";
 import Base from "../components/Base";
-import CardColumns from 'react-bootstrap/CardColumns'
-import "../../SCSS/card.scss";
-import Container from "react-bootstrap/Container"
+import { PostCard } from "../components/Card";
+import Spinner from 'react-bootstrap/Spinner';
+import CardColumns from 'react-bootstrap/CardColumns';
+import Container from "react-bootstrap/Container";
 import Alert from 'react-bootstrap/esm/Alert';
-import Spinner from 'react-bootstrap/Spinner'
+import "../../SCSS/card.scss";
 
 //Getting all posts
 class Posts extends React.Component{

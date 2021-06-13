@@ -7,9 +7,20 @@
         background-color: white !important;
         border-color:#6c63ff !important;
         color: #6c63ff !important;
+        margin:10px;
         &:hover{
             background-color: #6c63ff !important;
             color:white !important;
         }
+    }
+
+    .danger-button{
+        margin:10px;
+    }
+
+    .view-image{
+        width:500px;
+        border-radius: 10px;
+        margin-bottom: 10px;
     }
 }

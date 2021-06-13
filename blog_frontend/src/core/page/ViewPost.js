@@ -1,17 +1,17 @@
 import React from 'react';
-import Container from 'react-bootstrap/esm/Container';
 import { IsAuthenticated } from '../../auth/helper';
 import {CreateComment, getComments, getUserDetail, ViewPostInDetail} from "../helper/coreApiCalls";
-import "../../SCSS/viewPost.scss";
-import Button from 'react-bootstrap/Button';
 import Base from '../components/Base';
+import Spinner from 'react-bootstrap/Spinner'
+import Button from 'react-bootstrap/Button';
 import {FaRegComments} from 'react-icons/fa';
 import Modal from 'react-bootstrap/Modal';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import { MdDateRange } from "react-icons/md";
 import Alert from 'react-bootstrap/esm/Alert';
-import Spinner from 'react-bootstrap/Spinner'
+import Container from 'react-bootstrap/esm/Container';
+import "../../SCSS/viewPost.scss";
 
 class ViewPost extends React.Component{
     constructor(props){
@@ -28,10 +28,12 @@ class ViewPost extends React.Component{
         };
     }
 
+    //Function to close comments modal
     handleClose = () =>{
         this.setState({show:false,error:""})
     }
 
+    //Function to open comments modal
     handleShow = () =>{
         this.setState({show:true})
     }
@@ -58,6 +60,7 @@ class ViewPost extends React.Component{
         .catch(err => this.setState({error:err}))
     }
 
+    //Loading comments of particular post
     loadComments = (postId)  =>{
         this.setState({loading:true})
         getComments(postId)
@@ -67,18 +70,15 @@ class ViewPost extends React.Component{
             }else{
                 this.setState({
                     comments:data.comments,
+                    viewComments:!this.state.viewComments
                 })
-                if(this.state.viewComments){
-                    this.setState({viewComments:false})
-                }else{
-                    this.setState({viewComments:true})
-                }
             }
             this.setState({loading:false})
         })
         .catch(err=>this.setState({error:err}))
     }
 
+    //Loading detail of particular user of particular comment
     loadUserDetailOfComment = (author_id)=>{
         this.setState({loading:true})
         getUserDetail(author_id)
@@ -98,6 +98,7 @@ class ViewPost extends React.Component{
         this.setState({[name]:e.target.value});
     }
 
+    //Handling submit of new comment
     onSubmit = (e) =>{
         this.handleClose();
         this.setState({loading:true})
@@ -116,11 +117,13 @@ class ViewPost extends React.Component{
         }
     }
 
+    //A simple function to handle call of two different functions
     referenceFunction=()=>{
         this.loadComments(this.state.post.id);
         this.handleShow();
     }
 
+    //Formating all the data in the body in the form of text 
     createMarkup = () => {
         return { __html: this.state.post.body};
     }

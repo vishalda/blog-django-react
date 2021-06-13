@@ -28,7 +28,6 @@ const Menu = () =>{
                             <Nav.Link href="/"onClick={()=>signout()} className="nav-ele">Logout</Nav.Link>
                             <Nav.Link href="/profile" className="nav-ele">Profile</Nav.Link>
                         </>}
-                        
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

@@ -75,8 +75,8 @@ export const CreateComment = (author_id,post_id,content) =>{
 }
 
 export const ChangePostTextField = (post_id,data) =>{
-    console.log(data);
     const formData = new FormData();
+    //Getting all changed data in formData
     for(const dataName in data){
         formData.append(dataName,data[dataName]);
     }
@@ -93,7 +93,7 @@ export const ChangePostTextField = (post_id,data) =>{
 export const ChangePostImage = (post_id,imageObject)=>{
     const formData = new FormData();
     const image = imageObject.image;
-    console.log(image);
+    //Changing only image field
     formData.append('image',image);
     return fetch(`${API}post/update-post-image/${post_id}/`,{
         method:`POST`,

@@ -1,15 +1,15 @@
 import React from 'react';
-import { getPost, getUserDetail } from '../core/helper/coreApiCalls';
-import { PostCard } from "../core/components/Card";
-import Base from "../core/components/Base";
-import { IsAuthenticated } from '../auth/helper/index';
 import { Link } from 'react-router-dom';
-import Container from "react-bootstrap/Container";
+import { IsAuthenticated } from '../auth/helper/index';
+import { getPost, getUserDetail } from '../core/helper/coreApiCalls';
+import { PostCard } from '../core/components/Card';
+import Base from '../core/components/Base';
+import Container from 'react-bootstrap/Container';
 import CardColumns from 'react-bootstrap/CardColumns';
 import Button from 'react-bootstrap/Button';
-import "../SCSS/profile.scss";
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner'
+import '../SCSS/profile.scss';
 
 class Profile extends React.Component{
     constructor(props){
@@ -45,6 +45,7 @@ class Profile extends React.Component{
         .catch(err=>this.setState({error:err}))
     }
 
+    //Loading all posts
     loadPosts(){
         this.setState({loading:true})
         getPost()
@@ -66,6 +67,7 @@ class Profile extends React.Component{
         })
     };
 
+    //Function to redirect to update-post
     handleClick = (id) =>{
         console.log(id);
         return(
@@ -73,6 +75,7 @@ class Profile extends React.Component{
         );
     }
 
+    //Display error message using state variable
     errorMessage = () =>{
         return(
             <Container>

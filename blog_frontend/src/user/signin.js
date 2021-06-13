@@ -2,17 +2,17 @@ import React, {useState} from "react";
 import { Redirect } from "react-router";
 import {signin,Authenticat,IsAuthenticated} from "../auth/helper/index";
 import Base from "../core/components/Base";
+import Spinner from 'react-bootstrap/Spinner';
+import {LoginPageSvg} from "../core/components/svg";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
-import "../SCSS/authentication.scss";
 import InputGroup from 'react-bootstrap/InputGroup';
+import Alert from 'react-bootstrap/Alert';
+import Container from 'react-bootstrap/Container';
 import { RiLockPasswordLine } from "react-icons/ri";
 import { VscSymbolNamespace } from "react-icons/vsc";
 import { HiOutlineMailOpen } from "react-icons/hi";
-import Alert from 'react-bootstrap/Alert';
-import Container from "react-bootstrap/Container";
-import Spinner from 'react-bootstrap/Spinner';
-import {LoginPageSvg} from "../core/components/svg";
+import "../SCSS/authentication.scss";
 
 const SignIn = () =>{
 
@@ -32,16 +32,16 @@ const SignIn = () =>{
         setValues({...values,error:false,[name]:event.target.value});
     };
 
+    //Function to handle login
     const onSubmit = (event) =>{
         event.preventDefault();
         setValues({...values,error:false,loading:true});
+        //Check if all fields are filled
         if(email==='' || username===''||password===''){
             setValues({...values,error:"Please fill in all the details",loading:false});
         }else{
             signin({email,username,password})
             .then(data=>{
-                //TODO: remove later
-                console.log("DATA :",data);
                 if(data.token){
                     //Setting up the jwt in localstorage
                     Authenticat(data, ()=>{
@@ -59,6 +59,7 @@ const SignIn = () =>{
         }
     };
 
+    //Display success message using state variable
     const successMessage = () =>{
         return(
             <div style={{display:success? "" : "none"}}>
@@ -67,6 +68,7 @@ const SignIn = () =>{
         );
     };
 
+    //Display error message using state variable
     const errorMessage = () =>{
         return(
             <Container>
