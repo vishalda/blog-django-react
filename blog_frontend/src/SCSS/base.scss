@@ -24,6 +24,11 @@
                 color:rgb(19, 19, 19) !important;
             }
         }
+
+        @media (min-width:300px) and (max-width: 460px) {
+            margin:0;
+            border-radius: 0;
+        }
     }
 
     .top-right-circle{
