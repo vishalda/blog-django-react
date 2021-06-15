@@ -128,7 +128,7 @@ class UpdatePost extends React.Component{
         return(
             <div className="update-post">
                 <Base />
-                <Container>
+                <Container className="update-post-contents">
                     {this.errorMessage()}
                     {this.successMessage()}
                     {this.isLoading()}

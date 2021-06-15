@@ -12,3 +12,15 @@
         }
     }
 }
+
+@media (min-width:320px) and (max-width: 700px) {
+    .create-post{
+        .create-post-contents{
+            font-size: small;
+            margin-top: 5%;
+            .view-image{
+                width:100%;
+            }
+        }
+    }
+}

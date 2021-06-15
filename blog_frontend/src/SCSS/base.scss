@@ -40,6 +40,7 @@
         position:fixed;
         top:0;
         left:90%;
+        display: block;
     }
     
     .top-left-circle{
@@ -51,5 +52,17 @@
         position: fixed;
         top:0;
         left:0;
+        display: block;
+    }
+}
+
+@media (min-width:320px) and (max-width: 700px) {
+    .base{
+        .top-left-circle{
+            display: none;
+        }
+        .top-right-circle{
+            display: none;
+        }
     }
 }

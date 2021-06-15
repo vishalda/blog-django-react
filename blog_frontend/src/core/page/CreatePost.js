@@ -146,7 +146,7 @@ class CreatePost extends React.Component{
                 {this.successMessage()}
                 {this.isLoading()}
                 {this.performRedirect()}
-                <Container>
+                <Container className="create-post-contents">
                 <Form>
                     <Form.Group>
                         <Form.Label>Title:</Form.Label>
