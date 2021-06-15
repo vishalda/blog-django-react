@@ -117,7 +117,6 @@ class Profile extends React.Component{
                             return(
                                 <div key={index} className="post-card-div">
                                     <PostCard post = {post} />
-                                    <Button className="update-button" href={`/update-post/${post.id}`}>Update this Post</Button>
                                 </div>
                             ) 
                         })}

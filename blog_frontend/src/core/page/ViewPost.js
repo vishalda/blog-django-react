@@ -152,8 +152,10 @@ class ViewPost extends React.Component{
         const Image = this.state.post ? this.state.post.image : "/home/vishal/Pictures/01-28-2021-11.32.04.jpg";
         const AuthorName = this.state.post.author ? this.state.post.author.name : "Vishal";
         const AuthorUserName = this.state.post.author ? this.state.post.author.username : "VDA-001";
+        const AuthorId = this.state.post.author ? parseInt(this.state.post.author.id) : 0;
         const numberOfComments = this.state.post ? this.state.post.number_of_comments : "0";
         let CreatedAt = this.state.post ? String(this.state.post.created_at).slice(0,10) : "";
+        console.log(AuthorId);
         
         //View post in detail
         return(
@@ -170,7 +172,10 @@ class ViewPost extends React.Component{
                     <br/>
                     <hr/>
                     <p><FaRegComments className="icon" />:{numberOfComments}&nbsp; &nbsp;<MdDateRange className="icon" />{CreatedAt}</p>
-                    <Button onClick={this.referenceFunction} className="button">Comments</Button>
+                    <Button onClick={this.referenceFunction} className="button">Comments</Button><br/><br/>
+                    {AuthorId===IsAuthenticated().user.id &&
+                        <Button className="button" href={`/update-post/${this.state.post.id}`}>Update this Post</Button>
+                    }
                 </div>
                 <Modal show={this.state.show} scrollable={true} onHide={this.handleClose} className="view-comments">
                     <Modal.Header closeButton>

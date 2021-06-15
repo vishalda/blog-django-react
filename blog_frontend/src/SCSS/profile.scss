@@ -25,15 +25,20 @@
 
     .post-card-div{
         margin-bottom:20px;
+    }
+}
 
-        .update-button{
-            margin:5px 30%;
-            background-color: white !important;
-            border-color:#6c63ff !important;
-            color: #6c63ff !important;
-            &:hover{
-                background-color: #6c63ff !important;
-                color:white !important;
+@media (min-width:320px) and (max-width: 700px) {
+    .profile{
+        .detail-block{
+            font-size: small;
+            .profile-pic{
+                width:80px;
+                margin-left:20%;
+            }
+            #description::before {
+                content: "\A\A\A\A";
+                white-space: pre-line;
             }
         }
     }
