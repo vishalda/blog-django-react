@@ -206,7 +206,7 @@ class ViewPost extends React.Component{
                     </InputGroup>
                     </Modal.Footer>
                 </Modal>
-                <Container className="post-detail" style={{padding:"50px 200px"}}>
+                <Container className="post-detail">
                     <h1>{Title}</h1>
                     <h4 className="description">{Description}</h4>
                     <hr/>
