@@ -9,6 +9,7 @@ import Modal from 'react-bootstrap/Modal';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import { MdDateRange } from "react-icons/md";
+import { GrDocumentUpdate } from "react-icons/gr";
 import Alert from 'react-bootstrap/esm/Alert';
 import Container from 'react-bootstrap/esm/Container';
 import "../../SCSS/viewPost.scss";
@@ -163,7 +164,7 @@ class ViewPost extends React.Component{
                 <Base />
                 {this.errorMessage()}
                 {this.isLoading()}
-                <div className="sticky-top left-div">
+                <div className="sticky-top left-div large-view-div">
                     <iframe src={`https://robohash.org/${AuthorUserName}`} className="left-div-image"></iframe>
                     <span>
                         <h5>@{AuthorUserName}</h5>
@@ -171,10 +172,16 @@ class ViewPost extends React.Component{
                     </span>
                     <br/>
                     <hr/>
-                    <p><FaRegComments className="icon" />:{numberOfComments}&nbsp; &nbsp;<MdDateRange className="icon" />{CreatedAt}</p>
+                    <p ><FaRegComments className="icon" />:{numberOfComments}&nbsp; &nbsp;<MdDateRange className="icon" />{CreatedAt}</p>
                     <Button onClick={this.referenceFunction} className="button">Comments</Button><br/><br/>
                     {AuthorId===IsAuthenticated().user.id &&
                         <Button className="button" href={`/update-post/${this.state.post.id}`}>Update this Post</Button>
+                    }
+                </div>
+                <div className="fixed-bottom small-view-div">
+                    <Button onClick={this.referenceFunction} className="button comments-button"><FaRegComments className="icon" /></Button>
+                    {AuthorId===IsAuthenticated().user.id &&
+                        <Button className="button" href={`/update-post/${this.state.post.id}`}><GrDocumentUpdate className="icon" /></Button>
                     }
                 </div>
                 <Modal show={this.state.show} scrollable={true} onHide={this.handleClose} className="view-comments">
@@ -214,6 +221,14 @@ class ViewPost extends React.Component{
                     <br /><br />
                     <div dangerouslySetInnerHTML={this.createMarkup()} className="editor"></div>
                     <hr />
+                    <div className="small-view-user-info-div">
+                        <iframe src={`https://robohash.org/${AuthorUserName}`} className="left-div-image"></iframe>
+                        <span>
+                            <h5>@{AuthorUserName}</h5>
+                            <h6>{AuthorName}</h6>
+                        </span>
+                        <p ><FaRegComments className="icon" />:{numberOfComments}&nbsp; &nbsp;<MdDateRange className="icon" />{CreatedAt}</p>
+                    </div>
                 </Container>
             </div>
         );
