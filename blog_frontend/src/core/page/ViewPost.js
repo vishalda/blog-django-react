@@ -165,7 +165,7 @@ class ViewPost extends React.Component{
                 {this.errorMessage()}
                 {this.isLoading()}
                 <div className="sticky-top left-div large-view-div">
-                    <iframe src={`https://robohash.org/${AuthorUserName}`} className="left-div-image"></iframe>
+                    <iframe src={`https://robohash.org/${AuthorUserName}`} className="left-div-image" title="large-view-user-profile-pic"></iframe>
                     <span>
                         <h5>@{AuthorUserName}</h5>
                         <h6>{AuthorName}</h6>
@@ -222,7 +222,7 @@ class ViewPost extends React.Component{
                     <div dangerouslySetInnerHTML={this.createMarkup()} className="editor"></div>
                     <hr />
                     <div className="small-view-user-info-div">
-                        <iframe src={`https://robohash.org/${AuthorUserName}`} className="left-div-image"></iframe>
+                        <iframe src={`https://robohash.org/${AuthorUserName}`} className="left-div-image" title="small-view-user-profile-pic"></iframe>
                         <span>
                             <h5>@{AuthorUserName}</h5>
                             <h6>{AuthorName}</h6>

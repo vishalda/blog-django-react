@@ -6,7 +6,6 @@ import { PostCard } from '../core/components/Card';
 import Base from '../core/components/Base';
 import Container from 'react-bootstrap/Container';
 import CardColumns from 'react-bootstrap/CardColumns';
-import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner'
 import '../SCSS/profile.scss';
@@ -54,11 +53,7 @@ class Profile extends React.Component{
                 this.setState({error:data.error})
             }else{
                 //Filtering the data to get current authenticated users posts
-                let filteredData = data.filter((post) =>{
-                    if(post.author.id === this.state.user.id){
-                        return post;
-                    }
-                }) || [];
+                let filteredData = data.filter((post) => post.author.id === this.state.user.id);
                 if(filteredData!=null){
                     this.setState({filteredPost:filteredData,checkPost:true})
                 }
@@ -103,7 +98,7 @@ class Profile extends React.Component{
                 {!this.isLoading() && 
                 <div>
                     <Container className="detail-block">
-                        <iframe src={`https://robohash.org/${this.state.user.username}`} className="profile-pic"></iframe>
+                        <iframe src={`https://robohash.org/${this.state.user.username}`} className="profile-pic" title="profile-pic"></iframe>
                         <h5 className="user-detail" id="username">@{this.state.user.username}</h5>
                         <h3 className="user-detail" id="name">{this.state.user.name}</h3>
                         <p className="user-detail" id="description">{this.state.user.description}</p>
