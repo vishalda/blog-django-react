@@ -22,10 +22,10 @@
     }
 
     .home-page-svg{
-        width:50%;
+        width:45%;
         position: relative;
         float:right;
-        padding:5%;
+        padding:8% 10% 0 0;
     }
 
     .footer{
@@ -46,6 +46,41 @@
         .icons{
             color:rgb(31, 31, 31);
             margin:10px;
+        }
+    }
+}
+
+@media (min-width:320px) and (max-width:900px){
+    .home{
+        .home-page-content{
+            width:100%;
+            position: relative;
+            float: left;
+            padding:10%;
+            text-align:center;
+            h1{
+                font-size: x-large;
+            }
+            h4{
+                font-size: large;
+            }
+        }
+
+        .home-page-svg{
+            width:100%;
+            padding:40px 30%;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer{
+            h5{
+                width:100%;
+                text-align: center;
+                margin:10px 0;
+                font-size: large;
+            }
         }
     }
 }

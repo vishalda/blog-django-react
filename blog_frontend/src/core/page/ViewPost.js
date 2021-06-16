@@ -174,13 +174,13 @@ class ViewPost extends React.Component{
                     <hr/>
                     <p ><FaRegComments className="icon" />:{numberOfComments}&nbsp; &nbsp;<MdDateRange className="icon" />{CreatedAt}</p>
                     <Button onClick={this.referenceFunction} className="button">Comments</Button><br/><br/>
-                    {AuthorId===IsAuthenticated().user.id &&
+                    {IsAuthenticated() && AuthorId===IsAuthenticated().user.id &&
                         <Button className="button" href={`/update-post/${this.state.post.id}`}>Update this Post</Button>
                     }
                 </div>
                 <div className="fixed-bottom small-view-div">
                     <Button onClick={this.referenceFunction} className="button comments-button"><FaRegComments className="icon" /></Button>
-                    {AuthorId===IsAuthenticated().user.id &&
+                    {IsAuthenticated() && AuthorId===IsAuthenticated().user.id &&
                         <Button className="button" href={`/update-post/${this.state.post.id}`}><GrDocumentUpdate className="icon" /></Button>
                     }
                 </div>
