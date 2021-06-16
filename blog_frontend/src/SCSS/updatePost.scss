@@ -16,6 +16,18 @@
 
     .danger-button{
         margin:10px;
+
+        .cancel-button-link{
+            color:red;
+            text-decoration: none;
+            transition:0.2s;
+        }
+
+        &:hover{
+            .cancel-button-link{
+                color:white;
+            }
+        }
     }
 
     .view-image{
@@ -27,9 +39,11 @@
 
 @media (min-width:320px) and (max-width: 700px) {
     .update-post{
+
         .update-post-contents{
             font-size: small;
             margin-top: 5%;
+            
             .view-image{
                 width:100%;
             }

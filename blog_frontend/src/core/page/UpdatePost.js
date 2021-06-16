@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router';
+import {Link} from 'react-router-dom';
 import Base from '../components/Base';
 import {ChangePostTextField, ChangePostImage, ViewPostInDetail} from '../helper/coreApiCalls';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
@@ -10,8 +11,8 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import { MdDescription,MdTitle } from "react-icons/md";
 import Container from 'react-bootstrap/esm/Container';
 import Alert from 'react-bootstrap/esm/Alert';
+import Spinner from 'react-bootstrap/Spinner';
 import "../../SCSS/updatePost.scss";
-import Spinner from 'react-bootstrap/Spinner'
 
 class UpdatePost extends React.Component{
     constructor(props){
@@ -68,7 +69,7 @@ class UpdatePost extends React.Component{
     }
 
     performRedirect = () =>{
-        return <Redirect to="/profile" />;
+        return (<Redirect to="/profile" />);
     };
 
     //Function to handle title,description,body submit
@@ -170,8 +171,8 @@ class UpdatePost extends React.Component{
                         <Button className="button" type="submit" onClick={this.onSubmit}>
                             Save Changes
                         </Button> 
-                        <Button variant="outline-danger danger-button" type="submit" onClick={this.performRedirect}>
-                            Cancel
+                        <Button variant="outline-danger danger-button" type="submit">
+                            <Link to={`/post/view/${this.props.match.params.id}`} className="cancel-button-link">Cancel</Link>
                         </Button>                       
                         <br/>
                         <br/>
