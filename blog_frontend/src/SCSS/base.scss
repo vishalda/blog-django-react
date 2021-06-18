@@ -1,6 +1,24 @@
 @import "./main";
 
 .base{
+    .dark-theme{
+        background-color: rgb(23,25,28) !important;
+        box-shadow: -2px 3px 30px -20px black !important;
+        -webkit-box-shadow: -2px 3px 30px -20px black !important;
+        -moz-box-shadow: -2px 3px 30px -20px black!important;
+        #responsive-navbar-nav{
+            color:white !important;
+        }
+        .logo{
+            color:rgb(207, 207, 207) !important;
+        }
+        .nav-ele{
+            color:rgb(207, 207, 207) !important;
+            &:hover{
+                color:rgb(129, 129, 129) !important;
+            }
+        }
+    }
     .navbar{
         z-index: 2;
         background-color: rgb(255, 255, 255);
@@ -21,7 +39,7 @@
             border-radius: 20px;
             color:rgb(0, 0, 0);
             &:hover{
-                color:rgb(19, 19, 19) !important;
+                color:rgb(19, 19, 19);
             }
         }
 
