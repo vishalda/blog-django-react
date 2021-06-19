@@ -1,7 +1,8 @@
 @import "./main";
 
 .base{
-    .dark-theme{
+    .dark-theme-navbar{
+        transition:0.2s;
         background-color: rgb(23,25,28) !important;
         box-shadow: -2px 3px 30px -20px black !important;
         -webkit-box-shadow: -2px 3px 30px -20px black !important;
@@ -20,6 +21,7 @@
         }
     }
     .navbar{
+        transition:0.2s;
         z-index: 2;
         background-color: rgb(255, 255, 255);
         border-radius: 10px;

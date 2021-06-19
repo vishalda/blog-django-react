@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import Card from 'react-bootstrap/Card'
 import "../../SCSS/card.scss";
@@ -17,9 +17,9 @@ export const PostCard = ({post}) =>{
     function handleClick(){
         history.push(`/post/view/${post.id}`);
     };
-    
+
     return(
-        <Card onClick={() => handleClick()} className='post-card'>
+        <Card onClick={() => handleClick()} className={localStorage.getItem('dark')==="true" ? "dark-theme-card post-card" : "post-card"}>
             <div className="post-card-img-div">
                 <Card.Img variant="top" className='post-card-image' src={CardImage} />
             </div>
