@@ -13,9 +13,10 @@
             width: 100%;
 
             .dark-theme-card{
-                background-color: black !important;
+                background-color: rgb(23,25,28) !important;
+                color:rgb(207, 207, 207) !important;
             }
-    
+
             .post-card{
                 width:100%;
                 font-size: small;
@@ -58,6 +59,11 @@
     .category-card{
         border-radius: 20px;
         transition: 0.5s;
+
+        .dark-theme-card{
+            background-color: rgb(23,25,28) !important;
+            color:rgb(207, 207, 207) !important;
+        }
     
         &:hover{
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);

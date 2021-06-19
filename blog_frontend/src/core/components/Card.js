@@ -48,7 +48,7 @@ export const CategoryCard =({category}) =>{
 
     return(
         <div onClick={() =>handleClick()} className="category-card">
-            <Card style={{ width: '100%' }}>
+            <Card style={{ width: '100%' }} className={localStorage.getItem('dark')==='true' && "dark-theme-card"}>
             <Card.Body>
                 <Card.Title style={{fontSize:"30px"}} className="category-card-title">{CardTitle}</Card.Title>
                 <Card.Text>

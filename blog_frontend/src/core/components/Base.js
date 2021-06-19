@@ -4,7 +4,7 @@ import "../../SCSS/base.scss";
 
 const Base = () =>{
   return (
-    <div className="base">
+    <div className={localStorage.getItem('dark')==='true' ?"base dark-theme-base" : "base"}>
       <Menu />
       <div className="top-right-circle"></div>
       <div className="top-left-circle"></div>

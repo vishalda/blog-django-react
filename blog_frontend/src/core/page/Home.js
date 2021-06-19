@@ -28,7 +28,7 @@ class Home extends React.Component{
 
     render(){
         return(
-            <div className="home">
+            <div className={localStorage.getItem('dark')==="true" ? "home dark-theme-home" : "home"}>
                 <Base/>
                 <div className="home-page-svg"><HomePageSvg className="HomeSvg"/></div>
 
