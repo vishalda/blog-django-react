@@ -44,7 +44,7 @@ class Home extends React.Component{
                             );
                         }}>Darktheme</Button>
                 </div>
-                <div className="footer">
+                <div className={localStorage.getItem('dark')==="true" ? "footer dark-theme-footer" : "footer"}>
                     <h5 style={{position:'relative',float:'left'}}>Made with <BsHeartFill style={{color:'red'}}/>  by Vishal</h5>
                     <h5 style={{position:'relative',float:'right'}}>Connect with me : <a href='https://github.com/VDA-001'><AiFillGithub className="icons"/></a><a href='https://www.instagram.com/_v_ishhh_/'><AiFillInstagram className="icons"/></a><a href='https://www.linkedin.com/in/vishal-da-9216091a9/'><AiFillLinkedin className="icons"/></a></h5>
                 </div>

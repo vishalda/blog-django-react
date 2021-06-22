@@ -29,6 +29,7 @@
     }
 
     .footer{
+        transition:0.2s;
         background-color: white;
         width: 100%;
         height:auto;
@@ -46,6 +47,15 @@
         .icons{
             color:rgb(31, 31, 31);
             margin:10px;
+        }
+    }
+
+    .dark-theme-footer{
+        background-color: rgb(23,25,28) !important;
+        color:white !important;
+
+        .icons{
+            color: white !important;
         }
     }
 }
