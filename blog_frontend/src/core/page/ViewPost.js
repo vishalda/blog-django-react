@@ -41,6 +41,15 @@ class ViewPost extends React.Component{
 
     componentDidMount(){
         this.loadPostInDetail(this.props.match.params.id);
+
+        //Toggling dark-theme
+        if(localStorage.getItem('dark')==="true"){
+            document.body.style.backgroundColor = "rgb(23,25,28)";
+            document.body.style.color = "white";
+        }else{
+            document.body.style.backgroundColor = "white";
+            document.body.style.color = "black";
+        }
     }
     componentWillUnmount(){
         clearInterval(this.state.error,this.state.post)

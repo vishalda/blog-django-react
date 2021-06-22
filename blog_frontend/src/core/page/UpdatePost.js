@@ -31,6 +31,15 @@ class UpdatePost extends React.Component{
 
     componentDidMount(){
         this.loadPost(this.props.match.params.id);
+
+        //Toggling dark-theme
+        if(localStorage.getItem('dark')==="true"){
+            document.body.style.backgroundColor = "rgb(23,25,28)";
+            document.body.style.color = "white";
+        }else{
+            document.body.style.backgroundColor = "white";
+            document.body.style.color = "black";
+        }
     }
 
     //Load all data of the post to the state variables

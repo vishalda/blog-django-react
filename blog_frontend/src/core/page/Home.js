@@ -17,8 +17,18 @@ class Home extends React.Component{
     }
 
     componentDidMount(){
+        //Adding dark variable to localStorage if it doesn't exists
         if(localStorage.getItem('dark')===null){
             localStorage.setItem("dark", JSON.stringify(this.state.darkTheme));
+        }
+
+        //Toggling dark-theme
+        if(localStorage.getItem('dark')==="true"){
+            document.body.style.backgroundColor = "rgb(23,25,28)";
+            document.body.style.color = "white";
+        }else{
+            document.body.style.backgroundColor = "white";
+            document.body.style.color = "black";
         }
     }
     
@@ -39,6 +49,15 @@ class Home extends React.Component{
                     <Button className="toggle-theme" onClick={()=>{
                             this.setState({darkTheme:!this.state.darkTheme})
                             localStorage.setItem("dark",JSON.stringify(this.state.darkTheme));
+                            if(localStorage.getItem('dark')==="true"){
+                                document.body.style.backgroundColor = "rgb(23,25,28)";
+                                document.body.style.color = "white";
+                                document.body.style.transition = "0.2s";
+                            }else{
+                                document.body.style.backgroundColor = "white";
+                                document.body.style.color = "black";
+                                document.body.style.transition = "0.2s";
+                            }
                             return(
                                 <Redirect to="/" />
                             );

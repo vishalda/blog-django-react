@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { signup } from "../auth/helper/index";
 import Base from "../core/components/Base";
 import {RegisterPageSvg} from "../core/components/svg";
@@ -24,6 +24,18 @@ const SignUp = () =>{
         success: false,
         loading:false,
     });
+
+    useEffect(()=>{
+
+        //Toggling dark-theme
+        if(localStorage.getItem('dark')==="true"){
+            document.body.style.backgroundColor = "rgb(23,25,28)";
+            document.body.style.color = "white";
+        }else{
+            document.body.style.backgroundColor = "white";
+            document.body.style.color = "black";
+        }
+    },[]);
     
     //Assigning all state values to the local variables
     const {name,email,username,password,success,error,loading} = values;

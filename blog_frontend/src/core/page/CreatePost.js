@@ -44,6 +44,15 @@ class CreatePost extends React.Component{
             }
             this.setState({loading:false});
         });
+
+        //Toggling dark-theme
+        if(localStorage.getItem('dark')==="true"){
+            document.body.style.backgroundColor = "rgb(23,25,28)";
+            document.body.style.color = "white";
+        }else{
+            document.body.style.backgroundColor = "white";
+            document.body.style.color = "black";
+        }
     }
 
     //Setting up the options field for Select tag

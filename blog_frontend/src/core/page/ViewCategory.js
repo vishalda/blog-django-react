@@ -25,6 +25,15 @@ class ViewCategory extends React.Component{
         //accessing the id in props which was sent in the routers
         this.loadRelatedPost(this.props.match.params.id);
         this.loadCategoryInfo();
+
+        //Toggling dark-theme
+        if(localStorage.getItem('dark')==="true"){
+            document.body.style.backgroundColor = "rgb(23,25,28)";
+            document.body.style.color = "white";
+        }else{
+            document.body.style.backgroundColor = "white";
+            document.body.style.color = "black";
+        }
     }
     componentWillUnmount(){
         clearInterval(this.state.error,this.state.posts);

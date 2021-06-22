@@ -26,6 +26,15 @@ class Profile extends React.Component{
         //Getting the user details and his/her posts
         this.loadUserDetail();
         this.loadPosts();
+
+        //Toggling dark-theme
+        if(localStorage.getItem('dark')==="true"){
+            document.body.style.backgroundColor = "rgb(23,25,28)";
+            document.body.style.color = "white";
+        }else{
+            document.body.style.backgroundColor = "white";
+            document.body.style.color = "black";
+        }
     }
 
     loadUserDetail(){

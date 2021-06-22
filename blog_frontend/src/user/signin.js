@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Redirect } from "react-router";
 import {signin,Authenticat,IsAuthenticated} from "../auth/helper/index";
 import Base from "../core/components/Base";
@@ -25,6 +25,18 @@ const SignIn = () =>{
         loading:false,
         didRedirect:false
     });
+
+    useEffect(()=>{
+
+        //Toggling dark-theme
+        if(localStorage.getItem('dark')==="true"){
+            document.body.style.backgroundColor = "rgb(23,25,28)";
+            document.body.style.color = "white";
+        }else{
+            document.body.style.backgroundColor = "white";
+            document.body.style.color = "black";
+        }
+    },[]);
 
     const {email,username,password,error,success,loading} = values;
 
