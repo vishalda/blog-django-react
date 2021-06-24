@@ -35,10 +35,8 @@ class UpdatePost extends React.Component{
         //Toggling dark-theme
         if(localStorage.getItem('dark')==="true"){
             document.body.style.backgroundColor = "rgb(23,25,28)";
-            document.body.style.color = "white";
         }else{
             document.body.style.backgroundColor = "white";
-            document.body.style.color = "black";
         }
     }
 
@@ -143,7 +141,7 @@ class UpdatePost extends React.Component{
                     {this.successMessage()}
                     {this.isLoading()}
                     <Form>
-                        <Form.Label>Title:</Form.Label>
+                        <Form.Label className={localStorage.getItem('dark')==="true" ? "form-label-dark" : "form-label-light"}>Title:</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Prepend>
                             <InputGroup.Text id="basic-addon1"><MdTitle /></InputGroup.Text>
@@ -154,7 +152,7 @@ class UpdatePost extends React.Component{
                             onChange={this.handleChange("title")}
                             />
                         </InputGroup>
-                        <Form.Label>Description:</Form.Label>
+                        <Form.Label className={localStorage.getItem('dark')==="true" ? "form-label-dark" : "form-label-light"}>Description:</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Prepend>
                             <InputGroup.Text id="basic-addon1"><MdDescription /></InputGroup.Text>
@@ -165,7 +163,7 @@ class UpdatePost extends React.Component{
                             onChange={this.handleChange("description")} 
                             />
                         </InputGroup>
-                        <Form.Label>Body:</Form.Label>
+                        <Form.Label className={localStorage.getItem('dark')==="true" ? "form-label-dark" : "form-label-light"}>Body:</Form.Label>
                         <CKEditor
                             editor={ ClassicEditor }
                             data={this.state.body}
@@ -187,7 +185,7 @@ class UpdatePost extends React.Component{
                         <br/>
                         <hr/>
                         <img src={this.state.imageViewer} alt="" className="view-image" />
-                        <Form.File id="exampleFormControlFile1" label="Change Image" value = {undefined} type="file" onChange={this.handleChange('image')}/><br/>
+                        <Form.File className={localStorage.getItem('dark')==="true" ? "form-label-dark" : "form-label-light"} id="exampleFormControlFile1" label="Change Image" value = {undefined} type="file" onChange={this.handleChange('image')}/><br/>
                         <Button className="button" type="submit" style={{marginBottom:'40px',marginLeft:'0'}}onClick={this.onSubmitImage}>
                             Change Image
                         </Button>

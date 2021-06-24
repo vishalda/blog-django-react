@@ -111,6 +111,9 @@ class ViewPost extends React.Component{
     //Handling submit of new comment
     onSubmit = (e) =>{
         this.handleClose();
+        if(!IsAuthenticated()){
+            this.setState({error:"Please login to add a comment"});
+        }
         this.setState({loading:true})
         e.preventDefault();
         const post_id = this.state.post.id;
@@ -193,7 +196,7 @@ class ViewPost extends React.Component{
                         <Button className="button" href={`/update-post/${this.state.post.id}`}><GrDocumentUpdate className="icon" /></Button>
                     }
                 </div>
-                <Modal show={this.state.show} scrollable={true} onHide={this.handleClose} className="view-comments">
+                <Modal show={this.state.show} scrollable={true} onHide={this.handleClose} className="view-comments text-dark">
                     <Modal.Header closeButton>
                         <Modal.Title>Comments</Modal.Title>
                     </Modal.Header>

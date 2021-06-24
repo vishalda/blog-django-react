@@ -3,6 +3,14 @@
 .update-post{
     font-family: 'Merriweather', serif;
     
+    .form-label-dark{
+        color:rgb(255, 255, 255) !important;
+    }
+
+    .form-label-light{
+        color:black !important;
+    }
+    
     .button{
         background-color: white !important;
         border-color:#6c63ff !important;

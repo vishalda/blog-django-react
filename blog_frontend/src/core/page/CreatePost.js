@@ -48,7 +48,6 @@ class CreatePost extends React.Component{
         //Toggling dark-theme
         if(localStorage.getItem('dark')==="true"){
             document.body.style.backgroundColor = "rgb(23,25,28)";
-            document.body.style.color = "white";
         }else{
             document.body.style.backgroundColor = "white";
             document.body.style.color = "black";
@@ -158,7 +157,7 @@ class CreatePost extends React.Component{
                 <Container className="create-post-contents">
                 <Form>
                     <Form.Group>
-                        <Form.Label>Title:</Form.Label>
+                        <Form.Label className={localStorage.getItem('dark')==="true" ? "form-label-dark" : "form-label-light"}>Title:</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Prepend>
                             <InputGroup.Text id="basic-addon1"><MdTitle /></InputGroup.Text>
@@ -170,7 +169,7 @@ class CreatePost extends React.Component{
                             required
                             />
                         </InputGroup>
-                        <Form.Label>Description:</Form.Label>
+                        <Form.Label className={localStorage.getItem('dark')==="true" ? "form-label-dark" : "form-label-light"}>Description:</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Prepend>
                             <InputGroup.Text id="basic-addon1"><MdDescription /></InputGroup.Text>
@@ -182,8 +181,9 @@ class CreatePost extends React.Component{
                             required
                             />
                         </InputGroup>
-                        <Form.Label>Body:</Form.Label>
+                        <Form.Label className={localStorage.getItem('dark')==="true" ? "form-label-dark" : "form-label-light"}>Body:</Form.Label>
                         <CKEditor
+                            style={{color:'black !important'}}
                             editor={ ClassicEditor }
                             data={this.state.body}
                             onReady={ editor => {} }
@@ -195,7 +195,7 @@ class CreatePost extends React.Component{
                             onFocus={ ( event, editor ) => {} }
                         /><br/>
                         <img src={this.state.imageViewer} alt="" style={{width:"500px"}}/>
-                        <Form.File id="exampleFormControlFile1" label="Upload an Image representing post" value = {undefined} type="file" onChange={this.handleChange('image')} required/><br/>
+                        <Form.File className={localStorage.getItem('dark')==="true" ? "form-label-dark" : "form-label-light"} id="exampleFormControlFile1" label="Upload an Image representing post" value = {undefined} type="file" onChange={this.handleChange('image')} required/><br/>
                         <Select value={this.state.category_options[this.state.category_id-1]} options={this.state.category_options} onChange={this.handleChange('category_id')} required/>
                     </Form.Group>
                     <Button className="button" type="submit" onClick={this.onSubmit}>
