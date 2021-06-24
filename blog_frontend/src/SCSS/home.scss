@@ -9,6 +9,25 @@
         float: left;
         padding:10% 5%;
 
+        .toggle-theme-button{
+            position:absolute;
+            bottom:40px;
+            left:30px;
+            background-color: transparent;
+            border:0;
+            .theme-icon{
+                color:white;
+                font-size: x-large;
+            }
+        }
+
+        .github-icon{
+            transition:0.2s;
+            &:hover{
+                transform: translateY(-3px);
+            }
+        }
+
         .button{
             background-color: white !important;
             border-color:#6c63ff !important;
@@ -39,6 +58,19 @@
         position: fixed;
         bottom:0;
         left:0;
+
+        .toggle-theme-button{
+            position:absolute;
+            left:50%;
+            top:20%;
+            background-color: transparent;
+            border:0;
+            
+            .theme-icon{
+                color:white;
+                font-size: x-large;
+            }
+        }
 
         h5{
             margin:20px 10%;
@@ -85,6 +117,13 @@
         }
 
         .footer{
+            .toggle-theme-button{
+                position:relative;
+                float: left;
+                margin-top:10px;
+                margin-left: -20px;
+            }
+
             h5{
                 width:100%;
                 text-align: center;
