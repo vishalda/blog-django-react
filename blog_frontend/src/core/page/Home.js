@@ -3,7 +3,6 @@ import { Redirect } from 'react-router';
 import {Link} from 'react-router-dom';
 import Base from '../components/Base';
 import {HomePageSvg} from "../components/svg";
-import Button from 'react-bootstrap/Button';
 import { BsHeartFill } from "react-icons/bs";
 import { AiFillGithub,AiFillInstagram,AiFillLinkedin } from "react-icons/ai";
 import { FaGithubSquare } from "react-icons/fa";

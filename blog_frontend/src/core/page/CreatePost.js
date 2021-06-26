@@ -2,7 +2,6 @@ import React from 'react';
 import { Redirect } from "react-router";
 import Select from "react-select";
 import {CreateNewPost, getCategory} from '../helper/coreApiCalls';
-import { IsAuthenticated } from '../../auth/helper';
 import Base from "../components/Base";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';

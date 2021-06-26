@@ -1,8 +1,8 @@
 import React from 'react';
-import { Redirect } from 'react-router';
 import {Link} from 'react-router-dom';
 import Base from '../components/Base';
 import {ChangePostTextField, ChangePostImage, ViewPostInDetail} from '../helper/coreApiCalls';
+import { IsAuthenticated } from '../../auth/helper';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Form from 'react-bootstrap/Form';
@@ -13,7 +13,6 @@ import Container from 'react-bootstrap/esm/Container';
 import Alert from 'react-bootstrap/esm/Alert';
 import Spinner from 'react-bootstrap/Spinner';
 import "../../SCSS/updatePost.scss";
-import { IsAuthenticated } from '../../auth/helper';
 
 class UpdatePost extends React.Component{
     constructor(props){
@@ -52,16 +51,16 @@ class UpdatePost extends React.Component{
             if(data.error){
                 this.setState({error:data.error})
             }else{
+
+                //*Redirecting all other users who do not own the post
                 if(!IsAuthenticated()){
-                    console.log(IsAuthenticated().user.id);
-                    <Redirect to = '/p' />
                     this.performRedirect();
                 }
-        
-                if(parseInt(data.author.id) !== parseInt(IsAuthenticated().user.id)){
+                else if(parseInt(data.author.id) !== parseInt(IsAuthenticated().user.id)){
                     console.log(IsAuthenticated().user.id, data.author.id);
                     this.performRedirect();
                 }
+
                 this.setState({
                     title:data.title,
                     description:data.description,
@@ -91,7 +90,7 @@ class UpdatePost extends React.Component{
 
     performRedirect = () =>{
         if(this.state.doRedirect){
-            return <Redirect to="/login" />;
+            this.props.history.push('/');
         }
     };
 

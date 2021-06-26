@@ -1,4 +1,4 @@
-import React,{Redirect} from "react";
+import React from "react";
 import { BrowserRouter,Switch,Route} from "react-router-dom";
 import SignUp from "./user/signup";
 import SignIn from "./user/signin";
@@ -11,7 +11,6 @@ import Profile from "./user/profile";
 import UpdatePost from "./core/page/UpdatePost";
 import Home from "./core/page/Home";
 import {AuthenticatedRoute, NotAuthenticatedRoute} from "./privateRoute";
-import { IsAuthenticated } from "./auth/helper";
 
 const Routes = () =>{
     return(
