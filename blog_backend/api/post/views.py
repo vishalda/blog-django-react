@@ -48,6 +48,12 @@ def UpdatePostImage(request,post_id):
     return JsonResponse({'success':'Image added'})
 
 @csrf_exempt
+def DeletePost(request,post_id):
+    instance = BlogPost.objects.get(pk=post_id)
+    instance.delete()
+    return JsonResponse({'success':'Successfully deleted the post'})
+
+@csrf_exempt
 def CreateComment(request,author_id,blog_id):
     if request.method!="POST":
         return JsonResponse({'error':'Accepting only Post request'})
