@@ -11,6 +11,7 @@ import Profile from "./user/profile";
 import UpdatePost from "./core/page/UpdatePost";
 import Home from "./core/page/Home";
 import {AuthenticatedRoute, NotAuthenticatedRoute} from "./privateRoute";
+import NotFoundPage from "./core/page/404";
 
 const Routes = () =>{
     return(
@@ -26,6 +27,7 @@ const Routes = () =>{
                 <Route path="/update-post/:id" exact render={(props)=><UpdatePost {...props} />} />
                 <Route path="/post/view/:id" exact render={(props) => <ViewPost {...props} />}/>
                 <Route path="/category/view/:id" exact  render={(props)=><ViewCategory {...props}/>}/>
+                <Route path="*" component={NotFoundPage} />
             </Switch>
         </BrowserRouter>
     );
