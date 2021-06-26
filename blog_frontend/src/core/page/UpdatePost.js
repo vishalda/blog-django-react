@@ -225,7 +225,7 @@ class UpdatePost extends React.Component{
                             Change Image
                         </Button>
                         <>
-                            <Button variant="outline-danger" onClick={this.handleShow}>
+                            <Button className="delete-button" variant="danger" onClick={this.handleShow}>
                                 Delete this post
                             </Button>
 
