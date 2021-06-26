@@ -13,6 +13,7 @@ import Container from 'react-bootstrap/esm/Container';
 import Alert from 'react-bootstrap/esm/Alert';
 import Spinner from 'react-bootstrap/Spinner';
 import "../../SCSS/updatePost.scss";
+import { IsAuthenticated } from '../../auth/helper';
 
 class UpdatePost extends React.Component{
     constructor(props){
@@ -25,12 +26,15 @@ class UpdatePost extends React.Component{
             id:"",
             imageViewer:"",
             error:false,
+            doRedirect:true,
             loading:false,
         }
     }
 
     componentDidMount(){
         this.loadPost(this.props.match.params.id);
+
+        
 
         //Toggling dark-theme
         if(localStorage.getItem('dark')==="true"){
@@ -48,6 +52,16 @@ class UpdatePost extends React.Component{
             if(data.error){
                 this.setState({error:data.error})
             }else{
+                if(!IsAuthenticated()){
+                    console.log(IsAuthenticated().user.id);
+                    <Redirect to = '/p' />
+                    this.performRedirect();
+                }
+        
+                if(parseInt(data.author.id) !== parseInt(IsAuthenticated().user.id)){
+                    console.log(IsAuthenticated().user.id, data.author.id);
+                    this.performRedirect();
+                }
                 this.setState({
                     title:data.title,
                     description:data.description,
@@ -76,7 +90,9 @@ class UpdatePost extends React.Component{
     }
 
     performRedirect = () =>{
-        return (<Redirect to="/profile" />);
+        if(this.state.doRedirect){
+            return <Redirect to="/login" />;
+        }
     };
 
     //Function to handle title,description,body submit

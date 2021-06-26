@@ -1,9 +1,8 @@
 import React from 'react';
 import { Redirect } from "react-router";
 import Select from "react-select";
-import { MdDescription,MdTitle } from "react-icons/md";
 import {CreateNewPost, getCategory} from '../helper/coreApiCalls';
-import Spinner from 'react-bootstrap/Spinner';
+import { IsAuthenticated } from '../../auth/helper';
 import Base from "../components/Base";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -12,6 +11,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup'
 import Alert from 'react-bootstrap/esm/Alert';
+import Spinner from 'react-bootstrap/Spinner';
+import { MdDescription,MdTitle } from "react-icons/md";
 import "../../SCSS/createPost.scss";
 
 class CreatePost extends React.Component{
@@ -203,7 +204,6 @@ class CreatePost extends React.Component{
                     </Button>
                     </Form>
                 </Container>
-                
             </div>
         );
     };

@@ -51,6 +51,7 @@ class ViewPost extends React.Component{
             document.body.style.color = "black";
         }
     }
+
     componentWillUnmount(){
         clearInterval(this.state.error,this.state.post)
     }
@@ -82,6 +83,12 @@ class ViewPost extends React.Component{
                     comments:data.comments,
                     viewComments:!this.state.viewComments
                 })
+                //Getting user detail
+                /*if(this.state.comments!=null){
+                    for(let i=0;i<this.state.comments.length();i++){
+                        this.loadUserDetailOfComment(this.state.comments[i].author_id);
+                    }
+                }*/
             }
             this.setState({loading:false})
         })
