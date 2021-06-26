@@ -1,10 +1,11 @@
-import React from 'react';
+import React,{Redirect} from 'react';
 import {Link} from 'react-router-dom';
 import Base from '../components/Base';
-import {ChangePostTextField, ChangePostImage, ViewPostInDetail} from '../helper/coreApiCalls';
+import {ChangePostTextField, ChangePostImage, ViewPostInDetail, DeletePost} from '../helper/coreApiCalls';
 import { IsAuthenticated } from '../../auth/helper';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup'
@@ -24,6 +25,7 @@ class UpdatePost extends React.Component{
             image:"",
             id:"",
             imageViewer:"",
+            show:false,
             error:false,
             doRedirect:true,
             loading:false,
@@ -147,6 +149,24 @@ class UpdatePost extends React.Component{
         );
     };
 
+    handleClose = () =>{
+        this.setState({show:false});
+    }
+
+    handleShow = () =>{
+        this.setState({show:true});
+    }
+
+    handleDelete = () =>{
+        this.setState({loading:true});
+        DeletePost(this.state.id)
+        .then(response => {
+            this.setState({loading:false});
+            this.props.history.push("/profile");
+        })
+        .catch(err => this.setState({error:err}));
+    }
+
     render(){
         return(
             <div className="update-post">
@@ -204,6 +224,26 @@ class UpdatePost extends React.Component{
                         <Button className="button" type="submit" style={{marginBottom:'40px',marginLeft:'0'}}onClick={this.onSubmitImage}>
                             Change Image
                         </Button>
+                        <>
+                            <Button variant="outline-danger" onClick={this.handleShow}>
+                                Delete this post
+                            </Button>
+
+                            <Modal show={this.state.show} onHide={this.handleClose}>
+                                <Modal.Header closeButton>
+                                <Modal.Title>Delete Post</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>Do you want to delete this post.</Modal.Body>
+                                <Modal.Footer>
+                                <Button variant="outline-secondary" onClick={this.handleClose}>
+                                    Close
+                                </Button>
+                                <Button variant="outline-danger" onClick={this.handleClose,this.handleDelete}>
+                                    Delete
+                                </Button>
+                                </Modal.Footer>
+                            </Modal>
+                        </>
                     </Form>
                 </Container>
             </div>

@@ -61,6 +61,16 @@ export const CreateNewPost = (postData) =>{
     .catch(err => console.log(err))
 }; 
 
+export const DeletePost = (postId) =>{
+    return fetch(`${API}post/delete-post/${postId}/`,{
+        method:`POST`,
+    })
+    .then(response=>{
+        return response.json();
+    })
+    .catch(err => console.log(err))
+};
+
 export const CreateComment = (author_id,post_id,content) =>{
     const formData = new FormData();
     formData.append('content',content);
