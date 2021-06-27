@@ -1,4 +1,5 @@
 //This file will act as the base field for every page on the website
+import React from 'react';
 import Menu from "./Navbar";
 import "../../SCSS/base.scss";
 

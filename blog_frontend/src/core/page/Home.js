@@ -43,10 +43,10 @@ class Home extends React.Component{
                 <div className="home-page-content">
                     <h1>Welcome!</h1>
                     {IsAuthenticated() && 
-                        <><h4>A simple Blog which has basic CRUD functionality for editing posts.<br/><br/> Interested in publishing a new post? <Link to="/create-post" style={{color:'#6c63ff'}}>Create-Post</Link></h4><br/><br/></>
+                        <div><h4>A simple Blog which has basic CRUD functionality for editing posts.<br/><br/> Interested in publishing a new post? <Link to="/create-post" style={{color:'#6c63ff'}}>Create-Post</Link></h4><br/><br/></div>
                     }
                     {!IsAuthenticated() &&
-                        <><h4>A simple Blog which has basic CRUD functionality for editing posts.<br/><br/> Join us. <Link to="/register" style={{color:'#6c63ff'}}>Register</Link></h4><br/><br/></>
+                        <div><h4>A simple Blog which has basic CRUD functionality for editing posts.<br/><br/> Join us. <Link to="/register" style={{color:'#6c63ff'}}>Register</Link></h4><br/><br/></div>
                     }
                     <h5>
                         Source code : &nbsp;

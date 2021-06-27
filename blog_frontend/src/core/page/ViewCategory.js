@@ -101,12 +101,12 @@ class ViewCategory extends React.Component{
                         <Container>
                             {this.state.category.map((category,index)=>{
                                 return(
-                                    <>
+                                    <div>
                                         <h1>{category.title}</h1>
                                         <p>
                                             {category.description}
                                         </p>
-                                    </>
+                                    </div>
                                 )
                             })}
                         </Container>

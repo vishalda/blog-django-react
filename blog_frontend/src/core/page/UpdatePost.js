@@ -225,7 +225,7 @@ class UpdatePost extends React.Component{
                         <Button className="button" type="submit" style={{marginBottom:'40px',marginLeft:'0'}}onClick={this.onSubmitImage}>
                             Change Image
                         </Button>
-                        <>
+                        <div>
                             <Button className="delete-button" variant="danger" onClick={this.handleShow}>
                                 Delete this post
                             </Button>
@@ -244,7 +244,7 @@ class UpdatePost extends React.Component{
                                 </Button>
                                 </Modal.Footer>
                             </Modal>
-                        </>
+                        </div>
                     </Form>
                 </Container>
             </div>
