@@ -38,7 +38,7 @@ export const PostCard = ({post}) =>{
 
 export const CategoryCard =({category}) =>{
     const CardTitle = category ? category.title : "Card Title";
-    const CardDescription = category ? category.description : "Card Description";
+    const CardDescription = category ? category.description.slice(0,100) : "Card Description";
     const history = useHistory();
 
     //Onclick view the posts under particular category
@@ -52,7 +52,7 @@ export const CategoryCard =({category}) =>{
             <Card.Body>
                 <Card.Title style={{fontSize:"30px"}} className="category-card-title">{CardTitle}</Card.Title>
                 <Card.Text>
-                {CardDescription}
+                {CardDescription}...
                 </Card.Text>
             </Card.Body>
             </Card>

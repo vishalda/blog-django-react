@@ -3,15 +3,15 @@ from api.user.models import CustomUser
 
 class BlogCategory(models.Model):
     title = models.CharField(max_length=20)
-    description = models.CharField(max_length=100)   
+    description = models.TextField()   
 
     def __str__(self):
         return self.title
 
 #*Post Model
 class BlogPost(models.Model):
-    title = models.CharField(max_length=20)
-    description = models.CharField(max_length=100)
+    title = models.CharField(max_length=150)
+    description = models.TextField()
     body = models.TextField()
     image = models.ImageField(upload_to = 'images/',blank=True,null=True)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -66,6 +66,7 @@ class ViewCategory extends React.Component{
                 //Filtering out the category info to get detail of current category
                 const CategoryInfo = data.filter((category) => category.id === parseInt(this.props.match.params.id));
                 this.setState({category:CategoryInfo});
+                console.log(this.state.category)
             }
             this.setState({loading:false});
         }).catch(err=>this.setState({error:err}))
@@ -96,7 +97,7 @@ class ViewCategory extends React.Component{
                 <Container fluid>
                     {this.errorMessage()}
                     {this.isLoading()}
-                    <Jumbotron fluid style={{margin:'0 5%',backgroundColor:'transparent'}}>
+                    <Jumbotron fluid style={{margin:'0 5%',backgroundColor:'transparent',height:'auto'}}>
                         <Container>
                             {this.state.category.map((category,index)=>{
                                 return(
