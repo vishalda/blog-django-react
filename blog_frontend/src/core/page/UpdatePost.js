@@ -1,4 +1,4 @@
-import React,{Redirect} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import Base from '../components/Base';
 import {ChangePostTextField, ChangePostImage, ViewPostInDetail, DeletePost} from '../helper/coreApiCalls';
@@ -165,6 +165,7 @@ class UpdatePost extends React.Component{
             this.props.history.push("/profile");
         })
         .catch(err => this.setState({error:err}));
+        this.handleClose();
     }
 
     render(){
@@ -238,7 +239,7 @@ class UpdatePost extends React.Component{
                                 <Button variant="outline-secondary" onClick={this.handleClose}>
                                     Close
                                 </Button>
-                                <Button variant="outline-danger" onClick={this.handleClose,this.handleDelete}>
+                                <Button variant="outline-danger" onClick={this.handleDelete}>
                                     Delete
                                 </Button>
                                 </Modal.Footer>
