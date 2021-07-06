@@ -6,19 +6,19 @@ services:
     ports:
       - "5432:5432"
   django:
-    build: ./backend
+    build: ./blog_backend
     command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
     volumes:
-      - ./backend:/blog/backend
+      - ./blog_backend:/blog/backend
     ports:
       - "8000:8000"
     depends_on:
       - db
   frontend:
-    build: ./frontend
+    build: ./blog_frontend
     command: ["npm", "start"]
     volumes:
-      - ./frontend:/blog/frontend
+      - ./blog_frontend:/blog/frontend
       - node-modules:/blog/frontend/node_modules
     ports:
       - "3000:3000"
