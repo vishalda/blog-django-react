@@ -2,6 +2,14 @@
 This is a simple "Blogging platform" with basic CRUD functionalities.
 
 This is designed by using Django as backend, Reactjs as frontend and Postgresql for the Database part.
+
+Feel free to open a pull request or use this project.
+
+![shield-1](https://img.shields.io/github/license/VDA-001/blog-django-react?style=for-the-badge)
+![shield-2](https://img.shields.io/github/languages/count/VDA-001/blog-django-react?style=for-the-badge)
+![shield-3](https://img.shields.io/github/languages/top/VDA-001/blog-django-react?style=for-the-badge)
+![shield-4](https://img.shields.io/tokei/lines/github/VDA-001/blog-django-react?style=for-the-badge)
+![shield-5](https://img.shields.io/github/commit-activity/y/VDA-001/blog-django-react?style=for-the-badge)
 ***
 ## Features
 * Login/Registration
