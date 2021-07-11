@@ -64,9 +64,8 @@ SUPERUSER_PASSWORD=<Superuser password>
 
 ## Screenshots
 
-![screenshot1](./blog_backend/media/images/Screenshot-1.png)
-![screenshot2](./blog_backend/media/images/Screenshot-2.png)
-![screenshot3](./blog_backend/media/images/Screenshot-3.png)
-![screenshot4](./blog_backend/media/images/Screenshot-4.png)
-![screenshot5](./blog_backend/media/images/Screenshot-5.png)
-![screenshot6](./blog_backend/media/images/Screenshot-6.png)
+![screenshot1](./media/images/Screenshot-1.png)
+![screenshot2](./media/images/Screenshot-2.png)
+![screenshot3](./media/images/Screenshot-3.png)
+![screenshot4](./media/images/Screenshot-4.png)
+![screenshot5](./media/images/Screenshot-5.png)
