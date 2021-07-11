@@ -1,116 +1,116 @@
 import { API } from "../../backend";
-import {IsAuthenticated} from "../../auth/helper/index";
+import { IsAuthenticated } from "../../auth/helper/index";
 
-export const getPost = () =>{
-    return fetch(`${API}post/`,{method : `GET`})
-    .then(response =>{
-        return response.json();
+export const getPost = () => {
+  return fetch(`${API}post/`, { method: `GET` })
+    .then((response) => {
+      return response.data;
     })
-    .catch(err => console.log(err))
+    .catch((err) => console.log(err));
 };
 
-export const getCategory = () =>{
-    return fetch(`${API}post/categories/`,{method:`GET`})
-    .then(response =>{
-        return response.json();
+export const getCategory = () => {
+  return fetch(`${API}post/categories/`, { method: `GET` })
+    .then((response) => {
+      return response.json();
     })
-    .catch(err => console.log(err))
+    .catch((err) => console.log(err));
 };
 
-export const getComments = (id) =>{
-    return fetch(`${API}post/comment/${id}/`,{method:`GET`})
-    .then(response =>{
-        return response.json();
+export const getComments = (id) => {
+  return fetch(`${API}post/comment/${id}/`, { method: `GET` })
+    .then((response) => {
+      return response.json();
     })
-    .catch(err => console.log(err))
+    .catch((err) => console.log(err));
 };
 
-export const getUserDetail = (id) =>{
-    return fetch(`${API}user/${id}/`,{method:`GET`})
-    .then(response =>{
-        return response.json();
+export const getUserDetail = (id) => {
+  return fetch(`${API}user/${id}/`, { method: `GET` })
+    .then((response) => {
+      return response.json();
     })
-    .catch(err=>console.log(err))
+    .catch((err) => console.log(err));
 };
 
-export const ViewPostInDetail = (id) =>{
-    return fetch(`${API}post/view/${id}/`,{method:`GET`})
-    .then(response =>{
-        return response.json();
+export const ViewPostInDetail = (id) => {
+  return fetch(`${API}post/view/${id}/`, { method: `GET` })
+    .then((response) => {
+      return response.json();
     })
-    .catch(err => console.log(err))
+    .catch((err) => console.log(err));
 };
 
-export const CreateNewPost = (postData) =>{
-    //Getting userId by checking for Authentication
-    let userId = IsAuthenticated() && IsAuthenticated().user.id;
+export const CreateNewPost = (postData) => {
+  //Getting userId by checking for Authentication
+  let userId = IsAuthenticated() && IsAuthenticated().user.id;
 
-    //Creating a new Form Data
-    const formData = new FormData();
-    for(const dataName in postData){
-        formData.append(dataName,postData[dataName]);
-    }
+  //Creating a new Form Data
+  const formData = new FormData();
+  for (const dataName in postData) {
+    formData.append(dataName, postData[dataName]);
+  }
 
-    return fetch(`${API}post/create-post/${userId}/`,{
-        method:`POST`,
-        body:formData,
+  return fetch(`${API}post/create-post/${userId}/`, {
+    method: `POST`,
+    body: formData,
+  })
+    .then((response) => {
+      return response.data;
     })
-    .then(response =>{
-        return response.json();
-    })
-    .catch(err => console.log(err))
-}; 
-
-export const DeletePost = (postId) =>{
-    return fetch(`${API}post/delete-post/${postId}/`,{
-        method:`POST`,
-    })
-    .then(response=>{
-        return response.json();
-    })
-    .catch(err => console.log(err))
+    .catch((err) => console.log(err));
 };
 
-export const CreateComment = (author_id,post_id,content) =>{
-    const formData = new FormData();
-    formData.append('content',content);
-    return fetch(`${API}post/create-comment/${author_id}/${post_id}/`,{
-        method:`POST`,
-        body:formData
+export const DeletePost = (postId) => {
+  return fetch(`${API}post/delete-post/${postId}/`, {
+    method: `POST`,
+  })
+    .then((response) => {
+      return response.json();
     })
-    .then(response =>{
-        return response.json();
-    })
-    .catch(err => console.log(err));
-}
+    .catch((err) => console.log(err));
+};
 
-export const ChangePostTextField = (post_id,data) =>{
-    const formData = new FormData();
-    //Getting all changed data in formData
-    for(const dataName in data){
-        formData.append(dataName,data[dataName]);
-    }
-    return fetch(`${API}post/update-post/${post_id}/`,{
-        method:`POST`,
-        body:formData
+export const CreateComment = (author_id, post_id, content) => {
+  const formData = new FormData();
+  formData.append("content", content);
+  return fetch(`${API}post/create-comment/${author_id}/${post_id}/`, {
+    method: `POST`,
+    body: formData,
+  })
+    .then((response) => {
+      return response.json();
     })
-    .then(response=>{
-        return response.json();
-    })
-    .catch(err=>console.log(err))
-}
+    .catch((err) => console.log(err));
+};
 
-export const ChangePostImage = (post_id,imageObject)=>{
-    const formData = new FormData();
-    const image = imageObject.image;
-    //Changing only image field
-    formData.append('image',image);
-    return fetch(`${API}post/update-post-image/${post_id}/`,{
-        method:`POST`,
-        body:formData
+export const ChangePostTextField = (post_id, data) => {
+  const formData = new FormData();
+  //Getting all changed data in formData
+  for (const dataName in data) {
+    formData.append(dataName, data[dataName]);
+  }
+  return fetch(`${API}post/update-post/${post_id}/`, {
+    method: `POST`,
+    body: formData,
+  })
+    .then((response) => {
+      return response.json();
     })
-    .then(response=>{
-        return response.json();
+    .catch((err) => console.log(err));
+};
+
+export const ChangePostImage = (post_id, imageObject) => {
+  const formData = new FormData();
+  const image = imageObject.image;
+  //Changing only image field
+  formData.append("image", image);
+  return fetch(`${API}post/update-post-image/${post_id}/`, {
+    method: `POST`,
+    body: formData,
+  })
+    .then((response) => {
+      return response.json();
     })
-    .catch(err=>console.log(err))
-}
+    .catch((err) => console.log(err));
+};
