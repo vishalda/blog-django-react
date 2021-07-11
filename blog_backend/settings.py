@@ -67,7 +67,7 @@ ROOT_URLCONF = 'blog_backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'build')],
+        'DIRS': [os.path.join(BASE_DIR, 'blog_frontend/build')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -148,7 +148,7 @@ REACT_APP_PATH = os.path.join(BASE_DIR, 'blog_frontend')
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'build/static')
+    os.path.join(BASE_DIR, 'blog_frontend/build/static')
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
