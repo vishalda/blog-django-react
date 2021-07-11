@@ -1,7 +1,7 @@
 {
   "name": "blog_frontend",
   "version": "0.1.0",
-  "proxy": "http://localhost:8000",
+  "proxy": "http://localhost:8000/api/",
   "private": true,
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^27.1.0",
