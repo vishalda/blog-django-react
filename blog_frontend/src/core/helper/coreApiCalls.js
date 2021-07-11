@@ -4,7 +4,7 @@ import { IsAuthenticated } from "../../auth/helper/index";
 export const getPost = () => {
   return fetch(`${API}post/`, { method: `GET` })
     .then((response) => {
-      return response.data;
+      return response.json();
     })
     .catch((err) => console.log(err));
 };
@@ -56,7 +56,7 @@ export const CreateNewPost = (postData) => {
     body: formData,
   })
     .then((response) => {
-      return response.data;
+      return response.json();
     })
     .catch((err) => console.log(err));
 };
