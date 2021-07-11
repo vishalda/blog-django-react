@@ -29,7 +29,7 @@ SECRET_KEY = str(os.environ.get('SECRET_KEY'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','*']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -89,7 +90,7 @@ WSGI_APPLICATION = 'blog_backend.wsgi.application'
 #        'ENGINE': 'django.db.backends.postgresql',
 #        'NAME': str(os.getenv('DATABASE_NAME')),
 #       'USER':str(os.getenv('DATABASE_USER')),
-#        'PASSWORD':str(os.getenv('DATABASE_PASSWORD')),
+#       'PASSWORD':str(os.getenv('DATABASE_PASSWORD')),
 #        'HOST':'localhost'
 #    }
 #}
@@ -101,7 +102,10 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+DATABASES['default']['CONN_MAX_AGE'] = 500
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -139,7 +143,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+REACT_APP_PATH = os.path.join(BASE_DIR, 'blog_frontend')
+
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_DIRS = [
+    os.path.join(REACT_APP_PATH, 'static')
+]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
