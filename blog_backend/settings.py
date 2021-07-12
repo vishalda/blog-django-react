@@ -12,8 +12,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
+
 from dotenv import load_dotenv
 load_dotenv()
+
 import django_heroku
 django_heroku.settings(config=locals(), staticfiles=False,logging=False)
 
@@ -28,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = str(os.environ.get('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -90,8 +92,8 @@ WSGI_APPLICATION = 'blog_backend.wsgi.application'
 #    'default': {
 #        'ENGINE': 'django.db.backends.postgresql',
 #        'NAME': str(os.getenv('DATABASE_NAME')),
-#       'USER':str(os.getenv('DATABASE_USER')),
-#       'PASSWORD':str(os.getenv('DATABASE_PASSWORD')),
+#        'USER':str(os.getenv('DATABASE_USER')),
+#        'PASSWORD':str(os.getenv('DATABASE_PASSWORD')),
 #        'HOST':'localhost'
 #    }
 #}
@@ -103,6 +105,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+#Credentials to connect with heroku postgres database
 import dj_database_url
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
@@ -139,7 +143,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/

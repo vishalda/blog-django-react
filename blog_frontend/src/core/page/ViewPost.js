@@ -69,7 +69,6 @@ class ViewPost extends React.Component {
         if (data.error) {
           this.setState({ error: data.error });
         } else {
-          console.log(data);
           this.setState({ post: data });
         }
         this.setState({ loading: false });
@@ -198,8 +197,6 @@ class ViewPost extends React.Component {
     let CreatedAt = this.state.post
       ? String(this.state.post.created_at).slice(0, 10)
       : "";
-    console.log(AuthorId);
-
     //View post in detail
     return (
       <div className="view-post">
