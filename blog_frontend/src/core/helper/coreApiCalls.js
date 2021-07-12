@@ -1,7 +1,7 @@
 import { IsAuthenticated } from "../../auth/helper/index";
 
 export const getPost = () => {
-  return fetch(`post/`, { method: `GET` })
+  return fetch(`/api/post/`, { method: `GET` })
     .then((response) => {
       return response.json();
     })
@@ -9,7 +9,7 @@ export const getPost = () => {
 };
 
 export const getCategory = () => {
-  return fetch(`post/categories/`, { method: `GET` })
+  return fetch(`/api/post/categories/`, { method: `GET` })
     .then((response) => {
       return response.json();
     })
@@ -17,7 +17,7 @@ export const getCategory = () => {
 };
 
 export const getComments = (id) => {
-  return fetch(`post/comment/${id}/`, { method: `GET` })
+  return fetch(`/api/post/comment/${id}/`, { method: `GET` })
     .then((response) => {
       return response.json();
     })
@@ -25,7 +25,7 @@ export const getComments = (id) => {
 };
 
 export const getUserDetail = (id) => {
-  return fetch(`user/${id}/`, { method: `GET` })
+  return fetch(`/api/user/${id}/`, { method: `GET` })
     .then((response) => {
       return response.json();
     })
@@ -33,7 +33,7 @@ export const getUserDetail = (id) => {
 };
 
 export const ViewPostInDetail = (id) => {
-  return fetch(`post/view/${id}/`, { method: `GET` })
+  return fetch(`/api/post/view/${id}/`, { method: `GET` })
     .then((response) => {
       return response.json();
     })
@@ -50,7 +50,7 @@ export const CreateNewPost = (postData) => {
     formData.append(dataName, postData[dataName]);
   }
 
-  return fetch(`post/create-post/${userId}/`, {
+  return fetch(`/api/post/create-post/${userId}/`, {
     method: `POST`,
     body: formData,
   })
@@ -61,7 +61,7 @@ export const CreateNewPost = (postData) => {
 };
 
 export const DeletePost = (postId) => {
-  return fetch(`post/delete-post/${postId}/`, {
+  return fetch(`/api/post/delete-post/${postId}/`, {
     method: `POST`,
   })
     .then((response) => {
@@ -73,7 +73,7 @@ export const DeletePost = (postId) => {
 export const CreateComment = (author_id, post_id, content) => {
   const formData = new FormData();
   formData.append("content", content);
-  return fetch(`post/create-comment/${author_id}/${post_id}/`, {
+  return fetch(`/api/post/create-comment/${author_id}/${post_id}/`, {
     method: `POST`,
     body: formData,
   })
@@ -89,7 +89,7 @@ export const ChangePostTextField = (post_id, data) => {
   for (const dataName in data) {
     formData.append(dataName, data[dataName]);
   }
-  return fetch(`post/update-post/${post_id}/`, {
+  return fetch(`/api/post/update-post/${post_id}/`, {
     method: `POST`,
     body: formData,
   })
@@ -104,7 +104,7 @@ export const ChangePostImage = (post_id, imageObject) => {
   const image = imageObject.image;
   //Changing only image field
   formData.append("image", image);
-  return fetch(`post/update-post-image/${post_id}/`, {
+  return fetch(`/api/post/update-post-image/${post_id}/`, {
     method: `POST`,
     body: formData,
   })

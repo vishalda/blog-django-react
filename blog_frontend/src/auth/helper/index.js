@@ -1,6 +1,6 @@
 //Sign in function
 export const signup = (user) => {
-  return fetch(`user/`, {
+  return fetch(`/api/user/`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -21,7 +21,7 @@ export const signin = (user) => {
   for (const name in user) {
     formData.append(name, user[name]);
   }
-  return fetch(`user/login/`, {
+  return fetch(`/api/user/login/`, {
     method: "POST",
     body: formData,
   })
@@ -58,7 +58,7 @@ export const signout = () => {
   if (typeof window !== undefined) {
     //Removing jwt from localstorage
     localStorage.removeItem("jwt");
-    return fetch(`user/logout/${userId}/`, {
+    return fetch(`/api/user/logout/${userId}/`, {
       method: `GET`,
     })
       .then((response) => console.log("Logged out successfully"))
