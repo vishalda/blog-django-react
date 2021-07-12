@@ -4,13 +4,13 @@ import os
 
 class Migration(migrations.Migration):
     def seed_data(apps, schema_editor):
-        user = CustomUser(name = str(os.getenv('SUPERUSER_NAME')),
-            email = str(os.getenv('SUPERUSER_EMAIL')),
-            username =str(os.getenv('SUPERUSER_USERNAME')),
+        user = CustomUser(name = 'abcd',#str(os.getenv('SUPERUSER_NAME')),
+            email = 'abcd@gmail.com',#str(os.getenv('SUPERUSER_EMAIL')),
+            username = 'ab_cd',#str(os.getenv('SUPERUSER_USERNAME')),
             is_staff=True,
             is_superuser=True,
             phone = "9876543210",)
-        user.set_password(str(os.getenv('SUPERUSER_PASSWORD')))
+        user.set_password('abcd')#str(os.getenv('SUPERUSER_PASSWORD')))
         user.save()
     
     dependencies = [
