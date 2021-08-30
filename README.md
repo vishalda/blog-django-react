@@ -46,11 +46,12 @@ DATABASE_USER=<Your database username>
 6. Run `python manage.py makemigrations`.
 7. Run `python manage.py migrate`.
    > Note: Make sure to make changes to name, email, username, password at `blog-django-react/api/migrations/0001_initial.py`, which serves as superuser credentials.
-8. Change current directory to ./blog_frontend: `cd blog_frontend`
-9. Install all frontend dependencies: `yarn install`
-10. Build the frontend: `yarn build`.
-11. Move back to the root directory: `cd ..`
-12. Run the server: `python manage.py runserver`.
+8. Run `python manage.py collectstatic`
+9. Change current directory to ./blog_frontend: `cd blog_frontend`
+10. Install all frontend dependencies: `yarn install`
+11. Build the frontend: `yarn build`.
+12. Move back to the root directory: `cd ..`
+13. Run the server: `python manage.py runserver`.
 
 ---
 
