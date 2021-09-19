@@ -18,6 +18,7 @@ gunicorn = "*"
 dj-database-url = "*"
 psycopg2-binary = "*"
 django-heroku = "*"
+sqlparse = "*"
 
 [requires]
 python_version = "3.8"
