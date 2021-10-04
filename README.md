@@ -29,7 +29,7 @@ Feel free to open a pull request or use this project.
 
 Make sure you have python, pipenv and npm or yarn already installed
 
-1. Clone this repository : `git clone https://github.com/VDA-001/blog-django-react.git`
+1. Clone this repository : `git clone https://github.com/vishalda/blog-django-react.git`
 2. Move into the directory: `cd blog-django-react`
 3. Create a `.env` and add the following line's to it and give them a unique value.
    > Note: The default database is dbsqlite3, so giving values to below specified DATABASE\_\* is optional but is 'required' if you are using postgresql and to use postgresql just uncomment the DATABASE part in `blog-django-react/blog_backend/settings.py` and comment/remove the default one.
