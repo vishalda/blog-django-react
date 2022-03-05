@@ -12,7 +12,7 @@
     "ansi-regex": "^5.0.1",
     "bootstrap": "^4.6.0",
     "browserslist": "^4.19.1",
-    "follow-redirects": "^1.14.7",
+    "follow-redirects": "^1.14.8",
     "glob-parent": "^5.1.2",
     "immer": "^9.0.12",
     "jquery": "^3.6.0",
